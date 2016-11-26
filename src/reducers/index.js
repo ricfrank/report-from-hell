@@ -1,24 +1,17 @@
-import {getProjectIssues, GET_PROJECT_ISSUES} from '../actions'
+import {SHOW_PROJECT_ISSUES, ERROR_TO_SHOW_PROJECT_ISSUES} from '../actions'
 
 export const projectIssues = (state = [], action) => {
     switch (action.type) {
-        // case LOAD_PROJECT_ISSUES_SUCCESS:
-        //     return {
-        //         ...state,
-        //         issues : action.issues,
-        //         projectIssuesRequestStatus: 'success'
-        //
-        //     };
-        // case LOAD_PROJECT_ISSUES_FAILED:
-        //     return {
-        //         ...state,
-        //         issues : action.error,
-        //         projectIssuesRequestStatus: 'failed'
-        //     };
-        case GET_PROJECT_ISSUES:
+        case SHOW_PROJECT_ISSUES:
             return {
                 ...state,
-                projectIssuesRequestStatus: 'pending'
+                issues: action.issues,
+
+            };
+        case ERROR_TO_SHOW_PROJECT_ISSUES:
+            return {
+                ...state,
+                error: action.error,
             };
         default:
             return state;

@@ -1,237 +1,333 @@
 {
-    "time_entries": [
+    "issues": [
         {
-            "id": 26475,
+            "id": 12342,
             "project": {
                 "id": 182,
                 "name": "calciomercato"
             },
-            "issue": {
-                "id": 12327
+            "tracker": {
+                "id": 5,
+                "name": "Task"
             },
-            "user": {
-                "id": 120,
-                "name": "Riccardo Franconi"
+            "status": {
+                "id": 1,
+                "name": "New"
             },
-            "activity": {
-                "id": 9,
-                "name": "Development"
+            "priority": {
+                "id": 4,
+                "name": "50"
             },
-            "hours": 8.0,
-            "comments": "setup sito juve sf2 e impostazione configurazione unificata tra sito juve e CM",
-            "spent_on": "2016-11-18",
-            "created_on": "2016-11-20T16:49:29Z",
-            "updated_on": "2016-11-20T16:49:40Z"
+            "author": {
+                "id": 175,
+                "name": "Cristiano Erbacci"
+            },
+            "subject": "Juve - Pagina squadra",
+            "description": "",
+            "start_date": "2016-11-24",
+            "done_ratio": 0,
+            "custom_fields": [
+                {
+                    "id": 3,
+                    "name": "Story Point",
+                    "value": ""
+                },
+                {
+                    "id": 15,
+                    "name": "Story Point - Design",
+                    "value": ""
+                }
+            ],
+            "created_on": "2016-11-24T09:43:14Z",
+            "updated_on": "2016-11-24T09:45:46Z"
         },
         {
-            "id": 26439,
+            "id": 12338,
             "project": {
                 "id": 182,
                 "name": "calciomercato"
             },
-            "issue": {
-                "id": 12275
+            "tracker": {
+                "id": 5,
+                "name": "Task"
             },
-            "user": {
-                "id": 120,
-                "name": "Riccardo Franconi"
+            "status": {
+                "id": 1,
+                "name": "New"
             },
-            "activity": {
-                "id": 9,
-                "name": "Development"
+            "priority": {
+                "id": 4,
+                "name": "50"
             },
-            "hours": 7.5,
-            "comments": "- sistemato il bug php https://bugs.php.net/bug.php?id=73539 sulla macchina per lo sviluppo, mobile produzione e web preprod - creazione di mobile in preprod - switch a php 7 in new preprod per il sito calciomercato e amp e migrazioni",
-            "spent_on": "2016-11-17",
-            "created_on": "2016-11-17T17:40:41Z",
-            "updated_on": "2016-11-17T17:46:04Z"
+            "author": {
+                "id": 130,
+                "name": "Simone D'Amico"
+            },
+            "subject": "Sos Fanta - squadre in menu",
+            "description": "",
+            "start_date": "2016-11-23",
+            "done_ratio": 0,
+            "custom_fields": [
+                {
+                    "id": 3,
+                    "name": "Story Point",
+                    "value": ""
+                },
+                {
+                    "id": 15,
+                    "name": "Story Point - Design",
+                    "value": ""
+                }
+            ],
+            "created_on": "2016-11-23T15:49:36Z",
+            "updated_on": "2016-11-23T15:49:36Z"
         },
         {
-            "id": 26438,
+            "id": 12332,
             "project": {
                 "id": 182,
                 "name": "calciomercato"
             },
-            "issue": {
-                "id": 12258
+            "tracker": {
+                "id": 3,
+                "name": "Support"
             },
-            "user": {
-                "id": 120,
-                "name": "Riccardo Franconi"
+            "status": {
+                "id": 1,
+                "name": "New"
             },
-            "activity": {
-                "id": 9,
-                "name": "Development"
+            "priority": {
+                "id": 4,
+                "name": "50"
             },
-            "hours": 0.5,
-            "comments": "Pair con denis per supporto build frontend",
-            "spent_on": "2016-11-17",
-            "created_on": "2016-11-17T17:39:51Z",
-            "updated_on": "2016-11-17T17:39:51Z"
+            "author": {
+                "id": 130,
+                "name": "Simone D'Amico"
+            },
+            "subject": "SOS Fanta - Discovery utilizzo cloudfront",
+            "description": "",
+            "start_date": "2016-11-22",
+            "done_ratio": 0,
+            "created_on": "2016-11-22T13:58:10Z",
+            "updated_on": "2016-11-22T13:58:10Z"
         },
         {
-            "id": 26364,
+            "id": 12331,
             "project": {
                 "id": 182,
                 "name": "calciomercato"
             },
-            "issue": {
-                "id": 12309
+            "tracker": {
+                "id": 3,
+                "name": "Support"
             },
-            "user": {
-                "id": 120,
-                "name": "Riccardo Franconi"
+            "status": {
+                "id": 1,
+                "name": "New"
             },
-            "activity": {
-                "id": 9,
-                "name": "Development"
+            "priority": {
+                "id": 4,
+                "name": "50"
             },
-            "hours": 1.0,
-            "comments": "call per check ore",
-            "spent_on": "2016-11-15",
-            "created_on": "2016-11-15T17:19:46Z",
-            "updated_on": "2016-11-15T17:19:46Z"
+            "author": {
+                "id": 151,
+                "name": "Denis Casanuova"
+            },
+            "subject": "Migrazioni php7",
+            "description": "",
+            "start_date": "2016-11-22",
+            "done_ratio": 0,
+            "created_on": "2016-11-22T11:10:27Z",
+            "updated_on": "2016-11-22T11:10:27Z"
         },
         {
-            "id": 26363,
+            "id": 12329,
             "project": {
                 "id": 182,
                 "name": "calciomercato"
             },
-            "issue": {
-                "id": 12258
+            "tracker": {
+                "id": 3,
+                "name": "Support"
             },
-            "user": {
-                "id": 120,
-                "name": "Riccardo Franconi"
+            "status": {
+                "id": 1,
+                "name": "New"
             },
-            "activity": {
-                "id": 9,
-                "name": "Development"
+            "priority": {
+                "id": 4,
+                "name": "50"
             },
-            "hours": 7.0,
-            "comments": "setup ambiente symfony 2 per implementare sito Juve (nello specifico sostituito memcache con memcached)",
-            "spent_on": "2016-11-15",
-            "created_on": "2016-11-15T17:19:17Z",
-            "updated_on": "2016-11-15T17:19:17Z"
+            "author": {
+                "id": 151,
+                "name": "Denis Casanuova"
+            },
+            "subject": "Discovery Disqus",
+            "description": "",
+            "start_date": "2016-11-21",
+            "done_ratio": 0,
+            "created_on": "2016-11-21T09:41:43Z",
+            "updated_on": "2016-11-21T09:41:43Z"
         },
         {
-            "id": 26367,
+            "id": 12327,
             "project": {
                 "id": 182,
                 "name": "calciomercato"
             },
-            "issue": {
-                "id": 12275
+            "tracker": {
+                "id": 3,
+                "name": "Support"
             },
-            "user": {
-                "id": 120,
-                "name": "Riccardo Franconi"
+            "status": {
+                "id": 1,
+                "name": "New"
             },
-            "activity": {
-                "id": 9,
-                "name": "Development"
+            "priority": {
+                "id": 4,
+                "name": "50"
             },
-            "hours": 3.0,
-            "comments": "configurazione e deploy admin 7 in stage per farlo provare alla redazione con le nuove funzionalit\u00e0. Caricamento di tutti i dati su DB staging",
-            "spent_on": "2016-11-14",
-            "created_on": "2016-11-15T17:26:56Z",
-            "updated_on": "2016-11-15T17:26:56Z"
+            "author": {
+                "id": 163,
+                "name": "Marco Masotti"
+            },
+            "subject": "setup-juve-sf2",
+            "description": "",
+            "start_date": "2016-11-18",
+            "done_ratio": 0,
+            "created_on": "2016-11-18T18:48:40Z",
+            "updated_on": "2016-11-18T18:48:40Z"
         },
         {
-            "id": 26366,
+            "id": 12325,
             "project": {
                 "id": 182,
                 "name": "calciomercato"
             },
-            "issue": {
-                "id": 12275
+            "tracker": {
+                "id": 3,
+                "name": "Support"
             },
-            "user": {
-                "id": 120,
-                "name": "Riccardo Franconi"
+            "status": {
+                "id": 1,
+                "name": "New"
             },
-            "activity": {
-                "id": 9,
-                "name": "Development"
+            "priority": {
+                "id": 4,
+                "name": "50"
             },
-            "hours": 2.0,
-            "comments": "merge branch 12185 su branhc centos e sistemazione build test api sf1 su nuova vagrant. Attivit\u00e0 per poter andare live con le nuove feature del backend relative al sito juve sulla nuova macchina",
-            "spent_on": "2016-11-14",
-            "created_on": "2016-11-15T17:26:25Z",
-            "updated_on": "2016-11-15T17:26:25Z"
+            "author": {
+                "id": 130,
+                "name": "Simone D'Amico"
+            },
+            "subject": "Sos Fanta - shortcode per inserire upstory negli articoli",
+            "description": "",
+            "start_date": "2016-11-18",
+            "done_ratio": 0,
+            "created_on": "2016-11-18T10:40:33Z",
+            "updated_on": "2016-11-18T10:40:33Z"
         },
         {
-            "id": 26365,
+            "id": 12324,
             "project": {
                 "id": 182,
                 "name": "calciomercato"
             },
-            "issue": {
-                "id": 12275
+            "tracker": {
+                "id": 3,
+                "name": "Support"
             },
-            "user": {
-                "id": 120,
-                "name": "Riccardo Franconi"
+            "status": {
+                "id": 1,
+                "name": "New"
             },
-            "activity": {
-                "id": 9,
-                "name": "Development"
+            "priority": {
+                "id": 4,
+                "name": "50"
             },
-            "hours": 3.0,
-            "comments": "deploy admin 7 in prod",
-            "spent_on": "2016-11-14",
-            "created_on": "2016-11-15T17:23:13Z",
-            "updated_on": "2016-11-15T17:23:13Z"
+            "author": {
+                "id": 130,
+                "name": "Simone D'Amico"
+            },
+            "subject": "Sos Fanta - infeed Taboola dopo la 5a news in home page",
+            "description": "",
+            "start_date": "2016-11-18",
+            "done_ratio": 0,
+            "created_on": "2016-11-18T10:40:16Z",
+            "updated_on": "2016-11-18T10:40:16Z"
         },
         {
-            "id": 26284,
+            "id": 12323,
             "project": {
                 "id": 182,
                 "name": "calciomercato"
             },
-            "issue": {
-                "id": 12305
+            "tracker": {
+                "id": 3,
+                "name": "Support"
             },
-            "user": {
-                "id": 120,
-                "name": "Riccardo Franconi"
+            "status": {
+                "id": 1,
+                "name": "New"
             },
-            "activity": {
-                "id": 9,
-                "name": "Development"
+            "priority": {
+                "id": 4,
+                "name": "50"
             },
-            "hours": 1.0,
-            "comments": "- analisi su problema share facebook: il problema dipendeva da facebook",
-            "spent_on": "2016-11-11",
-            "created_on": "2016-11-11T17:35:21Z",
-            "updated_on": "2016-11-11T17:35:21Z"
+            "author": {
+                "id": 130,
+                "name": "Simone D'Amico"
+            },
+            "subject": "Sos Fanta - teste \"tagliate\" negli articoli e nella spalla destra",
+            "description": "",
+            "start_date": "2016-11-18",
+            "done_ratio": 0,
+            "created_on": "2016-11-18T10:39:51Z",
+            "updated_on": "2016-11-18T10:39:51Z"
         },
         {
-            "id": 26281,
+            "id": 12317,
             "project": {
                 "id": 182,
                 "name": "calciomercato"
             },
-            "issue": {
-                "id": 12186
+            "tracker": {
+                "id": 4,
+                "name": "User Story"
             },
-            "user": {
-                "id": 120,
-                "name": "Riccardo Franconi"
+            "status": {
+                "id": 1,
+                "name": "New"
             },
-            "activity": {
-                "id": 9,
-                "name": "Development"
+            "priority": {
+                "id": 4,
+                "name": "50"
             },
-            "hours": 2.0,
-            "comments": "rework discussi con Cosimo e integrazione con lavoro fatto da marco per le correlate ",
-            "spent_on": "2016-11-11",
-            "created_on": "2016-11-11T17:30:28Z",
-            "updated_on": "2016-11-11T17:30:28Z"
+            "author": {
+                "id": 124,
+                "name": "Vittorio Vittori"
+            },
+            "subject": "Juve - Categoria - Voglio vedere le news ultima ora",
+            "description": "",
+            "start_date": "2016-11-16",
+            "done_ratio": 0,
+            "custom_fields": [
+                {
+                    "id": 3,
+                    "name": "Story Point",
+                    "value": ""
+                },
+                {
+                    "id": 15,
+                    "name": "Story Point - Design",
+                    "value": ""
+                }
+            ],
+            "created_on": "2016-11-16T10:00:52Z",
+            "updated_on": "2016-11-16T10:03:41Z"
         }
     ],
-    "total_count": 120,
+    "total_count": 236,
     "offset": 0,
     "limit": 10
 }
