@@ -25,7 +25,7 @@ const Issue = React.createClass({
             <li className="list-group-item">
                 <h4>{this.props.id} - {this.props.subject}</h4>
                 <form>
-                    <div className="row no-gutter">
+                    <div className="row">
                         <div className="col-md-3" style={inputDateStyle}>
                             <input type="date" className="form-control" placeholder="Date" />
                         </div>

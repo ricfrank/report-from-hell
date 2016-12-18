@@ -2,15 +2,16 @@ import {combineReducers, createStore, applyMiddleware} from 'redux'
 import { Provider } from 'react-redux'
 import React from 'react'
 import {render} from 'react-dom'
-import {projectIssues, projects} from './reducers'
+import {projectIssues, projects, authentication} from './reducers'
 import Root from './components/Root.jsx'
-import {getProjectIssues, getProjects} from './actions'
+import {getProjects} from './actions'
 import thunk from 'redux-thunk'
 import Bootstrap from 'bootstrap/dist/css/bootstrap.css'
 
 const reducers = combineReducers({
     projectIssues,
-    projects
+    projects,
+    authentication
 });
 
 
@@ -19,7 +20,6 @@ const store = createStore(
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
     applyMiddleware(thunk)
 );
-// store.dispatch(getProjectIssues());
 store.dispatch(getProjects());
 
 render(
