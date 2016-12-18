@@ -1,0 +1,681 @@
+{
+    "projects": [
+        {
+            "id": 180,
+            "name": "Artimondo",
+            "identifier": "made-hand-buy",
+            "description": "",
+            "status": 1,
+            "custom_fields": [
+                {
+                    "id": 4,
+                    "name": "Cliente",
+                    "value": "madehandbuy"
+                },
+                {
+                    "id": 8,
+                    "name": "CC feed URL",
+                    "value": ""
+                },
+                {
+                    "id": 10,
+                    "name": "Budget",
+                    "value": ""
+                }
+            ],
+            "created_on": "2014-05-26T12:54:05Z",
+            "updated_on": "2016-01-21T14:28:25Z"
+        },
+        {
+            "id": 146,
+            "name": "assiprov",
+            "identifier": "assiprov",
+            "description": "",
+            "status": 1,
+            "custom_fields": [
+                {
+                    "id": 4,
+                    "name": "Cliente",
+                    "value": "assiprov"
+                },
+                {
+                    "id": 8,
+                    "name": "CC feed URL",
+                    "value": ""
+                },
+                {
+                    "id": 10,
+                    "name": "Budget",
+                    "value": ""
+                }
+            ],
+            "created_on": "2011-11-16T14:47:40Z",
+            "updated_on": "2011-11-16T14:47:40Z"
+        },
+        {
+            "id": 182,
+            "name": "calciomercato",
+            "identifier": "calciomercato",
+            "description": "",
+            "status": 1,
+            "custom_fields": [
+                {
+                    "id": 4,
+                    "name": "Cliente",
+                    "value": "calciomercato"
+                },
+                {
+                    "id": 8,
+                    "name": "CC feed URL",
+                    "value": ""
+                },
+                {
+                    "id": 10,
+                    "name": "Budget",
+                    "value": ""
+                }
+            ],
+            "created_on": "2014-10-27T15:06:22Z",
+            "updated_on": "2014-10-27T15:06:22Z"
+        },
+        {
+            "id": 185,
+            "name": "Calciomercato - Mobile",
+            "identifier": "calciomercato-mobile",
+            "description": "",
+            "status": 1,
+            "custom_fields": [
+                {
+                    "id": 4,
+                    "name": "Cliente",
+                    "value": "calciomercato-mobile"
+                },
+                {
+                    "id": 8,
+                    "name": "CC feed URL",
+                    "value": ""
+                },
+                {
+                    "id": 10,
+                    "name": "Budget",
+                    "value": ""
+                }
+            ],
+            "created_on": "2015-01-12T21:27:03Z",
+            "updated_on": "2015-01-12T21:27:03Z"
+        },
+        {
+            "id": 197,
+            "name": "Cargo",
+            "identifier": "cargo",
+            "description": "gestionale per spedizioni",
+            "status": 1,
+            "custom_fields": [
+                {
+                    "id": 4,
+                    "name": "Cliente",
+                    "value": "innobit"
+                },
+                {
+                    "id": 8,
+                    "name": "CC feed URL",
+                    "value": ""
+                },
+                {
+                    "id": 10,
+                    "name": "Budget",
+                    "value": ""
+                }
+            ],
+            "created_on": "2015-12-11T11:23:40Z",
+            "updated_on": "2015-12-18T15:18:35Z"
+        },
+        {
+            "id": 184,
+            "name": "Carimali",
+            "identifier": "carimali",
+            "description": "gestione sito carimali.com e server",
+            "status": 1,
+            "custom_fields": [
+                {
+                    "id": 4,
+                    "name": "Cliente",
+                    "value": "carimali"
+                },
+                {
+                    "id": 8,
+                    "name": "CC feed URL",
+                    "value": ""
+                },
+                {
+                    "id": 10,
+                    "name": "Budget",
+                    "value": ""
+                }
+            ],
+            "created_on": "2014-12-02T22:23:41Z",
+            "updated_on": "2014-12-02T22:23:41Z"
+        },
+        {
+            "id": 209,
+            "name": "Carimali-IoT",
+            "identifier": "carimali-iot",
+            "description": "",
+            "parent": {
+                "id": 184,
+                "name": "Carimali"
+            },
+            "status": 1,
+            "custom_fields": [
+                {
+                    "id": 4,
+                    "name": "Cliente",
+                    "value": "Carimali"
+                },
+                {
+                    "id": 8,
+                    "name": "CC feed URL",
+                    "value": ""
+                },
+                {
+                    "id": 10,
+                    "name": "Budget",
+                    "value": ""
+                }
+            ],
+            "created_on": "2016-10-13T15:21:05Z",
+            "updated_on": "2016-10-13T15:21:05Z"
+        },
+        {
+            "id": 198,
+            "name": "Carrefour",
+            "identifier": "carrefour",
+            "description": "Realizzazione style guide per tre tipologie di applicazioni. La prima su cui verte il progetto \u00e8 quella dedicata alla supply chain, CS4",
+            "status": 5,
+            "custom_fields": [
+                {
+                    "id": 4,
+                    "name": "Cliente",
+                    "value": "CARREFOUR"
+                },
+                {
+                    "id": 8,
+                    "name": "CC feed URL",
+                    "value": ""
+                },
+                {
+                    "id": 10,
+                    "name": "Budget",
+                    "value": ""
+                }
+            ],
+            "created_on": "2016-01-15T15:33:30Z",
+            "updated_on": "2016-01-15T15:33:30Z"
+        },
+        {
+            "id": 149,
+            "name": "Casanoi",
+            "identifier": "casanoi",
+            "description": "",
+            "status": 5,
+            "custom_fields": [
+                {
+                    "id": 4,
+                    "name": "Cliente",
+                    "value": "Giuseppe Bitetti"
+                },
+                {
+                    "id": 8,
+                    "name": "CC feed URL",
+                    "value": ""
+                },
+                {
+                    "id": 10,
+                    "name": "Budget",
+                    "value": ""
+                }
+            ],
+            "created_on": "2012-01-17T19:28:28Z",
+            "updated_on": "2012-01-17T19:28:28Z"
+        },
+        {
+            "id": 189,
+            "name": "Catapush",
+            "identifier": "catapush",
+            "description": "",
+            "status": 1,
+            "custom_fields": [
+                {
+                    "id": 4,
+                    "name": "Cliente",
+                    "value": "catapush"
+                },
+                {
+                    "id": 8,
+                    "name": "CC feed URL",
+                    "value": ""
+                },
+                {
+                    "id": 10,
+                    "name": "Budget",
+                    "value": ""
+                }
+            ],
+            "created_on": "2015-04-22T16:38:22Z",
+            "updated_on": "2015-04-22T16:38:22Z"
+        },
+        {
+            "id": 195,
+            "name": "Cefla",
+            "identifier": "cefla",
+            "description": "",
+            "status": 1,
+            "custom_fields": [
+                {
+                    "id": 4,
+                    "name": "Cliente",
+                    "value": "cefla"
+                },
+                {
+                    "id": 8,
+                    "name": "CC feed URL",
+                    "value": ""
+                },
+                {
+                    "id": 10,
+                    "name": "Budget",
+                    "value": ""
+                }
+            ],
+            "created_on": "2015-12-01T09:03:32Z",
+            "updated_on": "2016-04-04T14:52:42Z"
+        },
+        {
+            "id": 201,
+            "name": "Cocoon - O.R.A",
+            "identifier": "coccon-o-r-a",
+            "description": "",
+            "status": 1,
+            "custom_fields": [
+                {
+                    "id": 4,
+                    "name": "Cliente",
+                    "value": "Cocoon"
+                },
+                {
+                    "id": 8,
+                    "name": "CC feed URL",
+                    "value": ""
+                },
+                {
+                    "id": 10,
+                    "name": "Budget",
+                    "value": ""
+                }
+            ],
+            "created_on": "2016-04-01T13:01:31Z",
+            "updated_on": "2016-04-03T00:27:00Z"
+        },
+        {
+            "id": 192,
+            "name": "Damanhur",
+            "identifier": "damanhur",
+            "description": "",
+            "status": 1,
+            "custom_fields": [
+                {
+                    "id": 4,
+                    "name": "Cliente",
+                    "value": "e-xtrategy"
+                },
+                {
+                    "id": 8,
+                    "name": "CC feed URL",
+                    "value": ""
+                },
+                {
+                    "id": 10,
+                    "name": "Budget",
+                    "value": ""
+                }
+            ],
+            "created_on": "2015-09-11T09:00:02Z",
+            "updated_on": "2015-09-11T09:00:02Z"
+        },
+        {
+            "id": 125,
+            "name": "Dondup",
+            "identifier": "dondup",
+            "description": "Social Software per Dondup moda Uomo Donna & Bambino",
+            "status": 1,
+            "custom_fields": [
+                {
+                    "id": 4,
+                    "name": "Cliente",
+                    "value": "Dondup"
+                },
+                {
+                    "id": 8,
+                    "name": "CC feed URL",
+                    "value": ""
+                },
+                {
+                    "id": 10,
+                    "name": "Budget",
+                    "value": ""
+                }
+            ],
+            "created_on": "2010-06-08T09:13:28Z",
+            "updated_on": "2010-07-22T14:36:52Z"
+        },
+        {
+            "id": 126,
+            "name": "Dondup Web site",
+            "identifier": "dondupweb",
+            "description": "Website istituzionale per Dondup moda Uomo Donna & Bambino",
+            "parent": {
+                "id": 125,
+                "name": "Dondup"
+            },
+            "status": 5,
+            "custom_fields": [
+                {
+                    "id": 4,
+                    "name": "Cliente",
+                    "value": "Dondup"
+                },
+                {
+                    "id": 8,
+                    "name": "CC feed URL",
+                    "value": ""
+                },
+                {
+                    "id": 10,
+                    "name": "Budget",
+                    "value": ""
+                }
+            ],
+            "created_on": "2010-06-08T16:12:36Z",
+            "updated_on": "2010-07-22T14:36:52Z"
+        },
+        {
+            "id": 172,
+            "name": "Fiaso",
+            "identifier": "fiaso",
+            "description": "",
+            "status": 1,
+            "custom_fields": [
+                {
+                    "id": 4,
+                    "name": "Cliente",
+                    "value": "fiaso"
+                },
+                {
+                    "id": 8,
+                    "name": "CC feed URL",
+                    "value": ""
+                },
+                {
+                    "id": 10,
+                    "name": "Budget",
+                    "value": ""
+                }
+            ],
+            "created_on": "2013-10-28T10:54:00Z",
+            "updated_on": "2013-10-28T10:54:00Z"
+        },
+        {
+            "id": 150,
+            "name": "Fiat",
+            "identifier": "fiat",
+            "description": "",
+            "status": 1,
+            "custom_fields": [
+                {
+                    "id": 4,
+                    "name": "Cliente",
+                    "value": "fiat"
+                },
+                {
+                    "id": 8,
+                    "name": "CC feed URL",
+                    "value": ""
+                },
+                {
+                    "id": 10,
+                    "name": "Budget",
+                    "value": ""
+                }
+            ],
+            "created_on": "2012-02-12T21:18:52Z",
+            "updated_on": "2012-02-12T21:18:52Z"
+        },
+        {
+            "id": 174,
+            "name": "Footballandia - Prontocalcio",
+            "identifier": "prontocalcio",
+            "description": "",
+            "status": 1,
+            "custom_fields": [
+                {
+                    "id": 4,
+                    "name": "Cliente",
+                    "value": "Neoh Srl"
+                },
+                {
+                    "id": 8,
+                    "name": "CC feed URL",
+                    "value": ""
+                },
+                {
+                    "id": 10,
+                    "name": "Budget",
+                    "value": ""
+                }
+            ],
+            "created_on": "2013-12-16T14:14:38Z",
+            "updated_on": "2014-07-16T12:52:38Z"
+        },
+        {
+            "id": 113,
+            "name": "G+J",
+            "identifier": "wlcp",
+            "description": "",
+            "status": 1,
+            "custom_fields": [
+                {
+                    "id": 4,
+                    "name": "Cliente",
+                    "value": "G+J - Mondadori"
+                },
+                {
+                    "id": 8,
+                    "name": "CC feed URL",
+                    "value": ""
+                },
+                {
+                    "id": 10,
+                    "name": "Budget",
+                    "value": ""
+                }
+            ],
+            "created_on": "2010-01-25T09:24:23Z",
+            "updated_on": "2013-09-30T13:45:30Z"
+        },
+        {
+            "id": 170,
+            "name": "Focus - WebTv",
+            "identifier": "focus",
+            "description": "WebTv di Focus",
+            "parent": {
+                "id": 113,
+                "name": "G+J"
+            },
+            "status": 5,
+            "custom_fields": [
+                {
+                    "id": 4,
+                    "name": "Cliente",
+                    "value": "G&J/Mondadori"
+                },
+                {
+                    "id": 8,
+                    "name": "CC feed URL",
+                    "value": ""
+                },
+                {
+                    "id": 10,
+                    "name": "Budget",
+                    "value": ""
+                }
+            ],
+            "created_on": "2013-09-13T08:38:40Z",
+            "updated_on": "2013-09-30T13:57:37Z"
+        },
+        {
+            "id": 169,
+            "name": "Focus Jr",
+            "identifier": "focus-jr",
+            "description": "",
+            "parent": {
+                "id": 113,
+                "name": "G+J"
+            },
+            "status": 1,
+            "custom_fields": [
+                {
+                    "id": 4,
+                    "name": "Cliente",
+                    "value": "G&J/Mondadori"
+                },
+                {
+                    "id": 8,
+                    "name": "CC feed URL",
+                    "value": ""
+                },
+                {
+                    "id": 10,
+                    "name": "Budget",
+                    "value": ""
+                }
+            ],
+            "created_on": "2013-08-05T13:03:33Z",
+            "updated_on": "2013-08-05T13:03:33Z"
+        },
+        {
+            "id": 91,
+            "name": "Jack",
+            "identifier": "jack",
+            "description": "sito e community di JackTech.it",
+            "parent": {
+                "id": 113,
+                "name": "G+J"
+            },
+            "status": 5,
+            "custom_fields": [
+                {
+                    "id": 4,
+                    "name": "Cliente",
+                    "value": "Gruner-Jahr"
+                },
+                {
+                    "id": 8,
+                    "name": "CC feed URL",
+                    "value": ""
+                },
+                {
+                    "id": 10,
+                    "name": "Budget",
+                    "value": ""
+                }
+            ],
+            "created_on": "2009-10-07T21:54:38Z",
+            "updated_on": "2015-01-14T18:02:57Z"
+        },
+        {
+            "id": 134,
+            "name": "nostrofiglio.it",
+            "identifier": "nostrofiglio",
+            "description": "Rivista per mamme e pap\u00e0 su gravidanza, neonati e bambini. Concepimento, nascita, crescita, sviluppo, educazione, salute e alimentazione, ...",
+            "parent": {
+                "id": 113,
+                "name": "G+J"
+            },
+            "status": 5,
+            "custom_fields": [
+                {
+                    "id": 4,
+                    "name": "Cliente",
+                    "value": "G+J"
+                },
+                {
+                    "id": 8,
+                    "name": "CC feed URL",
+                    "value": ""
+                },
+                {
+                    "id": 10,
+                    "name": "Budget",
+                    "value": ""
+                }
+            ],
+            "created_on": "2010-11-16T09:32:41Z",
+            "updated_on": "2010-11-16T09:32:41Z"
+        },
+        {
+            "id": 11,
+            "name": "Harmony",
+            "identifier": "harmony",
+            "description": "assistenza e manutenzione siti harmony",
+            "status": 1,
+            "custom_fields": [
+                {
+                    "id": 4,
+                    "name": "Cliente",
+                    "value": "harlequin"
+                },
+                {
+                    "id": 8,
+                    "name": "CC feed URL",
+                    "value": ""
+                },
+                {
+                    "id": 10,
+                    "name": "Budget",
+                    "value": ""
+                }
+            ],
+            "created_on": "2008-10-19T22:45:11Z",
+            "updated_on": "2010-07-22T14:36:53Z"
+        },
+        {
+            "id": 204,
+            "name": "Instapartners",
+            "identifier": "instapartners",
+            "description": "",
+            "status": 1,
+            "custom_fields": [
+                {
+                    "id": 4,
+                    "name": "Cliente",
+                    "value": "Instapartners"
+                },
+                {
+                    "id": 8,
+                    "name": "CC feed URL",
+                    "value": ""
+                },
+                {
+                    "id": 10,
+                    "name": "Budget",
+                    "value": ""
+                }
+            ],
+            "created_on": "2016-07-18T10:06:32Z",
+            "updated_on": "2016-07-18T10:06:32Z"
+        }
+    ],
+    "total_count": 47,
+    "offset": 0,
+    "limit": 25
+}

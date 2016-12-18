@@ -14,33 +14,34 @@ const ProjectIssuesList = React.createClass({
                 />
             );
         });
-        return (<ul className="list-group"><div>{issues}</div></ul>)
+
+        return (
+            <div className="col-md-10">
+                <div className="panel panel-default">
+                    <div className="panel-heading">Issues</div>
+                    <ul className="list-group">
+                        <div>{issues}</div>
+                    </ul>
+                </div>
+            </div>
+        )
     }
 });
 
 const mapStateToProps = (state) => {
-    if (!_.isUndefined(state.error)) {
-        alert(state.error.data + '\n' + state.error.status + '\n');
-        return;
+
+    if (_.isUndefined(state.projectIssues.issues)) {
+        return {issues: []}
     }
 
-    if (_.isUndefined(state.issues)) {
-        return {issues: state}
+    if (!_.isEmpty(state.projectIssues.error)) {
+        alert(state.projectIssues.error.data + '\n' + state.projectIssues.error.status + '\n');
+        return {issues: []}
     }
 
-    return {issues: state.issues.issues}
+    return {issues: state.projectIssues.issues}
 };
 
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         handleVote: (id) => {
-//             dispatch(vote(id))
-//         }
-//     }
-// };
-
-// Connect Redux state to props and handlers
-// const TalkListRedux = connect(mapStateToProps, mapDispatchToProps)(TalkList)
 const ProjectIssuesListRedux = connect(mapStateToProps)(ProjectIssuesList);
 
 export default ProjectIssuesListRedux
