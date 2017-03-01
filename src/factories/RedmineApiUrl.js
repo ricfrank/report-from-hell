@@ -1,7 +1,5 @@
-import storage from '../services/LocalStorage'
-
-const createRedmineApiUrl = (url) => {
-    return url + '?key=' + storage.getItem('ideatoApiKey');
+const createRedmineApiUrl = (url, qs = '') => {
+    return 'https://redmine-stage.ideato.it' + url + qs;
 };
 
 export default createRedmineApiUrl;

@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import _ from 'lodash';
 import Issue from '../presentationals/Issue.jsx';
+import {logTimeEntry} from '../../actions'
 
 const ProjectIssuesList = React.createClass({
 
@@ -11,6 +12,7 @@ const ProjectIssuesList = React.createClass({
                 <Issue key={'projectIssues-' + issue.id}
                        id={issue.id}
                        subject={issue.subject}
+                       onLogTimeEntry={this.props.onLogTimeEntry}
                 />
             );
         });
@@ -18,7 +20,9 @@ const ProjectIssuesList = React.createClass({
         return (
             <div className="col-md-10">
                 <div className="panel panel-default">
-                    <div className="panel-heading">Issues</div>
+                    <div className="panel-heading">Issues - <span><a href="https://time.ideato.it/" target="_blank">
+                    logged time
+                </a></span></div>
                     <ul className="list-group">
                         <div>{issues}</div>
                     </ul>
@@ -42,6 +46,14 @@ const mapStateToProps = (state) => {
     return {issues: state.projectIssues.issues}
 };
 
-const ProjectIssuesListRedux = connect(mapStateToProps)(ProjectIssuesList);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onLogTimeEntry: (issueId, timeEntryDate, hours, comment) => {
+            dispatch(logTimeEntry(issueId, timeEntryDate, hours, comment));
+        }
+    }
+};
+
+const ProjectIssuesListRedux = connect(mapStateToProps, mapDispatchToProps)(ProjectIssuesList);
 
 export default ProjectIssuesListRedux

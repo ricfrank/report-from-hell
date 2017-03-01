@@ -4,7 +4,8 @@ import {
     SHOW_PROJECTS,
     ERROR_TO_GET_PROJECTS,
     REQUIRE_AUTHENTICATION,
-    AUTHENTICATE
+    AUTHENTICATE,
+    LOG_TIME_ENTRY_OK
 } from '../actions'
 
 export const authentication = (state = {}, action) => {
@@ -37,6 +38,11 @@ export const projectIssues = (state = {}, action) => {
             return {
                 ...state,
                 error: action.error,
+            };
+        case LOG_TIME_ENTRY_OK:
+            return {
+                ...state,
+                logTimeEntry: 'OK'
             };
         default:
             return state;
