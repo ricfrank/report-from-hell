@@ -6,17 +6,20 @@ import {Modal} from 'react-bootstrap'
 
 const Authentication = React.createClass({
     render: function() {
-        if (!_.isUndefined(this.props.apiKey) && !_.isNull(this.props.apiKey)) {
-            return null;
+        let modalShow  = true;
+        if (this.props.apiKey) {
+          modalShow = false;
         }
 
         return (
             <div>
-                <Modal show={true} onHide={this.close}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Add your api key</Modal.Title>
+                <Modal show={modalShow}>
+                    <Modal.Header>
+                        <Modal.Title>Add redmine api key</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
+                        <p>Log into projects, go to <a target="_blank"href="https://project.ideato.it/my/account">https://project.ideato.it/my/account</a> and
+                        copy/paste <b>API access key</b></p>
                         <form onSubmit={(e) => {
                             e.preventDefault();
 
