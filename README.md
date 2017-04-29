@@ -2,8 +2,8 @@ Requirements
 =
 - nvm
 
-Run project
-=
+Development
+===========
 
 - ```nvm use```
 - check if node version is 6.9.4
@@ -11,3 +11,13 @@ Run project
 - ```npm install && npm start```
 
 Go to ```http://localhost:4000/#/```
+
+Build
+=====
+```npm run build```
+
+To test build in browser, from project root directory, run:
+
+```node server.js```
+
+Go to ```http://localhost:3000```
