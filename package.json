@@ -7,9 +7,9 @@
     "test": "./node_modules/.bin/karma start karma.config.js",
     "test-watch": "./node_modules/.bin/karma start karma.config.js --single-run",
     "start": "./node_modules/.bin/webpack-dev-server --progress --inline --hot --port 4000",
-    "build": "npm run clean && npm run build:bundle",
+    "build": "npm i && npm run clean && npm run build:bundle",
     "clean": "./node_modules/.bin/rimraf build",
-    "build:bundle": "webpack -p",
+    "build:bundle": "webpack -p --config webpack.production.config.js",
     "watch-app": "./node_modules/.bin/webpack -w"
   },
   "author": "",

@@ -2,8 +2,7 @@ module.exports = {
     entry: './src/index.js',
     output: {
         path: __dirname + '/public/',
-        filename: 'bundle.js',
-        publicPath: '/static/'
+        filename: 'bundle.js'
     },
     module: {
         loaders: [
@@ -46,5 +45,5 @@ module.exports = {
             }
         ]
     },
-    devtool: "#inline-source-map"
+    devtool: "inline-source-map"
 };
