@@ -1,2 +1,4 @@
 node_modules
-public/bundle.js
+public/*
+!public/project_issues_182.json
+!public/projects.json
