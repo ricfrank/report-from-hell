@@ -15,10 +15,11 @@ export const LOG_TIME_ENTRY_DONE = 'LOG_TIME_ENTRY_DONE';
 axios.defaults.headers.common['X-Redmine-API-Key'] = storage.getItem(AUTH_LOCAL_STORAGE_KEY);
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
-export const showProjectIssues = (issues) => {
+export const showProjectIssues = (issues, offset = 0) => {
   return {
     type: SHOW_PROJECT_ISSUES,
-    issues: issues
+    issues: issues,
+    offset: offset
   }
 };
 
@@ -51,7 +52,7 @@ export function getProjectIssues(id, offset = 0, limit = 25) {
       '&sort=id:desc'
     ))
       .then(res => {
-        dispatch(showProjectIssues(res.data));
+        dispatch(showProjectIssues(res.data, offset));
       })
       .catch(error => {
         if (error.response) {
@@ -136,24 +137,7 @@ export function logTimeEntry(issueId, timeEntryDate, hours, comment) {
         }
 
         console.error(error.response);
-        // if (error.response) {
-        //     dispatch(errorToGetProjects(error.response));
-        // }
       });
-
-    // axios.get(createRedmineApiUrl('/projects.json'))
-    //     .then(res => dispatch(showProjects(res.data)))
-    //     .catch(error => {
-    //
-    //         if (error.response.status == 401) {
-    //             dispatch(requireAuthentication());
-    //             return
-    //         }
-    //
-    //         if (error.response) {
-    //             dispatch(errorToGetProjects(error.response));
-    //         }
-    //     });
   };
 }
 

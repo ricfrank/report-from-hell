@@ -2,15 +2,27 @@ import React from 'react'
 import {connect} from 'react-redux'
 import _ from 'lodash';
 import Issue from '../presentationals/Issue.jsx';
-import {logTimeEntry, logTimeEntryDone} from '../../actions'
+import {logTimeEntry, logTimeEntryDone, getProjectIssues} from '../../actions'
 
 class ProjectIssuesList extends React.Component {
   constructor(props) {
     super(props);
+    this.scrollListener = this.scrollListener.bind(this);
   }
 
-  onScroll() {
-    console.log("SCROLL!!!!!!");
+  componentDidMount() {
+    window.addEventListener('scroll', this.scrollListener);
+  }
+
+  componentDidUpdate() {
+    window.addEventListener('scroll', this.scrollListener);
+  }
+
+  scrollListener() {
+    if(window.scrollY > 1000){
+      window.removeEventListener('scroll', this.scrollListener);
+      this.props.onLoadIssues(this.props.issues[0].project.id, this.props.offset + 25)
+    }
   }
 
   render() {
@@ -29,9 +41,7 @@ class ProjectIssuesList extends React.Component {
       return (
         <div className="col-md-10 rfh-no-padding">
           <h3 className="rfh-project-name">Issues for {this.props.issues[0].project.name}</h3>
-          <ul className="list-group rfh-issues-list" ref="issuesList" onScroll={ () => {
-            this.onScroll()
-          }}>
+          <ul className="list-group rfh-issues-list" ref="issuesList">
             <div>{issues}</div>
           </ul>
         </div>
@@ -53,7 +63,11 @@ const mapStateToProps = (state) => {
     return {issues: []}
   }
 
-  return {issues: state.projectIssues.issues, loggedIssueId: state.projectIssues.loggedIssueId}
+  return {
+    issues: state.projectIssues.issues,
+    loggedIssueId: state.projectIssues.loggedIssueId,
+    offset: state.projectIssues.offset
+  }
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -63,6 +77,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     onLogTimeEntryDone: () => {
       dispatch(logTimeEntryDone());
+    },
+    onLoadIssues: (id, offset = 0) => {
+      dispatch(getProjectIssues(id, offset));
     }
   }
 };
