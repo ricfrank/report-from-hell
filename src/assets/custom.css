@@ -1,0 +1,88 @@
+body {
+    background-color: #fafbfc;
+}
+
+.rfh-sidebar {
+    background-color: #323232;
+}
+
+.rfh-logo {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 50%;
+}
+
+.rfh-sidebar-item {
+    border: none;
+    color: #cccccc !important;
+    background: none;
+    text-transform: uppercase;
+}
+
+.rfh-sidebar-item:hover,
+.rfh-sidebar-item:focus {
+    background: none !important;
+    color: #ffffff !important;
+}
+
+.rfh-search-box {
+    height: 68px;
+    border: none;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .1);
+    padding: 0 10px 0 30px;
+    font-size: 18px;
+    white-space: nowrap;
+}
+
+.rfh-no-padding {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.rfh-btn-default {
+    background-color: #cccccc;
+}
+
+.rfh-issue-title {
+    cursor: pointer;
+}
+
+.rfh-project-name {
+    margin-left: 20px;
+}
+
+.rfh-issue-form-date {
+    padding-right: 0;
+    width: 19%;
+}
+
+.rfh-issue-form-time {
+    padding-right: 0;
+    width: 9%;
+}
+
+.rfh-issue-form-comment {
+    padding-right: 0;
+    width: 63%;
+}
+
+.rfh-time-log-button {
+    width: 100%;
+}
+
+.rfh-logged-issue-msg {
+    background-color: #cccccc;
+    transition-property: background-color;
+    transition-duration: 2s;
+    -webkit-transition-property: background-color; /*Safari e Chrome */
+    -webkit-transition-duration: 2s;
+    -o-transition-property: background-color;      /*Opera*/
+    -o-transition-duration: 2s;
+    -moz-transition-property: background-color;    /*Firefox*/
+    -moz-transition-duration: 2s;
+}
+
+.rfh-issues-list {
+    height: 100px;
+}

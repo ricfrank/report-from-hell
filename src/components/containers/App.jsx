@@ -1,8 +1,9 @@
 import React from 'react'
 import ProjectIssuesList from './ProjectIssuesList.jsx'
 import ProjectsList from './ProjectsList.jsx'
+import SearchBox from './SearchBox.jsx'
 import Authentication from './Authentication.jsx'
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import {getProjects} from '../../actions'
 
 class App extends React.Component {
@@ -16,6 +17,7 @@ class App extends React.Component {
       <div>
         <Authentication />
         <ProjectsList />
+        <SearchBox/>
         <ProjectIssuesList />
       </div>
     )

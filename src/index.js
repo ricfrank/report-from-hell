@@ -7,6 +7,7 @@ import Root from './components/Root.jsx'
 import thunk from 'redux-thunk'
 import Bootstrap from 'bootstrap/dist/css/bootstrap.css'
 import {createLogger} from 'redux-logger'
+import styles from './assets/custom.css'
 
 const reducers = combineReducers({
   projectIssues,
