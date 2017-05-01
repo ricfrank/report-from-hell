@@ -10,6 +10,7 @@ export const ERROR_TO_GET_PROJECTS = 'ERROR_TO_GET_PROJECTS';
 export const REQUIRE_AUTHENTICATION = 'REQUIRE_AUTHENTICATION';
 export const AUTHENTICATE = 'AUTHENTICATE';
 export const LOG_TIME_ENTRY_OK = 'LOG_TIME_ENTRY_OK';
+export const LOG_TIME_ENTRY_DONE = 'LOG_TIME_ENTRY_DONE';
 
 axios.defaults.headers.common['X-Redmine-API-Key'] = storage.getItem(AUTH_LOCAL_STORAGE_KEY);
 axios.defaults.headers.post['Content-Type'] = 'application/json';
@@ -42,9 +43,13 @@ export const errorToGetProjects = (error) => {
   }
 };
 
-export function getProjectIssues(id) {
+export function getProjectIssues(id, offset = 0, limit = 25) {
   return dispatch =>
-    axios.get(createRedmineApiUrl('/issues.json', '?project_id=' + id + '&status_id=open&limit=50&sort=id:desc'))
+    axios.get(createRedmineApiUrl('/issues.json', '?project_id=' + id +
+      '&status_id=open&limit=' + limit +
+      '&offset=' + offset +
+      '&sort=id:desc'
+    ))
       .then(res => {
         dispatch(showProjectIssues(res.data));
       })
@@ -68,9 +73,12 @@ export function authenticate(apiKey) {
   }
 }
 
-export function logTimeEntryOk() {
+export function logTimeEntryOk(issueId) {
   return {
-    type: LOG_TIME_ENTRY_OK
+    type: LOG_TIME_ENTRY_OK,
+    payload: {
+      loggedIssueId: issueId
+    }
   }
 }
 
@@ -119,7 +127,7 @@ export function logTimeEntry(issueId, timeEntryDate, hours, comment) {
       }
     })
       .then(function (response) {
-        dispatch(logTimeEntryOk());
+        dispatch(logTimeEntryOk(issueId));
       })
       .catch(function (error) {
         if (error.response.status == 401) {
@@ -146,5 +154,11 @@ export function logTimeEntry(issueId, timeEntryDate, hours, comment) {
     //             dispatch(errorToGetProjects(error.response));
     //         }
     //     });
+  };
+}
+
+export function logTimeEntryDone() {
+  return {
+    type: LOG_TIME_ENTRY_DONE
   }
 }

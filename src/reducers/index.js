@@ -5,7 +5,8 @@ import {
     ERROR_TO_GET_PROJECTS,
     REQUIRE_AUTHENTICATION,
     AUTHENTICATE,
-    LOG_TIME_ENTRY_OK
+    LOG_TIME_ENTRY_OK,
+    LOG_TIME_ENTRY_DONE
 } from '../actions'
 
 export const authentication = (state = {}, action) => {
@@ -42,7 +43,12 @@ export const projectIssues = (state = {}, action) => {
         case LOG_TIME_ENTRY_OK:
             return {
                 ...state,
-                logTimeEntry: 'OK'
+                loggedIssueId: action.payload.loggedIssueId
+            };
+        case LOG_TIME_ENTRY_DONE:
+            return {
+                ...state,
+                loggedIssueId: ''
             };
         default:
             return state;
