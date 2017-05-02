@@ -1,5 +1,5 @@
 const createRedmineApiUrl = (url, qs = '') => {
-    return 'https://redmine-stage.ideato.it' + url + qs;
+    return ENDPOINT + url + qs;
 };
 
 export default createRedmineApiUrl;

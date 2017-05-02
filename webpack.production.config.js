@@ -52,7 +52,8 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production') //see http://dev.topheman.com/make-your-react-production-minified-version-with-webpack/
-      }
+      },
+      ENDPOINT: JSON.stringify('https://project.ideato.it'),
     }),
   ]
 };
