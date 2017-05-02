@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import _ from 'lodash';
 import Issue from '../presentationals/Issue.jsx';
+import SearchBox from '../presentationals/SearchBox.jsx'
 import {logTimeEntry, logTimeEntryDone, getProjectIssues} from '../../actions'
 
 class ProjectIssuesList extends React.Component {
@@ -41,8 +42,13 @@ class ProjectIssuesList extends React.Component {
       return (
         <div className="col-md-10 rfh-no-padding">
           <h3 className="rfh-project-name">Issues for {this.props.issues[0].project.name}</h3>
+          <div className="row">
+            <div className="col-md-12">
+              <SearchBox/>
+            </div>
+          </div>
           <ul className="list-group rfh-issues-list" ref="issuesList">
-            <div>{issues}</div>
+            {issues}
           </ul>
         </div>
       )
