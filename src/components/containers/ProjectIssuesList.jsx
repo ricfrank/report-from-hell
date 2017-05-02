@@ -19,7 +19,7 @@ class ProjectIssuesList extends React.Component {
   }
 
   scrollListener() {
-    if(window.scrollY > 1000){
+    if(window.scrollY > 500){
       window.removeEventListener('scroll', this.scrollListener);
       this.props.onLoadIssues(this.props.issues[0].project.id, this.props.offset + 25)
     }
@@ -53,14 +53,8 @@ class ProjectIssuesList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-
-  if (_.isUndefined(state.projectIssues.issues)) {
-    return {issues: []}
-  }
-
   if (!_.isEmpty(state.projectIssues.error)) {
     alert(state.projectIssues.error.data + '\n' + state.projectIssues.error.status + '\n');
-    return {issues: []}
   }
 
   return {

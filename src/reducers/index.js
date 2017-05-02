@@ -35,9 +35,15 @@ const PROJECT_ISSUES_INITIAL_STATE = {
 export const projectIssues = (state = PROJECT_ISSUES_INITIAL_STATE, action) => {
   switch (action.type) {
     case SHOW_PROJECT_ISSUES:
+      let issues = action.issues.issues;
+
+      if (state.issues.length > 0 && state.issues[0].project.id === issues[0].project.id) {
+        issues = state.issues.concat(action.issues.issues)
+      }
+
       return {
         ...state,
-        issues: state.issues.concat(action.issues.issues),
+        issues: issues,
         offset: action.offset,
         error: {}
       };
