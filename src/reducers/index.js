@@ -45,6 +45,7 @@ export const projectIssues = (state = PROJECT_ISSUES_INITIAL_STATE, action) => {
         ...state,
         issues: issues,
         offset: action.offset,
+        threshold: action.threshold,
         error: {}
       };
     case ERROR_TO_GET_PROJECT_ISSUES:

@@ -4,6 +4,7 @@ import _ from 'lodash';
 import Issue from '../presentationals/Issue.jsx';
 import SearchBox from '../presentationals/SearchBox.jsx'
 import {logTimeEntry, logTimeEntryDone, getProjectIssues} from '../../actions'
+import {ISSUES_INFINITE_SCROLL_THRESHOLD, ISSUES_INFINITE_SCROLL_LIMIT} from '../../constants'
 
 class ProjectIssuesList extends React.Component {
   constructor(props) {
@@ -20,9 +21,13 @@ class ProjectIssuesList extends React.Component {
   }
 
   scrollListener() {
-    if(window.scrollY > 500){
+    if(window.scrollY > this.props.threshold){
       window.removeEventListener('scroll', this.scrollListener);
-      this.props.onLoadIssues(this.props.issues[0].project.id, this.props.offset + 25)
+      this.props.onLoadIssues(
+        this.props.issues[0].project.id,
+        this.props.offset + ISSUES_INFINITE_SCROLL_LIMIT,
+        this.props.threshold + ISSUES_INFINITE_SCROLL_THRESHOLD
+      )
     }
   }
 
@@ -66,7 +71,8 @@ const mapStateToProps = (state) => {
   return {
     issues: state.projectIssues.issues,
     loggedIssueId: state.projectIssues.loggedIssueId,
-    offset: state.projectIssues.offset
+    offset: state.projectIssues.offset,
+    threshold: state.projectIssues.threshold
   }
 };
 
@@ -78,8 +84,8 @@ const mapDispatchToProps = (dispatch) => {
     onLogTimeEntryDone: () => {
       dispatch(logTimeEntryDone());
     },
-    onLoadIssues: (id, offset = 0) => {
-      dispatch(getProjectIssues(id, offset));
+    onLoadIssues: (id, offset = 0, threshold = ISSUES_INFINITE_SCROLL_THRESHOLD) => {
+      dispatch(getProjectIssues(id, offset, threshold, ISSUES_INFINITE_SCROLL_LIMIT));
     }
   }
 };
