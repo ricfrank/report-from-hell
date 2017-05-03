@@ -35,17 +35,17 @@ const PROJECT_ISSUES_INITIAL_STATE = {
 export const projectIssues = (state = PROJECT_ISSUES_INITIAL_STATE, action) => {
   switch (action.type) {
     case SHOW_PROJECT_ISSUES:
-      let issues = action.issues.issues;
+      let issues = action.payload.issues.issues;
 
       if (state.issues.length > 0 && state.issues[0].project.id === issues[0].project.id) {
-        issues = state.issues.concat(action.issues.issues)
+        issues = state.issues.concat(action.payload.issues.issues)
       }
 
       return {
         ...state,
         issues: issues,
-        offset: action.offset,
-        threshold: action.threshold,
+        offset: action.payload.offset,
+        threshold: action.payload.threshold,
         error: {}
       };
     case ERROR_TO_GET_PROJECT_ISSUES:

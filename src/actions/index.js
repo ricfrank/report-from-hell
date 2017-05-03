@@ -18,9 +18,11 @@ axios.defaults.headers.post['Content-Type'] = 'application/json';
 export const showProjectIssues = (issues, offset = 0, threshold = ISSUES_INFINITE_SCROLL_THRESHOLD) => {
   return {
     type: SHOW_PROJECT_ISSUES,
-    issues: issues,
-    offset: offset,
-    threshold: threshold
+    payload: {
+      issues: issues,
+      offset: offset,
+      threshold: threshold
+    }
   }
 };
 
