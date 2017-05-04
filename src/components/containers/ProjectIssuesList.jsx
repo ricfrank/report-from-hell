@@ -84,8 +84,8 @@ const mapDispatchToProps = (dispatch) => {
     onLogTimeEntryDone: () => {
       dispatch(logTimeEntryDone());
     },
-    onLoadIssues: (id, offset = 0, threshold = ISSUES_INFINITE_SCROLL_THRESHOLD) => {
-      dispatch(getProjectIssues(id, offset, threshold, ISSUES_INFINITE_SCROLL_LIMIT));
+    onLoadIssues: (projectId, offset = 0, threshold = ISSUES_INFINITE_SCROLL_THRESHOLD) => {
+      dispatch(getProjectIssues(projectId, offset, threshold, ISSUES_INFINITE_SCROLL_LIMIT));
     }
   }
 };

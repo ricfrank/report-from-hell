@@ -27,7 +27,6 @@ export const authentication = (state = {}, action) => {
 };
 
 const PROJECT_ISSUES_INITIAL_STATE = {
-  error: {},
   issues: [],
   offset: 0
 };
@@ -35,18 +34,15 @@ const PROJECT_ISSUES_INITIAL_STATE = {
 export const projectIssues = (state = PROJECT_ISSUES_INITIAL_STATE, action) => {
   switch (action.type) {
     case SHOW_PROJECT_ISSUES:
-      let issues = action.payload.issues.issues;
+      let issuesInfo = action.payload;
 
-      if (state.issues.length > 0 && state.issues[0].project.id === issues[0].project.id) {
-        issues = state.issues.concat(action.payload.issues.issues)
+      if (state.issues.length > 0 && state.issues[0].project.id === issuesInfo.issues[0].project.id) {
+        issuesInfo.issues = state.issues.concat(issuesInfo.issues)
       }
 
       return {
-        ...state,
-        issues: issues,
-        offset: action.payload.offset,
-        threshold: action.payload.threshold,
-        error: {}
+        ...issuesInfo,
+        threshold: action.payload.threshold
       };
     case ERROR_TO_GET_PROJECT_ISSUES:
       return {

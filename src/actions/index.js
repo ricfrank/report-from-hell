@@ -15,12 +15,11 @@ export const LOG_TIME_ENTRY_DONE = 'LOG_TIME_ENTRY_DONE';
 axios.defaults.headers.common['X-Redmine-API-Key'] = storage.getItem(AUTH_LOCAL_STORAGE_KEY);
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
-export const showProjectIssues = (issues, offset = 0, threshold = ISSUES_INFINITE_SCROLL_THRESHOLD) => {
+export const showProjectIssues = (issues, threshold = ISSUES_INFINITE_SCROLL_THRESHOLD) => {
   return {
     type: SHOW_PROJECT_ISSUES,
     payload: {
-      issues: issues,
-      offset: offset,
+      ...issues,
       threshold: threshold
     }
   }
@@ -60,7 +59,7 @@ export function getProjectIssues(
       '&sort=id:desc'
     ))
       .then(res => {
-        dispatch(showProjectIssues(res.data, offset, threshold));
+        dispatch(showProjectIssues(res.data, threshold));
       })
       .catch(error => {
         if (error.response) {
