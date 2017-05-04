@@ -25,6 +25,9 @@ class ProjectsList extends React.Component {
           <img src="https://www.ideato.it/assets/themes/ideato/img/theme/ideato-logo-header.svg"
                alt="logo ideato"/>
         </div>
+        <div className="rfh-projects-count">
+          <h5><span className="rfh-color-red">{this.props.totalCount}</span> active projects</h5>
+        </div>
         <div className="list-group">
           {projects}
         </div>
@@ -34,17 +37,15 @@ class ProjectsList extends React.Component {
 };
 
 const mapStateToProps = (state) => {
-
-  if (_.isUndefined(state.projects.projects)) {
-    return {projects: []}
-  }
-
   if (!_.isEmpty(state.projects.error)) {
     alert(state.projects.error.data + '\n' + state.projects.error.status + '\n');
     return;
   }
 
-  return {projects: state.projects.projects}
+  return {
+    projects: state.projects.projects,
+    totalCount: state.projects.totalCount
+  }
 };
 
 const mapDispatchToProps = (dispatch) => {

@@ -64,14 +64,17 @@ export const projectIssues = (state = PROJECT_ISSUES_INITIAL_STATE, action) => {
   }
 };
 
-export const projects = (state = {}, action) => {
+const PROJECT_INITIAL_STATE = {
+  projects: [],
+  totalCount: 0
+};
+
+export const projects = (state = PROJECT_INITIAL_STATE, action) => {
   switch (action.type) {
     case SHOW_PROJECTS:
       return {
-        ...state,
-        projects: action.projects.projects,
-        error: {}
-
+        projects: action.payload.projects,
+        totalCount: action.payload.total_count
       };
     case ERROR_TO_GET_PROJECTS:
       return {

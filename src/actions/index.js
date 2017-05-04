@@ -28,7 +28,9 @@ export const showProjectIssues = (issues, threshold = ISSUES_INFINITE_SCROLL_THR
 export const showProjects = (projects) => {
   return {
     type: SHOW_PROJECTS,
-    projects: projects
+    payload: {
+      ...projects
+    }
   }
 };
 

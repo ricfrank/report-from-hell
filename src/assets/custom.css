@@ -86,3 +86,13 @@ body {
 .rfh-issues-list {
     height: 100px;
 }
+
+.rfh-projects-count {
+    color: #ffffff;
+    border-bottom: 1px solid #cccccc;
+    text-transform: uppercase;
+}
+
+.rfh-color-red {
+    color: red;
+}
