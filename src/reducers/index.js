@@ -8,6 +8,7 @@ import {
   LOG_TIME_ENTRY_OK,
   LOG_TIME_ENTRY_DONE
 } from '../actions'
+import {ISSUES_INFINITE_SCROLL_THRESHOLD} from '../constants'
 
 export const authentication = (state = {}, action) => {
   switch (action.type) {
@@ -28,7 +29,9 @@ export const authentication = (state = {}, action) => {
 
 const PROJECT_ISSUES_INITIAL_STATE = {
   issues: [],
-  offset: 0
+  offset: 0,
+  totalCount: 0,
+  threshold: ISSUES_INFINITE_SCROLL_THRESHOLD
 };
 
 export const projectIssues = (state = PROJECT_ISSUES_INITIAL_STATE, action) => {
@@ -42,7 +45,8 @@ export const projectIssues = (state = PROJECT_ISSUES_INITIAL_STATE, action) => {
 
       return {
         ...issuesInfo,
-        threshold: action.payload.threshold
+        threshold: action.payload.threshold,
+        totalCount: action.payload.total_count
       };
     case ERROR_TO_GET_PROJECT_ISSUES:
       return {

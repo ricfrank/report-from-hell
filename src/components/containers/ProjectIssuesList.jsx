@@ -46,7 +46,9 @@ class ProjectIssuesList extends React.Component {
     if (issues.length !== 0) {
       return (
         <div className="col-md-10 rfh-no-padding">
-          <h3 className="rfh-project-name">Issues for {this.props.issues[0].project.name}</h3>
+          <h3 className="rfh-project-name">Issues for {this.props.issues[0].project.name} - <span className="rfh-color-red">
+            {this.props.totalCount}
+          </span> opened issues</h3>
           <div className="row">
             <div className="col-md-12">
               <SearchBox/>
@@ -72,7 +74,8 @@ const mapStateToProps = (state) => {
     issues: state.projectIssues.issues,
     loggedIssueId: state.projectIssues.loggedIssueId,
     offset: state.projectIssues.offset,
-    threshold: state.projectIssues.threshold
+    threshold: state.projectIssues.threshold,
+    totalCount: state.projectIssues.totalCount,
   }
 };
 
