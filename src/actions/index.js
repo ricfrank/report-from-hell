@@ -4,6 +4,7 @@ import {AUTH_LOCAL_STORAGE_KEY, ISSUES_INFINITE_SCROLL_LIMIT, ISSUES_INFINITE_SC
 import storage from '../services/LocalStorage';
 
 export const SHOW_PROJECT_ISSUES = 'SHOW_PROJECT_ISSUES';
+export const SEARCH_PROJECT_ISSUES = 'SEARCH_PROJECT_ISSUES ';
 export const SHOW_PROJECTS = 'SHOW_PROJECTS';
 export const ERROR_TO_GET_PROJECT_ISSUES = 'ERROR_TO_GET_PROJECT_ISSUES';
 export const ERROR_TO_GET_PROJECTS = 'ERROR_TO_GET_PROJECTS';
@@ -22,6 +23,13 @@ export const showProjectIssues = (issues, threshold = ISSUES_INFINITE_SCROLL_THR
       ...issues,
       threshold: threshold
     }
+  }
+};
+
+export const searchProjectIssues = (text) => {
+  return {
+    type: SEARCH_PROJECT_ISSUES,
+    payload: {text}
   }
 };
 

@@ -1,5 +1,6 @@
 import {
   SHOW_PROJECT_ISSUES,
+  SEARCH_PROJECT_ISSUES,
   ERROR_TO_GET_PROJECT_ISSUES,
   SHOW_PROJECTS,
   ERROR_TO_GET_PROJECTS,
@@ -9,6 +10,7 @@ import {
   LOG_TIME_ENTRY_DONE
 } from '../actions'
 import {ISSUES_INFINITE_SCROLL_THRESHOLD} from '../constants'
+import _ from 'lodash';
 
 export const authentication = (state = {}, action) => {
   switch (action.type) {
@@ -31,7 +33,10 @@ const PROJECT_ISSUES_INITIAL_STATE = {
   issues: [],
   offset: 0,
   totalCount: 0,
-  threshold: ISSUES_INFINITE_SCROLL_THRESHOLD
+  threshold: ISSUES_INFINITE_SCROLL_THRESHOLD,
+  filteredIssues: [],
+  resetIssuesList: true,
+  projectName: ''
 };
 
 export const projectIssues = (state = PROJECT_ISSUES_INITIAL_STATE, action) => {
@@ -44,9 +49,13 @@ export const projectIssues = (state = PROJECT_ISSUES_INITIAL_STATE, action) => {
       }
 
       return {
+        ...state,
         ...issuesInfo,
         threshold: action.payload.threshold,
-        totalCount: action.payload.total_count
+        totalCount: action.payload.total_count,
+        projectName: issuesInfo.issues[0].project.name,
+        filteredIssues: [],
+        resetIssuesList: true
       };
     case ERROR_TO_GET_PROJECT_ISSUES:
       return {
@@ -63,6 +72,32 @@ export const projectIssues = (state = PROJECT_ISSUES_INITIAL_STATE, action) => {
         ...state,
         loggedIssueId: ''
       };
+    case SEARCH_PROJECT_ISSUES:
+      const text = action.payload.text;
+
+      if(text === '') {
+        return {
+          ...state,
+          filteredIssues: [],
+          resetIssuesList: true
+        };
+      }
+
+      let filteredIssues = _.filter(state.issues, (issue) => {
+        if (_.includes(issue.id, _.toLower(text))) {
+          return issue;
+        }
+        if (_.includes(_.toLower(issue.subject), _.toLower(text))) {
+          return issue;
+        }
+      });
+
+      return {
+        ...state,
+        filteredIssues: filteredIssues,
+        resetIssuesList: false
+      };
+
     default:
       return state;
   }

@@ -8,7 +8,8 @@ class Searchbox extends React.Component {
   render() {
     return (
       <div className="col-md-12">
-        <input className="form-control rfh-search-box" type="text" placeholder="Search yuor issue"/>
+        <input onKeyUp={(event) => {this.props.onSearchIssue(event.target.value)}}
+               className="form-control rfh-search-box" type="text" placeholder="Search yuor issue"/>
       </div>
     )
   }

@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import _ from 'lodash';
 import Issue from '../presentationals/Issue.jsx';
 import SearchBox from '../presentationals/SearchBox.jsx'
-import {logTimeEntry, logTimeEntryDone, getProjectIssues} from '../../actions'
+import {logTimeEntry, logTimeEntryDone, getProjectIssues, searchProjectIssues} from '../../actions'
 import {ISSUES_INFINITE_SCROLL_THRESHOLD, ISSUES_INFINITE_SCROLL_LIMIT} from '../../constants'
 
 class ProjectIssuesList extends React.Component {
@@ -43,15 +43,14 @@ class ProjectIssuesList extends React.Component {
         />
       );
     });
-    if (issues.length !== 0) {
       return (
         <div className="col-md-10 rfh-no-padding">
-          <h3 className="rfh-project-name">Issues for {this.props.issues[0].project.name} - <span className="rfh-color-red">
+          <h3 className="rfh-project-name">Issues for {this.props.projectName} - <span className="rfh-color-red">
             {this.props.totalCount}
           </span> opened issues</h3>
           <div className="row">
             <div className="col-md-12">
-              <SearchBox/>
+              <SearchBox onSearchIssue={this.props.onSearchIssue}/>
             </div>
           </div>
           <ul className="list-group rfh-issues-list" ref="issuesList">
@@ -59,9 +58,6 @@ class ProjectIssuesList extends React.Component {
           </ul>
         </div>
       )
-    }
-
-    return null;
   }
 }
 
@@ -70,8 +66,14 @@ const mapStateToProps = (state) => {
     alert(state.projectIssues.error.data + '\n' + state.projectIssues.error.status + '\n');
   }
 
+  let issues = state.projectIssues.issues;
+  if(state.projectIssues.resetIssuesList === false && state.projectIssues.filteredIssues.length >= 0) {
+    issues =  state.projectIssues.filteredIssues;
+  }
+
   return {
-    issues: state.projectIssues.issues,
+    issues: issues,
+    projectName: state.projectIssues.projectName,
     loggedIssueId: state.projectIssues.loggedIssueId,
     offset: state.projectIssues.offset,
     threshold: state.projectIssues.threshold,
@@ -89,6 +91,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     onLoadIssues: (projectId, offset = 0, threshold = ISSUES_INFINITE_SCROLL_THRESHOLD) => {
       dispatch(getProjectIssues(projectId, offset, threshold, ISSUES_INFINITE_SCROLL_LIMIT));
+    },
+    onSearchIssue: (text) => {
+      dispatch(searchProjectIssues(text));
     }
   }
 };
