@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {saveApiKey} from '../../actions'
+import {saveApiKey} from '../actions'
 import {Modal} from 'react-bootstrap'
 
 class Authentication extends React.Component {
@@ -67,8 +67,5 @@ const mapDispatchToProps = (dispatch) => {
     }
   }
 };
-
-// Connect Redux state to props and handlers
-// const AuthenticationRedux = connect(mapStateToProps, mapDispatchToProps)(Authentication);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Authentication)

@@ -1,22 +1,24 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import _ from 'lodash';
-import Issue from '../presentationals/Issue.jsx';
-import SearchBox from '../presentationals/SearchBox.jsx'
-import {logTimeEntry, logTimeEntryDone, getProjectIssues, searchProjectIssues} from '../../actions'
-import {ISSUES_INFINITE_SCROLL_THRESHOLD, ISSUES_INFINITE_SCROLL_LIMIT} from '../../constants'
+import Issue from '../components/Issue.jsx';
+import SearchBox from '../components/SearchBox.jsx'
+import {logTimeEntry, logTimeEntryDone, getProjectIssues, searchProjectIssues} from '../actions'
+import {ISSUES_INFINITE_SCROLL_THRESHOLD, ISSUES_INFINITE_SCROLL_LIMIT} from '../constants'
 
 class ProjectIssuesList extends React.Component {
   constructor(props) {
     super(props);
     this.scrollListener = this.scrollListener.bind(this);
-  }
 
-  componentDidMount() {
+    this.props.onLoadIssues(this.props.params['projectId']);
     window.addEventListener('scroll', this.scrollListener);
   }
 
   componentDidUpdate() {
+    if (this.props.issues.length > 0 && this.props.params['projectId'] != this.props.issues[0].project.id) {
+      this.props.onLoadIssues(this.props.params['projectId']);
+    }
     window.addEventListener('scroll', this.scrollListener);
   }
 

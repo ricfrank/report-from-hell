@@ -1,9 +1,8 @@
 import React from 'react'
-import ProjectIssuesList from './ProjectIssuesList.jsx'
-import ProjectsList from './ProjectsList.jsx'
-import Authentication from './Authentication.jsx'
+import ProjectsList from './components/ProjectsList.jsx'
+import Authentication from './components/Authentication.jsx'
 import {connect} from 'react-redux';
-import {getProjects} from '../../actions'
+import {getProjects} from './actions'
 
 class App extends React.Component {
   constructor(props) {
@@ -16,7 +15,7 @@ class App extends React.Component {
       <div>
         <Authentication />
         <ProjectsList />
-        <ProjectIssuesList />
+        {this.props.children}
       </div>
     )
   }

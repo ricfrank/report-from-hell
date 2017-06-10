@@ -1,8 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import _ from 'lodash';
-import Project from '../presentationals/Project.jsx';
-import {getProjectIssues} from '../../actions'
+import Project from './Project.jsx';
 
 class ProjectsList extends React.Component {
   constructor(props) {
@@ -15,7 +14,6 @@ class ProjectsList extends React.Component {
         <Project key={'project-' + project.id}
                  id={project.id}
                  name={project.name}
-                 onProjectClick={this.props.onProjectClick}
         />
       );
     });
@@ -48,12 +46,4 @@ const mapStateToProps = (state) => {
   }
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onProjectClick: (projectId) => {
-      dispatch(getProjectIssues(projectId));
-    }
-  }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProjectsList);
+export default connect(mapStateToProps)(ProjectsList);
