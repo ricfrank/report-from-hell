@@ -14,7 +14,6 @@ class Home extends React.Component {
   }
 
   render() {
-    // console.log(this.props.userLogTimeEntries);
     const userLogTimeEntries = this.props.userLogTimeEntries.map(timeEntry => {
       return (
         <LogTimeEntry key={'logTimeEntry-' + timeEntry.id}
@@ -59,7 +58,7 @@ const mapStateToProps = (state) => {
     alert(state.user.userLogTimeEntries.data + '\n' + state.user.userLogTimeEntries.status + '\n');
     return;
   }
-  console.log(state);
+
   return {
     user: state.user,
     userLogTimeEntries: state.userLogTimeEntries,

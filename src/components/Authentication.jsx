@@ -22,7 +22,7 @@ class Authentication extends React.Component {
           </Modal.Header>
           <Modal.Body>
             <p>Log into projects, go to <a target="_blank" href="https://project.ideato.it/my/account">https://project.ideato.it/my/account</a>
-              and
+               and
               copy/paste <b>API access key</b></p>
             <form onSubmit={(e) => {
               e.preventDefault();
