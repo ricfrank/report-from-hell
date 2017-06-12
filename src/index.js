@@ -5,14 +5,16 @@ import {render} from 'react-dom'
 import Bootstrap from 'bootstrap/dist/css/bootstrap.css'
 import {createLogger} from 'redux-logger'
 import thunk from 'redux-thunk'
-import {projectIssues, projects, authentication} from './reducers'
+import {projectIssues, projects, authentication, user, userLogTimeEntries} from './reducers'
 import Root from './Root.jsx'
 import styles from './assets/custom.css'
 
 const reducers = combineReducers({
   projectIssues,
   projects,
-  authentication
+  authentication,
+  user,
+  userLogTimeEntries
 });
 
 const loggerMiddleware = createLogger({

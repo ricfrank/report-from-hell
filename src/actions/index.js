@@ -12,6 +12,10 @@ export const REQUIRE_AUTHENTICATION = 'REQUIRE_AUTHENTICATION';
 export const AUTHENTICATE = 'AUTHENTICATE';
 export const LOG_TIME_ENTRY_OK = 'LOG_TIME_ENTRY_OK';
 export const LOG_TIME_ENTRY_DONE = 'LOG_TIME_ENTRY_DONE';
+export const SAVE_LOGGED_USER = 'SAVE_LOGGED_USER';
+export const ERROR_TO_GET_LOGGED_USER = 'ERROR_TO_GET_LOGGED_USER';
+export const SHOW_USER_LOG_TIME_ENTRIES = 'SHOW_USER_LOG_TIME_ENTRIES';
+export const ERROR_TO_GET_USER_LOG_TIME_ENTRIES = 'ERROR_TO_GET_USER_LOG_TIME_ENTRIES';
 
 axios.defaults.headers.common['X-Redmine-API-Key'] = storage.getItem(AUTH_LOCAL_STORAGE_KEY);
 axios.defaults.headers.post['Content-Type'] = 'application/json';
@@ -56,12 +60,10 @@ export const errorToGetProjects = (error) => {
   }
 };
 
-export function getProjectIssues(
-  id,
-  offset = 0,
-  threshold = ISSUES_INFINITE_SCROLL_THRESHOLD,
-  limit = ISSUES_INFINITE_SCROLL_LIMIT
-) {
+export function getProjectIssues(id,
+                                 offset = 0,
+                                 threshold = ISSUES_INFINITE_SCROLL_THRESHOLD,
+                                 limit = ISSUES_INFINITE_SCROLL_LIMIT) {
   return dispatch =>
     axios.get(createRedmineApiUrl('/issues.json', '?project_id=' + id +
       '&status_id=open&limit=' + limit +
@@ -91,11 +93,12 @@ export function authenticate(apiKey) {
   }
 }
 
-export function logTimeEntryOk(issueId) {
+export function logTimeEntryOk(issueId, loggedTimeEntryId) {
   return {
     type: LOG_TIME_ENTRY_OK,
     payload: {
-      loggedIssueId: issueId
+      loggedIssueId: issueId,
+      loggedTimeEntryId: loggedTimeEntryId,
     }
   }
 }
@@ -134,7 +137,7 @@ export function getProjects() {
 }
 
 export function logTimeEntry(issueId, timeEntryDate, hours, comment) {
-  return dispatch => {
+  return (dispatch, getState) => {
 
     axios.post(createRedmineApiUrl('/time_entries.json'), {
       time_entry: {
@@ -145,7 +148,8 @@ export function logTimeEntry(issueId, timeEntryDate, hours, comment) {
       }
     })
       .then(function (response) {
-        dispatch(logTimeEntryOk(issueId));
+        dispatch(logTimeEntryOk(issueId, response.data.time_entry.id));
+        dispatch(getUserLogTimeEntries(getState().user.id))
       })
       .catch(function (error) {
         if (error.response.status == 401) {
@@ -163,3 +167,72 @@ export function logTimeEntryDone() {
     type: LOG_TIME_ENTRY_DONE
   }
 }
+
+export const getLoggedUser = () => {
+  return dispatch => {
+    return axios.get(createRedmineApiUrl('/users/current.json'))
+      .then(res => {
+        dispatch(saveLoggedUser(res.data.user));
+      })
+      .catch(error => {
+        if (error.response) {
+          dispatch(errorToGetLoggedUser(error.response));
+        }
+      });
+  };
+};
+
+export const saveLoggedUser = (user) => {
+  return {
+    type: SAVE_LOGGED_USER,
+    payload: {user: user}
+  };
+};
+
+export const errorToGetLoggedUser = (error) => {
+  return {
+    type: ERROR_TO_GET_LOGGED_USER,
+    error: error
+  }
+};
+
+
+export const getUserLogTimeEntries = loggedUserId => {
+  return dispatch => {
+    axios.get(createRedmineApiUrl('/time_entries.json', '?user_id=' + loggedUserId + '&limit=10'))
+      .then(res => {
+        const logTimeEntriesPromises = res.data.time_entries.map((timeEntry) => {
+          return axios.get(createRedmineApiUrl('/issues/' + timeEntry.issue.id + '.json'))
+            .then((res) => {
+              return {
+                ...timeEntry,
+                issue: res.data.issue
+              }
+            });
+        });
+
+        Promise.all(logTimeEntriesPromises).then(function(logTimeEntries) {
+          dispatch(showUserLogTimeEntries(logTimeEntries));
+        });
+      })
+      .catch(function (error) {
+        if (error.response) {
+          dispatch(errorToGetUserLogTimeEntries(error.response));
+        }
+      });
+  };
+};
+
+export const showUserLogTimeEntries = timeEntries => {
+  return {
+    type: SHOW_USER_LOG_TIME_ENTRIES,
+    payload: {logTimeEntries: timeEntries}
+  }
+};
+
+export const errorToGetUserLogTimeEntries = error => {
+  return {
+    type: ERROR_TO_GET_USER_LOG_TIME_ENTRIES,
+    error: error
+  }
+};

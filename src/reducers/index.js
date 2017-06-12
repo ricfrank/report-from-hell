@@ -7,7 +7,11 @@ import {
   REQUIRE_AUTHENTICATION,
   AUTHENTICATE,
   LOG_TIME_ENTRY_OK,
-  LOG_TIME_ENTRY_DONE
+  LOG_TIME_ENTRY_DONE,
+  SAVE_LOGGED_USER,
+  ERROR_TO_GET_LOGGED_USER,
+  SHOW_USER_LOG_TIME_ENTRIES,
+  ERROR_TO_GET_USER_LOG_TIME_ENTRIES
 } from '../actions'
 import {ISSUES_INFINITE_SCROLL_THRESHOLD} from '../constants'
 import _ from 'lodash';
@@ -65,12 +69,14 @@ export const projectIssues = (state = PROJECT_ISSUES_INITIAL_STATE, action) => {
     case LOG_TIME_ENTRY_OK:
       return {
         ...state,
-        loggedIssueId: action.payload.loggedIssueId
+        loggedIssueId: action.payload.loggedIssueId,
+        loggedTimeEntryId: action.payload.loggedTimeEntryId
       };
     case LOG_TIME_ENTRY_DONE:
       return {
         ...state,
-        loggedIssueId: ''
+        loggedIssueId: '',
+        loggedTimeEntryId: ''
       };
     case SEARCH_PROJECT_ISSUES:
       const text = action.payload.text;
@@ -122,5 +128,35 @@ export const projects = (state = PROJECT_INITIAL_STATE, action) => {
       };
     default:
       return state;
+  }
+};
+
+export const user = (state = {}, action) => {
+  switch (action.type) {
+    case SAVE_LOGGED_USER:
+      return {
+        ...action.payload.user
+      };
+    case ERROR_TO_GET_LOGGED_USER:
+      return {
+        ...state,
+        error: action.error
+      };
+    default:
+      return state
+  }
+};
+
+export const userLogTimeEntries = (state = [], action) => {
+  switch (action.type) {
+    case SHOW_USER_LOG_TIME_ENTRIES:
+      return action.payload.logTimeEntries;
+    case ERROR_TO_GET_LOGGED_USER:
+      return {
+        ...state,
+        error: action.error
+      };
+    default:
+      return state
   }
 };
