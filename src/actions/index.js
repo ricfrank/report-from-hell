@@ -104,29 +104,35 @@ export function logTimeEntryOk(issueId, loggedTimeEntryId) {
 }
 
 export function saveApiKey(apiKey) {
-  return dispatch => {
+  return (dispatch, getState)=> {
     storage.setItem(AUTH_LOCAL_STORAGE_KEY, apiKey);
     axios.defaults.headers.common['X-Redmine-API-Key'] = storage.getItem(AUTH_LOCAL_STORAGE_KEY);
 
     dispatch(authenticate(apiKey));
     dispatch(getProjects());
+    dispatch(getLoggedUser()).then(() => {
+      dispatch(getUserLogTimeEntries(getState().user.id));
+    });
   }
 }
 
 export function getProjects() {
   return dispatch => {
 
+    //why ?
     if (storage.getItem(AUTH_LOCAL_STORAGE_KEY)) {
       dispatch(authenticate(storage.getItem(AUTH_LOCAL_STORAGE_KEY)));
     }
+    //
 
-    axios.get(createRedmineApiUrl('/projects.json'))
+    return axios.get(createRedmineApiUrl('/projects.json'))
       .then(res => dispatch(showProjects(res.data)))
       .catch(error => {
-
         if (error.response.status == 401) {
           dispatch(requireAuthentication());
-          return
+          return new Promise((resolve, reject) => {
+              reject(error);
+          });
         }
 
         if (error.response) {

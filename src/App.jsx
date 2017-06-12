@@ -7,7 +7,6 @@ import {getProjects} from './actions'
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.props.dispatch(getProjects());
   }
 
   render() {

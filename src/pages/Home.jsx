@@ -7,10 +7,11 @@ import LogTimeEntry from '../components/LogTimeEntry.jsx'
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.props.getProjects();
-    this.props.getLoggedUser().then(() => {
-      this.props.getUserLogTimeEntries(this.props.user.id)
-    });
+    this.props.getProjects().then(() => {
+      this.props.getLoggedUser().then(() => {
+        this.props.getUserLogTimeEntries(this.props.user.id)
+      });
+    }).catch((error) => {});
   }
 
   render() {
@@ -72,7 +73,7 @@ const mapDispatchToProps = (dispatch) => {
     onLogTimeEntry: (issueId, timeEntryDate, hours, comment) => {
       dispatch(logTimeEntry(issueId, timeEntryDate, hours, comment));
     },
-    getProjects: () => {dispatch(getProjects())},
+    getProjects: () => (dispatch(getProjects())),
     getLoggedUser: () => (dispatch(getLoggedUser())),
     getUserLogTimeEntries: (userId) => {dispatch(getUserLogTimeEntries(userId))},
     onLogTimeEntryDone: () => {dispatch(logTimeEntryDone())}
