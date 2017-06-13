@@ -34,8 +34,6 @@ class ProjectIssuesList extends React.Component {
   }
 
   render() {
-    console.log('2222222');
-    console.log(this.props.issues);
     const issues = this.props.issues.map(issue => {
       return (
         <Issue key={'projectIssues-' + issue.id}
