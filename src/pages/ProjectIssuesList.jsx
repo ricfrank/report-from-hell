@@ -16,7 +16,7 @@ class ProjectIssuesList extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.props.issues.length > 0 && this.props.params['projectId'] != this.props.issues[0].project.id) {
+    if (this.props.params['projectId'] != this.props.projectId) {
       this.props.onLoadIssues(this.props.params['projectId']);
     }
     window.addEventListener('scroll', this.scrollListener);
@@ -34,6 +34,8 @@ class ProjectIssuesList extends React.Component {
   }
 
   render() {
+    console.log('2222222');
+    console.log(this.props.issues);
     const issues = this.props.issues.map(issue => {
       return (
         <Issue key={'projectIssues-' + issue.id}
@@ -76,6 +78,7 @@ const mapStateToProps = (state) => {
   return {
     issues: issues,
     projectName: state.projectIssues.projectName,
+    projectId: state.projectIssues.projectId,
     loggedIssueId: state.projectIssues.loggedIssueId,
     offset: state.projectIssues.offset,
     threshold: state.projectIssues.threshold,

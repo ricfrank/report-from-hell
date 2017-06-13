@@ -40,26 +40,25 @@ const PROJECT_ISSUES_INITIAL_STATE = {
   threshold: ISSUES_INFINITE_SCROLL_THRESHOLD,
   filteredIssues: [],
   resetIssuesList: true,
-  projectName: ''
+  projectName: '',
+  projectId: null
 };
 
 export const projectIssues = (state = PROJECT_ISSUES_INITIAL_STATE, action) => {
   switch (action.type) {
     case SHOW_PROJECT_ISSUES:
       let issuesInfo = action.payload;
-
-      if (state.issues.length > 0 && state.issues[0].project.id === issuesInfo.issues[0].project.id) {
+      if (state.issues.length > 0 && issuesInfo.issues.length > 0 && state.issues[0].project.id === issuesInfo.issues[0].project.id) {
         issuesInfo.issues = state.issues.concat(issuesInfo.issues)
       }
-
       return {
-        ...state,
         ...issuesInfo,
         threshold: action.payload.threshold,
         totalCount: action.payload.total_count,
-        projectName: issuesInfo.issues[0].project.name,
+        projectName: issuesInfo.issues.length > 0 ? issuesInfo.issues[0].project.name : PROJECT_ISSUES_INITIAL_STATE.projectName,
         filteredIssues: [],
-        resetIssuesList: true
+        resetIssuesList: true,
+        projectId: action.payload.projectId
       };
     case ERROR_TO_GET_PROJECT_ISSUES:
       return {
@@ -117,6 +116,7 @@ const PROJECT_INITIAL_STATE = {
 export const projects = (state = PROJECT_INITIAL_STATE, action) => {
   switch (action.type) {
     case SHOW_PROJECTS:
+      console.log(action.payload.projects);
       return {
         projects: action.payload.projects,
         totalCount: action.payload.total_count
