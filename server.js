@@ -15,7 +15,7 @@ server.register(require('inert'), (err) => {
     method: 'GET',
     path: '/',
     handler: function (request, reply) {
-      reply.file(__dirname + '/index.html');
+      reply.file(__dirname + '/public/index.html');
     }
   });
 

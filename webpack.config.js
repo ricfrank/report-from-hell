@@ -1,9 +1,10 @@
-var webpack = require('webpack');
+const webpack = require('webpack');
+const { resolve } = require('path');
 
 module.exports = {
   entry: './src/index.js',
   output: {
-    path: __dirname + '/public/',
+    path: resolve(__dirname, 'public'),
     filename: 'bundle.js'
   },
   module: {
@@ -52,5 +53,10 @@ module.exports = {
     new webpack.DefinePlugin({
       ENDPOINT: JSON.stringify('https://redmine-stage.ideato.it'),
     })
-  ]
+  ],
+  devServer: {
+    hot: true,
+    contentBase: resolve(__dirname, 'public'),
+    publicPath: '/',
+  },
 };

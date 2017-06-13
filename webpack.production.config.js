@@ -1,9 +1,11 @@
-var webpack = require('webpack');
+const webpack = require('webpack');
+const { resolve } = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
   output: {
-    path: __dirname + '/public/',
+    path: resolve(__dirname, 'public'),
     filename: 'bundle.js'
   },
   module: {
@@ -55,5 +57,10 @@ module.exports = {
       },
       ENDPOINT: JSON.stringify('https://project.ideato.it'),
     }),
+    new HtmlWebpackPlugin({
+      template: `${__dirname}/index.html`,
+      filename: 'index.html',
+      inject: 'body',
+    })
   ]
 };
