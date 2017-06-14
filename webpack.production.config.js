@@ -61,6 +61,7 @@ module.exports = {
       template: `${__dirname}/index.html`,
       filename: 'index.html',
       inject: 'body',
+      hash: true
     })
   ]
 };
