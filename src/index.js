@@ -21,13 +21,14 @@ const loggerMiddleware = createLogger({
   collapsed: true
 });
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 const store = createStore(
   reducers,
   undefined,
-  compose(
+  composeEnhancers(
     applyMiddleware(thunk),
-    applyMiddleware(loggerMiddleware),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    applyMiddleware(loggerMiddleware)
   )
 );
 
