@@ -3,6 +3,7 @@ import {Link} from 'react-router'
 import {connect} from 'react-redux'
 import _ from 'lodash';
 import Project from './Project.jsx';
+import {searchProject} from '../actions/index'
 
 class ProjectsList extends React.Component {
   constructor(props) {
@@ -28,6 +29,8 @@ class ProjectsList extends React.Component {
         </div>
         <div className="rfh-projects-count">
           <h5><span className="rfh-color-red">{this.props.totalCount}</span> active projects</h5>
+          <input onKeyUp={(event) => {this.props.onSearchProject(event.target.value)}}
+                 className="form-control rfh-search--project-box" type="text" placeholder="Search project"/>
         </div>
         <div className="list-group">
           {projects}
@@ -44,9 +47,17 @@ const mapStateToProps = (state) => {
   }
 
   return {
-    projects: state.projects.projects,
+    projects: state.projects.filteredProjects.length > 0 ? state.projects.filteredProjects : state.projects.projects,
     totalCount: state.projects.totalCount
   }
 };
 
-export default connect(mapStateToProps)(ProjectsList);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onSearchProject: (text) => {
+      dispatch(searchProject(text));
+    }
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectsList);

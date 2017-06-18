@@ -96,3 +96,9 @@ body {
 .rfh-color-red {
     color: red;
 }
+
+.rfh-search--project-box {
+    background-color: transparent;
+    border: none;
+    color: white;
+}

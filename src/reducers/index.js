@@ -1,6 +1,7 @@
 import {
   SHOW_PROJECT_ISSUES,
   SEARCH_PROJECT_ISSUES,
+  SEARCH_PROJECT,
   ERROR_TO_GET_PROJECT_ISSUES,
   SHOW_PROJECTS,
   ERROR_TO_GET_PROJECTS,
@@ -110,14 +111,15 @@ export const projectIssues = (state = PROJECT_ISSUES_INITIAL_STATE, action) => {
 
 const PROJECT_INITIAL_STATE = {
   projects: [],
+  filteredProjects: [],
   totalCount: 0
 };
 
 export const projects = (state = PROJECT_INITIAL_STATE, action) => {
   switch (action.type) {
     case SHOW_PROJECTS:
-      console.log(action.payload.projects);
       return {
+        ...state,
         projects: action.payload.projects,
         totalCount: action.payload.total_count
       };
@@ -125,6 +127,19 @@ export const projects = (state = PROJECT_INITIAL_STATE, action) => {
       return {
         ...state,
         error: action.error,
+      };
+    case SEARCH_PROJECT:
+      const text = action.payload.text;
+
+      let filteredProjects = _.filter(state.projects, (project) => {
+        if (_.includes(_.toLower(project.name), _.toLower(text))) {
+          return project;
+        }
+      });
+
+      return {
+        ...state,
+        filteredProjects: filteredProjects,
       };
     default:
       return state;
