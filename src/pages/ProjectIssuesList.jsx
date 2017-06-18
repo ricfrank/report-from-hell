@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import _ from 'lodash';
 import Issue from '../components/Issue.jsx';
-import SearchBox from '../components/SearchBox.jsx'
+import IssueSearchBox from '../components/IssueSearchBox.jsx'
 import {logTimeEntry, logTimeEntryDone, getProjectIssues, searchProjectIssues} from '../actions'
 import {ISSUES_INFINITE_SCROLL_THRESHOLD, ISSUES_INFINITE_SCROLL_LIMIT} from '../constants'
 
@@ -52,7 +52,7 @@ class ProjectIssuesList extends React.Component {
           </span> opened issues</h3>
           <div className="row">
             <div className="col-md-12">
-              <SearchBox onSearchIssue={this.props.onSearchIssue}/>
+              <IssueSearchBox onSearchIssue={this.props.onSearchIssue}/>
             </div>
           </div>
           <ul className="list-group rfh-issues-list" ref="issuesList">

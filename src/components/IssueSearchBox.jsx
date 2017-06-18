@@ -1,6 +1,6 @@
 import React from 'react'
 
-class Searchbox extends React.Component {
+class IssueSearchBox extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -15,4 +15,4 @@ class Searchbox extends React.Component {
   }
 }
 
-export default Searchbox
+export default IssueSearchBox
