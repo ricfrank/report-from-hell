@@ -49,7 +49,7 @@ export const projectIssues = (state = PROJECT_ISSUES_INITIAL_STATE, action) => {
   switch (action.type) {
     case SHOW_PROJECT_ISSUES:
       let issuesInfo = action.payload;
-      if (state.issues.length > 0 && issuesInfo.issues.length > 0 && state.issues[0].project.id === issuesInfo.issues[0].project.id) {
+      if (state.issues.length > 0 && issuesInfo.issues.length >= 0 && state.issues[0].project.id === issuesInfo.issues[0].project.id) {
         issuesInfo.issues = state.issues.concat(issuesInfo.issues)
       }
       return {
