@@ -10,7 +10,8 @@
     "build": "npm i && npm run clean && npm run build:bundle",
     "clean": "./node_modules/.bin/rimraf public",
     "build:bundle": "NODE_ENV=production webpack -p --config webpack.production.config.js --progress --profile --colors",
-    "watch-app": "./node_modules/.bin/webpack -w"
+    "watch-app": "./node_modules/.bin/webpack -w",
+    "deploy": "npm run build && rsync -avzC ./ ideato@52.29.194.12:/var/www/report.ideato.it"
   },
   "author": "",
   "license": "ISC",
