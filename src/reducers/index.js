@@ -120,7 +120,7 @@ export const projects = (state = PROJECT_INITIAL_STATE, action) => {
     case SHOW_PROJECTS:
       return {
         ...state,
-        projects: action.payload.projects,
+        projects: _.sortBy(action.payload.projects, 'identifier'),
         totalCount: action.payload.total_count
       };
     case ERROR_TO_GET_PROJECTS:
