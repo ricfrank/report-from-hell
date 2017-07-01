@@ -4,6 +4,7 @@ import {AUTH_LOCAL_STORAGE_KEY, ISSUES_INFINITE_SCROLL_LIMIT, ISSUES_INFINITE_SC
 import storage from '../services/LocalStorage';
 
 export const SHOW_PROJECT_ISSUES = 'SHOW_PROJECT_ISSUES';
+export const UPDATE_PROJECT_ISSUES = 'UPDATE_PROJECT_ISSUES';
 export const SEARCH_PROJECT_ISSUES = 'SEARCH_PROJECT_ISSUES ';
 export const SHOW_PROJECTS = 'SHOW_PROJECTS';
 export const SEARCH_PROJECT = 'SEARCH_PROJECT';
@@ -24,6 +25,17 @@ axios.defaults.headers.post['Content-Type'] = 'application/json';
 export const showProjectIssues = (issues, threshold = ISSUES_INFINITE_SCROLL_THRESHOLD, id) => {
   return {
     type: SHOW_PROJECT_ISSUES,
+    payload: {
+      ...issues,
+      threshold: threshold,
+      projectId: id
+    }
+  }
+};
+
+export const updateProjectIssues = (issues, threshold = ISSUES_INFINITE_SCROLL_THRESHOLD, id) => {
+  return {
+    type: UPDATE_PROJECT_ISSUES,
     payload: {
       ...issues,
       threshold: threshold,
@@ -80,7 +92,11 @@ export function getProjectIssues(id,
       '&sort=id:desc'
     ))
       .then(res => {
-        dispatch(showProjectIssues(res.data, threshold, id));
+        if(offset === 0){
+          dispatch(showProjectIssues(res.data, threshold, id));
+          return;
+        }
+        dispatch(updateProjectIssues(res.data, threshold, id));
       })
       .catch(error => {
         if (error.response) {

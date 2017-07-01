@@ -1,5 +1,6 @@
 import {
   SHOW_PROJECT_ISSUES,
+  UPDATE_PROJECT_ISSUES,
   SEARCH_PROJECT_ISSUES,
   SEARCH_PROJECT,
   ERROR_TO_GET_PROJECT_ISSUES,
@@ -49,14 +50,24 @@ export const projectIssues = (state = PROJECT_ISSUES_INITIAL_STATE, action) => {
   switch (action.type) {
     case SHOW_PROJECT_ISSUES:
       let issuesInfo = action.payload;
-      if (state.issues.length > 0 && issuesInfo.issues.length >= 0 && state.issues[0].project.id === issuesInfo.issues[0].project.id) {
-        issuesInfo.issues = state.issues.concat(issuesInfo.issues)
-      }
       return {
         ...issuesInfo,
         threshold: action.payload.threshold,
         totalCount: action.payload.total_count,
         projectName: issuesInfo.issues.length > 0 ? issuesInfo.issues[0].project.name : PROJECT_ISSUES_INITIAL_STATE.projectName,
+        filteredIssues: [],
+        resetIssuesList: true,
+        projectId: action.payload.projectId
+      };
+    case UPDATE_PROJECT_ISSUES:
+      let updatedIssuesInfo = action.payload;
+      updatedIssuesInfo.issues = state.issues.concat(updatedIssuesInfo.issues);
+
+      return {
+        ...updatedIssuesInfo,
+        threshold: action.payload.threshold,
+        totalCount: action.payload.total_count,
+        projectName: updatedIssuesInfo.issues.length > 0 ? updatedIssuesInfo.issues[0].project.name : PROJECT_ISSUES_INITIAL_STATE.projectName,
         filteredIssues: [],
         resetIssuesList: true,
         projectId: action.payload.projectId
