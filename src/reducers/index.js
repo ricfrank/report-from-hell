@@ -128,9 +128,13 @@ const PROJECT_INITIAL_STATE = {
 export const projects = (state = PROJECT_INITIAL_STATE, action) => {
   switch (action.type) {
     case SHOW_PROJECTS:
+      const CLOSED_PROJECT_STATUS_ID = 5;
+      const projects = action.payload.projects.filter((project) => {
+        return project.status !== CLOSED_PROJECT_STATUS_ID;
+      });
       return {
         ...state,
-        projects: _.sortBy(action.payload.projects, 'identifier'),
+        projects: _.sortBy(projects, 'identifier'),
         totalCount: action.payload.total_count
       };
     case ERROR_TO_GET_PROJECTS:
