@@ -102,3 +102,10 @@ body {
     border: none;
     color: white;
 }
+
+.rfh-white-rabbit {
+    top: 10px;
+    position: absolute;
+    display: block;
+    right: 30px;
+}

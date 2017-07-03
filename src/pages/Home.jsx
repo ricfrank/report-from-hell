@@ -11,7 +11,8 @@ class Home extends React.Component {
       this.props.getLoggedUser().then(() => {
         this.props.getUserLogTimeEntries(this.props.user.id)
       });
-    }).catch((error) => {});
+    }).catch((error) => {
+    });
   }
 
   render() {
@@ -34,11 +35,17 @@ class Home extends React.Component {
     });
     return (
       <div className="col-md-10">
-          <div className="page-header">
-            <h1>Report from hell</h1>
-            <p className="lead">Hi {this.props.user.firstname}! See your last 10 time entries</p>
-            <p>Check your time: <a target="_blank" href="https://time.ideato.it/">white rabbit</a></p>
+        <div className="row">
+          <div className="col-md-9">
+            <div className="page-header">
+              <h1>Report from hell</h1>
+              <p className="lead">Hi {this.props.user.firstname}! See your last 10 time entries</p>
+            </div>
           </div>
+          <div className="col-md-3">
+            <span className="rfh-white-rabbit">Check your time on <a target="_blank" href="https://time.ideato.it/">white rabbit</a></span>
+          </div>
+        </div>
         <div className="row">
           <div className="col-md-12">
             <ul className="list-group rfh-issues-list" ref="issuesList">
@@ -76,8 +83,12 @@ const mapDispatchToProps = (dispatch) => {
     },
     getProjects: () => (dispatch(getProjects())),
     getLoggedUser: () => (dispatch(getLoggedUser())),
-    getUserLogTimeEntries: (userId) => {dispatch(getUserLogTimeEntries(userId))},
-    onLogTimeEntryDone: () => {dispatch(logTimeEntryDone())}
+    getUserLogTimeEntries: (userId) => {
+      dispatch(getUserLogTimeEntries(userId))
+    },
+    onLogTimeEntryDone: () => {
+      dispatch(logTimeEntryDone())
+    }
   }
 };
 

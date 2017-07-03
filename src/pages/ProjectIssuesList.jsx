@@ -23,7 +23,7 @@ class ProjectIssuesList extends React.Component {
   }
 
   scrollListener() {
-    if(window.scrollY > this.props.threshold){
+    if (window.scrollY > this.props.threshold) {
       window.removeEventListener('scroll', this.scrollListener);
       this.props.onLoadIssues(
         this.props.issues[0].project.id,
@@ -45,21 +45,31 @@ class ProjectIssuesList extends React.Component {
         />
       );
     });
-      return (
-        <div className="col-md-10 rfh-no-padding">
-          <h3 className="rfh-project-name">Issues for {this.props.projectName} - <span className="rfh-color-red">
-            {this.props.totalCount}
-          </span> opened issues</h3>
-          <div className="row">
-            <div className="col-md-12">
-              <IssueSearchBox onSearchIssue={this.props.onSearchIssue}/>
-            </div>
+    return (
+      <div className="col-md-10 rfh-no-padding">
+        <div className="row">
+          <div className="col-md-9">
+            <h3 className="rfh-project-name">
+              Issues for {this.props.projectName} - <span className="rfh-color-red">{this.props.totalCount}</span>
+              opened issues
+            </h3>
           </div>
-          <ul className="list-group rfh-issues-list" ref="issuesList">
-            {issues}
-          </ul>
+          <div className="col-md-3">
+            <span className="rfh-white-rabbit">
+              Check your time on <a target="_blank" href="https://time.ideato.it/">white rabbit</a>
+            </span>
+          </div>
         </div>
-      )
+        <div className="row">
+          <div className="col-md-12">
+            <IssueSearchBox onSearchIssue={this.props.onSearchIssue}/>
+          </div>
+        </div>
+        <ul className="list-group rfh-issues-list" ref="issuesList">
+          {issues}
+        </ul>
+      </div>
+    )
   }
 }
 
@@ -69,8 +79,8 @@ const mapStateToProps = (state) => {
   }
 
   let issues = state.projectIssues.issues;
-  if(state.projectIssues.resetIssuesList === false && state.projectIssues.filteredIssues.length >= 0) {
-    issues =  state.projectIssues.filteredIssues;
+  if (state.projectIssues.resetIssuesList === false && state.projectIssues.filteredIssues.length >= 0) {
+    issues = state.projectIssues.filteredIssues;
   }
 
   return {
