@@ -50,8 +50,7 @@ class ProjectIssuesList extends React.Component {
         <div className="row">
           <div className="col-md-9">
             <h3 className="rfh-project-name">
-              Issues for {this.props.projectName} - <span className="rfh-color-red">{this.props.totalCount}</span>
-              opened issues
+              Issues for {this.props.projectName} - <span className="rfh-color-red">{this.props.totalCount}</span> opened issues
             </h3>
           </div>
           <div className="col-md-3">
