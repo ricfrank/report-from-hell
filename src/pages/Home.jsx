@@ -37,6 +37,7 @@ class Home extends React.Component {
           <div className="page-header">
             <h1>Report from hell</h1>
             <p className="lead">Hi {this.props.user.firstname}! See your last 10 time entries</p>
+            <p>Check your time: <a target="_blank" href="https://time.ideato.it/">white rabbit</a></p>
           </div>
         <div className="row">
           <div className="col-md-12">
