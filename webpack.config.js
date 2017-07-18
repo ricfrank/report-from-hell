@@ -51,7 +51,7 @@ module.exports = {
   devtool: "inline-source-map",
   plugins: [
     new webpack.DefinePlugin({
-      ENDPOINT: JSON.stringify('https://redmine-stage.ideato.it'),
+      ENDPOINT: JSON.stringify('https://project-stage.ideato.it'),
     })
   ],
   devServer: {
