@@ -67,8 +67,12 @@ class LogTimeEntry extends React.Component {
       <li className={'list-group-item ' + loggedTimeEntryClass}>
         <h4 className="rfh-issue-title">{this.props.logDate} # <span className={'rfh-color-red'}>{this.props.projectName}</span> # {this.props.subject}</h4>
         <ul>
-          <li>Issue id: <b>{this.props.issueId}</b></li>
-          <li>Time: {this.props.hours}</li>
+          <li>Edit issue: <a target={"_blank"}
+                              href={`${ENDPOINT}/issues/${this.props.issueId}` }>
+            {this.props.issueId}
+            </a>
+          </li>
+          <li>Time: {this.props.hours} h</li>
           <li>Comment: {this.props.comment}</li>
         </ul>
         <div className={'row'}>
