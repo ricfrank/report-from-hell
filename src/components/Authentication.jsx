@@ -1,17 +1,17 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { saveApiKey } from '../actions';
-import { Modal } from 'react-bootstrap';
+import React from 'react'
+import { connect } from 'react-redux'
+import { saveApiKey } from '../actions'
+import { Modal } from 'react-bootstrap'
 
 class Authentication extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
   }
 
   render() {
-    let modalShow = true;
+    let modalShow = true
     if (this.props.apiKey) {
-      modalShow = false;
+      modalShow = false
     }
 
     return (
@@ -30,16 +30,16 @@ class Authentication extends React.Component {
             </p>
             <form
               onSubmit={e => {
-                e.preventDefault();
+                e.preventDefault()
 
-                this.props.onApiKeySend(this.apiKeyValue.value);
+                this.props.onApiKeySend(this.apiKeyValue.value)
               }}
             >
               <div className="row">
                 <div className="col-md-10">
                   <input
                     ref={value => {
-                      this.apiKeyValue = value;
+                      this.apiKeyValue = value
                     }}
                     type="text"
                     className="form-control"
@@ -56,19 +56,19 @@ class Authentication extends React.Component {
           </Modal.Body>
         </Modal>
       </div>
-    );
+    )
   }
 }
 const mapStateToProps = state => {
-  return { apiKey: state.authentication.apiKey };
-};
+  return { apiKey: state.authentication.apiKey }
+}
 
 const mapDispatchToProps = dispatch => {
   return {
     onApiKeySend: apiKey => {
-      dispatch(saveApiKey(apiKey));
+      dispatch(saveApiKey(apiKey))
     }
-  };
-};
+  }
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Authentication);
+export default connect(mapStateToProps, mapDispatchToProps)(Authentication)

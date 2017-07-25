@@ -1,9 +1,9 @@
-import React from 'react';
-import moment from 'moment';
+import React from 'react'
+import moment from 'moment'
 
 class LogTimeEntry extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       show: 'none',
@@ -12,7 +12,7 @@ class LogTimeEntry extends React.Component {
         hours: props.hours,
         comment: props.comment
       }
-    };
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -22,43 +22,43 @@ class LogTimeEntry extends React.Component {
         hours: nextProps.hours,
         comment: nextProps.comment
       }
-    });
+    })
   }
 
   toggleTimeLogEntry() {
     if (this.state.show === 'block') {
-      this.setState({ show: 'none' });
-      return;
+      this.setState({ show: 'none' })
+      return
     }
-    this.setState({ show: 'block' });
+    this.setState({ show: 'block' })
   }
 
   changeDate(date) {
     this.setState({
       timeEntryForm: { ...this.state.timeEntryForm, date }
-    });
+    })
   }
 
   changeHours(hours) {
     this.setState({
       timeEntryForm: { ...this.state.timeEntryForm, hours }
-    });
+    })
   }
 
   changeComment(comment) {
     this.setState({
       timeEntryForm: { ...this.state.timeEntryForm, comment }
-    });
+    })
   }
 
   render() {
-    let loggedTimeEntryClass = '';
+    let loggedTimeEntryClass = ''
     if (this.isLoggedTimeEntry()) {
-      loggedTimeEntryClass = 'rfh-logged-issue-msg';
+      loggedTimeEntryClass = 'rfh-logged-issue-msg'
 
       setTimeout(() => {
-        this.props.onLogTimeEntryDone();
-      }, 3000);
+        this.props.onLogTimeEntryDone()
+      }, 3000)
     }
 
     return (
@@ -91,7 +91,7 @@ class LogTimeEntry extends React.Component {
               type="button"
               className="btn btn-default rfh-btn-default rfh-time-log-button"
               onClick={() => {
-                this.toggleTimeLogEntry();
+                this.toggleTimeLogEntry()
               }}
             >
               Log again
@@ -101,16 +101,16 @@ class LogTimeEntry extends React.Component {
         <form
           style={{ display: this.state.show }}
           onSubmit={e => {
-            e.preventDefault();
+            e.preventDefault()
 
             this.props.onLogTimeEntry(
               this.props.issueId,
               this.state.timeEntryForm.date,
               this.state.timeEntryForm.hours,
               this.state.timeEntryForm.comment
-            );
+            )
 
-            this.toggleTimeLogEntry();
+            this.toggleTimeLogEntry()
           }}
         >
           <div className="row">
@@ -121,7 +121,7 @@ class LogTimeEntry extends React.Component {
                 placeholder="Date"
                 value={this.state.timeEntryForm.date}
                 onChange={event => {
-                  this.changeDate(event.target.value);
+                  this.changeDate(event.target.value)
                 }}
                 required="required"
               />
@@ -135,7 +135,7 @@ class LogTimeEntry extends React.Component {
                 pattern="[0-8]?(\.[0,5])?"
                 value={this.state.timeEntryForm.hours}
                 onChange={event => {
-                  this.changeHours(event.target.value);
+                  this.changeHours(event.target.value)
                 }}
                 required="required"
               />
@@ -147,7 +147,7 @@ class LogTimeEntry extends React.Component {
                 placeholder="Comment"
                 value={this.state.timeEntryForm.comment}
                 onChange={event => {
-                  this.changeComment(event.target.value);
+                  this.changeComment(event.target.value)
                 }}
               />
             </div>
@@ -162,12 +162,12 @@ class LogTimeEntry extends React.Component {
           </div>
         </form>
       </li>
-    );
+    )
   }
 
   isLoggedTimeEntry() {
-    return this.props.loggedTimeEntryId === this.props.id;
+    return this.props.loggedTimeEntryId === this.props.id
   }
 }
 
-export default LogTimeEntry;
+export default LogTimeEntry

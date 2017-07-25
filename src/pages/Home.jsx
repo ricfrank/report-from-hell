@@ -1,26 +1,26 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import _ from 'lodash';
+import React from 'react'
+import { connect } from 'react-redux'
+import _ from 'lodash'
 import {
   getProjects,
   getLoggedUser,
   getUserLogTimeEntries,
   logTimeEntry,
   logTimeEntryDone
-} from '../actions';
-import LogTimeEntry from '../components/LogTimeEntry.jsx';
+} from '../actions'
+import LogTimeEntry from '../components/LogTimeEntry.jsx'
 
 class Home extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.props
       .getProjects()
       .then(() => {
         this.props.getLoggedUser().then(() => {
-          this.props.getUserLogTimeEntries(this.props.user.id);
-        });
+          this.props.getUserLogTimeEntries(this.props.user.id)
+        })
       })
-      .catch(error => {});
+      .catch(error => {})
   }
 
   render() {
@@ -40,8 +40,8 @@ class Home extends React.Component {
           onLogTimeEntryDone={this.props.onLogTimeEntryDone}
           loggedIssueId={this.props.loggedIssueId}
         />
-      );
-    });
+      )
+    })
     return (
       <div className="col-md-10">
         <div className="row">
@@ -70,14 +70,14 @@ class Home extends React.Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
 const mapStateToProps = state => {
   if (!_.isEmpty(state.user.error)) {
-    alert(state.user.error.data + '\n' + state.user.error.status + '\n');
-    return;
+    alert(state.user.error.data + '\n' + state.user.error.status + '\n')
+    return
   }
   if (!_.isEmpty(state.userLogTimeEntries.error)) {
     alert(
@@ -85,8 +85,8 @@ const mapStateToProps = state => {
         '\n' +
         state.user.userLogTimeEntries.status +
         '\n'
-    );
-    return;
+    )
+    return
   }
 
   return {
@@ -94,23 +94,23 @@ const mapStateToProps = state => {
     userLogTimeEntries: state.userLogTimeEntries,
     loggedIssueId: state.projectIssues.loggedIssueId,
     loggedTimeEntryId: state.projectIssues.loggedTimeEntryId
-  };
-};
+  }
+}
 
 const mapDispatchToProps = dispatch => {
   return {
     onLogTimeEntry: (issueId, timeEntryDate, hours, comment) => {
-      dispatch(logTimeEntry(issueId, timeEntryDate, hours, comment));
+      dispatch(logTimeEntry(issueId, timeEntryDate, hours, comment))
     },
     getProjects: () => dispatch(getProjects()),
     getLoggedUser: () => dispatch(getLoggedUser()),
     getUserLogTimeEntries: userId => {
-      dispatch(getUserLogTimeEntries(userId));
+      dispatch(getUserLogTimeEntries(userId))
     },
     onLogTimeEntryDone: () => {
-      dispatch(logTimeEntryDone());
+      dispatch(logTimeEntryDone())
     }
-  };
-};
+  }
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

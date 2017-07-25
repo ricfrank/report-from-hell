@@ -1,43 +1,43 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import _ from 'lodash';
-import Issue from '../components/Issue.jsx';
-import IssueSearchBox from '../components/IssueSearchBox.jsx';
+import React from 'react'
+import { connect } from 'react-redux'
+import _ from 'lodash'
+import Issue from '../components/Issue.jsx'
+import IssueSearchBox from '../components/IssueSearchBox.jsx'
 import {
   logTimeEntry,
   logTimeEntryDone,
   getProjectIssues,
   searchProjectIssues
-} from '../actions';
+} from '../actions'
 import {
   ISSUES_INFINITE_SCROLL_THRESHOLD,
   ISSUES_INFINITE_SCROLL_LIMIT
-} from '../constants';
+} from '../constants'
 
 class ProjectIssuesList extends React.Component {
   constructor(props) {
-    super(props);
-    this.scrollListener = this.scrollListener.bind(this);
+    super(props)
+    this.scrollListener = this.scrollListener.bind(this)
 
-    this.props.onLoadIssues(this.props.params['projectId']);
-    window.addEventListener('scroll', this.scrollListener);
+    this.props.onLoadIssues(this.props.params['projectId'])
+    window.addEventListener('scroll', this.scrollListener)
   }
 
   componentDidUpdate() {
     if (this.props.params['projectId'] != this.props.projectId) {
-      this.props.onLoadIssues(this.props.params['projectId']);
+      this.props.onLoadIssues(this.props.params['projectId'])
     }
-    window.addEventListener('scroll', this.scrollListener);
+    window.addEventListener('scroll', this.scrollListener)
   }
 
   scrollListener() {
     if (window.scrollY > this.props.threshold) {
-      window.removeEventListener('scroll', this.scrollListener);
+      window.removeEventListener('scroll', this.scrollListener)
       this.props.onLoadIssues(
         this.props.issues[0].project.id,
         this.props.offset + ISSUES_INFINITE_SCROLL_LIMIT,
         this.props.threshold + ISSUES_INFINITE_SCROLL_THRESHOLD
-      );
+      )
     }
   }
 
@@ -52,8 +52,8 @@ class ProjectIssuesList extends React.Component {
           onLogTimeEntryDone={this.props.onLogTimeEntryDone}
           loggedIssueId={this.props.loggedIssueId}
         />
-      );
-    });
+      )
+    })
     return (
       <div className="col-md-10 rfh-no-padding">
         <div className="row">
@@ -84,7 +84,7 @@ class ProjectIssuesList extends React.Component {
           {issues}
         </ul>
       </div>
-    );
+    )
   }
 }
 
@@ -95,15 +95,15 @@ const mapStateToProps = state => {
         '\n' +
         state.projectIssues.error.status +
         '\n'
-    );
+    )
   }
 
-  let issues = state.projectIssues.issues;
+  let issues = state.projectIssues.issues
   if (
     state.projectIssues.resetIssuesList === false &&
     state.projectIssues.filteredIssues.length >= 0
   ) {
-    issues = state.projectIssues.filteredIssues;
+    issues = state.projectIssues.filteredIssues
   }
 
   return {
@@ -114,16 +114,16 @@ const mapStateToProps = state => {
     offset: state.projectIssues.offset,
     threshold: state.projectIssues.threshold,
     totalCount: state.projectIssues.totalCount
-  };
-};
+  }
+}
 
 const mapDispatchToProps = dispatch => {
   return {
     onLogTimeEntry: (issueId, timeEntryDate, hours, comment) => {
-      dispatch(logTimeEntry(issueId, timeEntryDate, hours, comment));
+      dispatch(logTimeEntry(issueId, timeEntryDate, hours, comment))
     },
     onLogTimeEntryDone: () => {
-      dispatch(logTimeEntryDone());
+      dispatch(logTimeEntryDone())
     },
     onLoadIssues: (
       projectId,
@@ -137,12 +137,12 @@ const mapDispatchToProps = dispatch => {
           threshold,
           ISSUES_INFINITE_SCROLL_LIMIT
         )
-      );
+      )
     },
     onSearchIssue: text => {
-      dispatch(searchProjectIssues(text));
+      dispatch(searchProjectIssues(text))
     }
-  };
-};
+  }
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProjectIssuesList);
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectIssuesList)

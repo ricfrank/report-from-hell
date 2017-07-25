@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router';
+import React from 'react'
+import { Link } from 'react-router'
 
 const Project = React.createClass({
   render: function() {
@@ -9,13 +9,13 @@ const Project = React.createClass({
         activeClassName="active"
         className="list-group-item rfh-sidebar-item"
         onClick={() => {
-          window.scrollTo(0, 0);
+          window.scrollTo(0, 0)
         }}
       >
         {this.props.name}
       </Link>
-    );
+    )
   }
-});
+})
 
-export default Project;
+export default Project

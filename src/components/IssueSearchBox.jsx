@@ -1,11 +1,11 @@
-import React from 'react';
+import React from 'react'
 
 class IssueSearchBox extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       searchValue: ''
-    };
+    }
   }
 
   render() {
@@ -13,8 +13,8 @@ class IssueSearchBox extends React.Component {
       <div className="col-md-12">
         <input
           onChange={event => {
-            this.props.onSearchIssue(event.target.value);
-            this.setState({ searchValue: event.target.value });
+            this.props.onSearchIssue(event.target.value)
+            this.setState({ searchValue: event.target.value })
           }}
           className="form-control rfh-search-box"
           type="text"
@@ -25,13 +25,13 @@ class IssueSearchBox extends React.Component {
           style={{ right: '25px', top: '26px', position: 'absolute' }}
           className={'glyphicon glyphicon-remove-sign'}
           onClick={() => {
-            this.setState({ searchValue: '' });
-            this.props.onSearchIssue('');
+            this.setState({ searchValue: '' })
+            this.props.onSearchIssue('')
           }}
         />
       </div>
-    );
+    )
   }
 }
 
-export default IssueSearchBox;
+export default IssueSearchBox

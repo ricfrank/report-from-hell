@@ -1,28 +1,28 @@
-import React from 'react';
+import React from 'react'
 
 class Issue extends React.Component {
   constructor(props) {
-    super(props);
-    this.state = { show: 'none' };
+    super(props)
+    this.state = { show: 'none' }
   }
 
   toggleTimeLogEntry() {
     if (this.state.show === 'block') {
-      this.setState({ show: 'none' });
-      return;
+      this.setState({ show: 'none' })
+      return
     }
-    this.setState({ show: 'block' });
+    this.setState({ show: 'block' })
   }
 
   render() {
-    let loggedIssueClass = '';
+    let loggedIssueClass = ''
     if (this.isLoggedIssue()) {
-      this.state.show = 'none';
-      loggedIssueClass = 'rfh-logged-issue-msg';
+      this.state.show = 'none'
+      loggedIssueClass = 'rfh-logged-issue-msg'
 
       setTimeout(() => {
-        this.props.onLogTimeEntryDone();
-      }, 3000);
+        this.props.onLogTimeEntryDone()
+      }, 3000)
     }
 
     return (
@@ -30,7 +30,7 @@ class Issue extends React.Component {
         <h4
           className="rfh-issue-title"
           onClick={() => {
-            this.toggleTimeLogEntry();
+            this.toggleTimeLogEntry()
           }}
         >
           {this.props.id} - {this.props.subject}
@@ -38,18 +38,18 @@ class Issue extends React.Component {
         <form
           style={{ display: this.state.show }}
           onSubmit={e => {
-            e.preventDefault();
+            e.preventDefault()
 
             this.props.onLogTimeEntry(
               this.props.id,
               this.date.value,
               this.hours.value,
               this.comment.value
-            );
+            )
 
-            this.date.value = '';
-            this.hours.value = '';
-            this.comment.value = '';
+            this.date.value = ''
+            this.hours.value = ''
+            this.comment.value = ''
           }}
         >
           <div className="row">
@@ -59,7 +59,7 @@ class Issue extends React.Component {
                 className="form-control"
                 placeholder="Date"
                 ref={value => {
-                  this.date = value;
+                  this.date = value
                 }}
                 required="required"
               />
@@ -72,7 +72,7 @@ class Issue extends React.Component {
                 step="0.5"
                 pattern="[0-8]?(\.[0,5])?"
                 ref={value => {
-                  this.hours = value;
+                  this.hours = value
                 }}
                 required="required"
               />
@@ -83,7 +83,7 @@ class Issue extends React.Component {
                 className="form-control"
                 placeholder="Comment"
                 ref={value => {
-                  this.comment = value;
+                  this.comment = value
                 }}
               />
             </div>
@@ -98,12 +98,12 @@ class Issue extends React.Component {
           </div>
         </form>
       </li>
-    );
+    )
   }
 
   isLoggedIssue() {
-    return this.props.loggedIssueId === this.props.id;
+    return this.props.loggedIssueId === this.props.id
   }
 }
 
-export default Issue;
+export default Issue

@@ -1,11 +1,11 @@
-import React from 'react';
+import React from 'react'
 
 class ProjectSearchBox extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       searchValue: ''
-    };
+    }
   }
 
   render() {
@@ -17,21 +17,21 @@ class ProjectSearchBox extends React.Component {
           placeholder="Search project"
           value={this.state.searchValue}
           onChange={event => {
-            this.setState({ searchValue: event.target.value });
-            this.props.onSearchProject(event.target.value);
+            this.setState({ searchValue: event.target.value })
+            this.props.onSearchProject(event.target.value)
           }}
         />
         <span
           style={{ right: '5px', top: '12px', position: 'absolute' }}
           className={'glyphicon glyphicon-remove-sign'}
           onClick={() => {
-            this.setState({ searchValue: '' });
-            this.props.onSearchProject('');
+            this.setState({ searchValue: '' })
+            this.props.onSearchProject('')
           }}
         />
       </div>
-    );
+    )
   }
 }
 
-export default ProjectSearchBox;
+export default ProjectSearchBox
