@@ -1,7 +1,7 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import {saveApiKey} from '../actions'
-import {Modal} from 'react-bootstrap'
+import React from 'react';
+import { connect } from 'react-redux';
+import { saveApiKey } from '../actions';
+import { Modal } from 'react-bootstrap';
 
 class Authentication extends React.Component {
   constructor(props) {
@@ -21,26 +21,33 @@ class Authentication extends React.Component {
             <Modal.Title>Add redmine api key</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <p>Log into projects, go to <a target="_blank" href="https://project.ideato.it/my/account">https://project.ideato.it/my/account</a> and copy/paste <b>API access key</b></p>
-            <form onSubmit={(e) => {
-              e.preventDefault();
+            <p>
+              Log into projects, go to{' '}
+              <a target="_blank" href="https://project.ideato.it/my/account">
+                https://project.ideato.it/my/account
+              </a>{' '}
+              and copy/paste <b>API access key</b>
+            </p>
+            <form
+              onSubmit={e => {
+                e.preventDefault();
 
-              this.props.onApiKeySend(this.apiKeyValue.value);
-            }}>
+                this.props.onApiKeySend(this.apiKeyValue.value);
+              }}
+            >
               <div className="row">
                 <div className="col-md-10">
                   <input
-                    ref={(value) => {
+                    ref={value => {
                       this.apiKeyValue = value;
                     }}
                     type="text"
                     className="form-control"
-                    placeholder="Api key"/>
+                    placeholder="Api key"
+                  />
                 </div>
                 <div className="col-md-1">
-                  <button
-                    type="submit"
-                    className="btn btn-success">
+                  <button type="submit" className="btn btn-success">
                     Send
                   </button>
                 </div>
@@ -49,21 +56,19 @@ class Authentication extends React.Component {
           </Modal.Body>
         </Modal>
       </div>
-    )
+    );
   }
 }
-;
-
-const mapStateToProps = (state) => {
-  return {apiKey: state.authentication.apiKey};
+const mapStateToProps = state => {
+  return { apiKey: state.authentication.apiKey };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    onApiKeySend: (apiKey) => {
+    onApiKeySend: apiKey => {
       dispatch(saveApiKey(apiKey));
     }
-  }
+  };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Authentication)
+export default connect(mapStateToProps, mapDispatchToProps)(Authentication);

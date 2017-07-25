@@ -13,8 +13,8 @@ import {
   SAVE_LOGGED_USER,
   ERROR_TO_GET_LOGGED_USER,
   SHOW_USER_LOG_TIME_ENTRIES
-} from '../actions'
-import {ISSUES_INFINITE_SCROLL_THRESHOLD} from '../constants'
+} from '../actions';
+import { ISSUES_INFINITE_SCROLL_THRESHOLD } from '../constants';
 import _ from 'lodash';
 
 export const authentication = (state = {}, action) => {
@@ -53,7 +53,10 @@ export const projectIssues = (state = PROJECT_ISSUES_INITIAL_STATE, action) => {
         ...issuesInfo,
         threshold: action.payload.threshold,
         totalCount: action.payload.total_count,
-        projectName: issuesInfo.issues.length > 0 ? issuesInfo.issues[0].project.name : PROJECT_ISSUES_INITIAL_STATE.projectName,
+        projectName:
+          issuesInfo.issues.length > 0
+            ? issuesInfo.issues[0].project.name
+            : PROJECT_ISSUES_INITIAL_STATE.projectName,
         filteredIssues: [],
         resetIssuesList: true,
         projectId: action.payload.projectId
@@ -66,7 +69,10 @@ export const projectIssues = (state = PROJECT_ISSUES_INITIAL_STATE, action) => {
         ...updatedIssuesInfo,
         threshold: action.payload.threshold,
         totalCount: action.payload.total_count,
-        projectName: updatedIssuesInfo.issues.length > 0 ? updatedIssuesInfo.issues[0].project.name : PROJECT_ISSUES_INITIAL_STATE.projectName,
+        projectName:
+          updatedIssuesInfo.issues.length > 0
+            ? updatedIssuesInfo.issues[0].project.name
+            : PROJECT_ISSUES_INITIAL_STATE.projectName,
         filteredIssues: [],
         resetIssuesList: true,
         projectId: action.payload.projectId
@@ -74,7 +80,7 @@ export const projectIssues = (state = PROJECT_ISSUES_INITIAL_STATE, action) => {
     case ERROR_TO_GET_PROJECT_ISSUES:
       return {
         ...state,
-        error: action.error,
+        error: action.error
       };
     case LOG_TIME_ENTRY_OK:
       return {
@@ -91,7 +97,7 @@ export const projectIssues = (state = PROJECT_ISSUES_INITIAL_STATE, action) => {
     case SEARCH_PROJECT_ISSUES:
       const text = action.payload.text;
 
-      if(text === '') {
+      if (text === '') {
         return {
           ...state,
           filteredIssues: [],
@@ -99,7 +105,7 @@ export const projectIssues = (state = PROJECT_ISSUES_INITIAL_STATE, action) => {
         };
       }
 
-      let filteredIssues = _.filter(state.issues, (issue) => {
+      let filteredIssues = _.filter(state.issues, issue => {
         if (_.includes(issue.id, _.toLower(text))) {
           return issue;
         }
@@ -129,7 +135,7 @@ export const projects = (state = PROJECT_INITIAL_STATE, action) => {
   switch (action.type) {
     case SHOW_PROJECTS:
       const CLOSED_PROJECT_STATUS_ID = 5;
-      const projects = action.payload.projects.filter((project) => {
+      const projects = action.payload.projects.filter(project => {
         return project.status !== CLOSED_PROJECT_STATUS_ID;
       });
       return {
@@ -140,12 +146,12 @@ export const projects = (state = PROJECT_INITIAL_STATE, action) => {
     case ERROR_TO_GET_PROJECTS:
       return {
         ...state,
-        error: action.error,
+        error: action.error
       };
     case SEARCH_PROJECT:
       const text = action.payload.text;
 
-      let filteredProjects = _.filter(state.projects, (project) => {
+      let filteredProjects = _.filter(state.projects, project => {
         if (_.includes(_.toLower(project.name), _.toLower(text))) {
           return project;
         }
@@ -153,7 +159,7 @@ export const projects = (state = PROJECT_INITIAL_STATE, action) => {
 
       return {
         ...state,
-        filteredProjects: filteredProjects,
+        filteredProjects: filteredProjects
       };
     default:
       return state;
@@ -172,7 +178,7 @@ export const user = (state = {}, action) => {
         error: action.error
       };
     default:
-      return state
+      return state;
   }
 };
 
@@ -186,6 +192,6 @@ export const userLogTimeEntries = (state = [], action) => {
         error: action.error
       };
     default:
-      return state
+      return state;
   }
 };

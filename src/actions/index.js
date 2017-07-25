@@ -1,6 +1,10 @@
 import axios from 'axios';
 import createRedmineApiUrl from '../factories/RedmineApiUrl';
-import {AUTH_LOCAL_STORAGE_KEY, ISSUES_INFINITE_SCROLL_LIMIT, ISSUES_INFINITE_SCROLL_THRESHOLD} from '../constants'
+import {
+  AUTH_LOCAL_STORAGE_KEY,
+  ISSUES_INFINITE_SCROLL_LIMIT,
+  ISSUES_INFINITE_SCROLL_THRESHOLD
+} from '../constants';
 import storage from '../services/LocalStorage';
 
 export const SHOW_PROJECT_ISSUES = 'SHOW_PROJECT_ISSUES';
@@ -17,12 +21,19 @@ export const LOG_TIME_ENTRY_DONE = 'LOG_TIME_ENTRY_DONE';
 export const SAVE_LOGGED_USER = 'SAVE_LOGGED_USER';
 export const ERROR_TO_GET_LOGGED_USER = 'ERROR_TO_GET_LOGGED_USER';
 export const SHOW_USER_LOG_TIME_ENTRIES = 'SHOW_USER_LOG_TIME_ENTRIES';
-export const ERROR_TO_GET_USER_LOG_TIME_ENTRIES = 'ERROR_TO_GET_USER_LOG_TIME_ENTRIES';
+export const ERROR_TO_GET_USER_LOG_TIME_ENTRIES =
+  'ERROR_TO_GET_USER_LOG_TIME_ENTRIES';
 
-axios.defaults.headers.common['X-Redmine-API-Key'] = storage.getItem(AUTH_LOCAL_STORAGE_KEY);
+axios.defaults.headers.common['X-Redmine-API-Key'] = storage.getItem(
+  AUTH_LOCAL_STORAGE_KEY
+);
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
-export const showProjectIssues = (issues, threshold = ISSUES_INFINITE_SCROLL_THRESHOLD, id) => {
+export const showProjectIssues = (
+  issues,
+  threshold = ISSUES_INFINITE_SCROLL_THRESHOLD,
+  id
+) => {
   return {
     type: SHOW_PROJECT_ISSUES,
     payload: {
@@ -30,10 +41,14 @@ export const showProjectIssues = (issues, threshold = ISSUES_INFINITE_SCROLL_THR
       threshold: threshold,
       projectId: id
     }
-  }
+  };
 };
 
-export const updateProjectIssues = (issues, threshold = ISSUES_INFINITE_SCROLL_THRESHOLD, id) => {
+export const updateProjectIssues = (
+  issues,
+  threshold = ISSUES_INFINITE_SCROLL_THRESHOLD,
+  id
+) => {
   return {
     type: UPDATE_PROJECT_ISSUES,
     payload: {
@@ -41,58 +56,68 @@ export const updateProjectIssues = (issues, threshold = ISSUES_INFINITE_SCROLL_T
       threshold: threshold,
       projectId: id
     }
-  }
+  };
 };
 
-export const searchProjectIssues = (text) => {
+export const searchProjectIssues = text => {
   return {
     type: SEARCH_PROJECT_ISSUES,
-    payload: {text}
-  }
+    payload: { text }
+  };
 };
 
-export const searchProject = (text) => {
+export const searchProject = text => {
   return {
     type: SEARCH_PROJECT,
-    payload: {text}
-  }
+    payload: { text }
+  };
 };
 
-export const showProjects = (projects) => {
+export const showProjects = projects => {
   return {
     type: SHOW_PROJECTS,
     payload: {
       ...projects
     }
-  }
+  };
 };
 
-export const errorToGetProjectIssues = (error) => {
+export const errorToGetProjectIssues = error => {
   return {
     type: ERROR_TO_GET_PROJECT_ISSUES,
     error: error
-  }
+  };
 };
 
-export const errorToGetProjects = (error) => {
+export const errorToGetProjects = error => {
   return {
     type: ERROR_TO_GET_PROJECTS,
     error: error
-  }
+  };
 };
 
-export function getProjectIssues(id,
-                                 offset = 0,
-                                 threshold = ISSUES_INFINITE_SCROLL_THRESHOLD,
-                                 limit = ISSUES_INFINITE_SCROLL_LIMIT) {
+export function getProjectIssues(
+  id,
+  offset = 0,
+  threshold = ISSUES_INFINITE_SCROLL_THRESHOLD,
+  limit = ISSUES_INFINITE_SCROLL_LIMIT
+) {
   return dispatch =>
-    axios.get(createRedmineApiUrl('/issues.json', '?project_id=' + id +
-      '&status_id=open&limit=' + limit +
-      '&offset=' + offset +
-      '&sort=id:desc'
-    ))
+    axios
+      .get(
+        createRedmineApiUrl(
+          '/issues.json',
+          '?project_id=' +
+            id +
+            '&status_id=open&limit=' +
+            limit +
+            '&offset=' +
+            offset +
+            '&sort=id:desc'
+        )
+      )
       .then(res => {
-        if(offset === 0){
+        if (offset === 0) {
           dispatch(showProjectIssues(res.data, threshold, id));
           return;
         }
@@ -108,14 +133,14 @@ export function getProjectIssues(id,
 export function requireAuthentication() {
   return {
     type: REQUIRE_AUTHENTICATION
-  }
+  };
 }
 
 export function authenticate(apiKey) {
   return {
     type: AUTHENTICATE,
     apiKey: apiKey
-  }
+  };
 }
 
 export function logTimeEntryOk(issueId, loggedTimeEntryId) {
@@ -123,40 +148,42 @@ export function logTimeEntryOk(issueId, loggedTimeEntryId) {
     type: LOG_TIME_ENTRY_OK,
     payload: {
       loggedIssueId: issueId,
-      loggedTimeEntryId: loggedTimeEntryId,
+      loggedTimeEntryId: loggedTimeEntryId
     }
-  }
+  };
 }
 
 export function saveApiKey(apiKey) {
-  return (dispatch, getState)=> {
+  return (dispatch, getState) => {
     storage.setItem(AUTH_LOCAL_STORAGE_KEY, apiKey);
-    axios.defaults.headers.common['X-Redmine-API-Key'] = storage.getItem(AUTH_LOCAL_STORAGE_KEY);
+    axios.defaults.headers.common['X-Redmine-API-Key'] = storage.getItem(
+      AUTH_LOCAL_STORAGE_KEY
+    );
 
     dispatch(authenticate(apiKey));
     dispatch(getProjects());
     dispatch(getLoggedUser()).then(() => {
       dispatch(getUserLogTimeEntries(getState().user.id));
     });
-  }
+  };
 }
 
 export function getProjects() {
   return dispatch => {
-
     //why ?
     if (storage.getItem(AUTH_LOCAL_STORAGE_KEY)) {
       dispatch(authenticate(storage.getItem(AUTH_LOCAL_STORAGE_KEY)));
     }
     //
 
-    return axios.get(createRedmineApiUrl('/projects.json', '?limit=100'))
+    return axios
+      .get(createRedmineApiUrl('/projects.json', '?limit=100'))
       .then(res => dispatch(showProjects(res.data)))
       .catch(error => {
         if (error.response.status == 401) {
           dispatch(requireAuthentication());
           return new Promise((resolve, reject) => {
-              reject(error);
+            reject(error);
           });
         }
 
@@ -164,28 +191,28 @@ export function getProjects() {
           dispatch(errorToGetProjects(error.response));
         }
       });
-  }
+  };
 }
 
 export function logTimeEntry(issueId, timeEntryDate, hours, comment) {
   return (dispatch, getState) => {
-
-    axios.post(createRedmineApiUrl('/time_entries.json'), {
-      time_entry: {
-        issue_id: issueId,
-        spent_on: timeEntryDate,
-        hours: hours,
-        comments: comment
-      }
-    })
-      .then(function (response) {
-        dispatch(logTimeEntryOk(issueId, response.data.time_entry.id));
-        dispatch(getUserLogTimeEntries(getState().user.id))
+    axios
+      .post(createRedmineApiUrl('/time_entries.json'), {
+        time_entry: {
+          issue_id: issueId,
+          spent_on: timeEntryDate,
+          hours: hours,
+          comments: comment
+        }
       })
-      .catch(function (error) {
+      .then(function(response) {
+        dispatch(logTimeEntryOk(issueId, response.data.time_entry.id));
+        dispatch(getUserLogTimeEntries(getState().user.id));
+      })
+      .catch(function(error) {
         if (error.response.status == 401) {
           dispatch(requireAuthentication());
-          return
+          return;
         }
 
         console.error(error.response);
@@ -196,12 +223,13 @@ export function logTimeEntry(issueId, timeEntryDate, hours, comment) {
 export function logTimeEntryDone() {
   return {
     type: LOG_TIME_ENTRY_DONE
-  }
+  };
 }
 
 export const getLoggedUser = () => {
   return dispatch => {
-    return axios.get(createRedmineApiUrl('/users/current.json'))
+    return axios
+      .get(createRedmineApiUrl('/users/current.json'))
       .then(res => {
         dispatch(saveLoggedUser(res.data.user));
       })
@@ -213,32 +241,38 @@ export const getLoggedUser = () => {
   };
 };
 
-export const saveLoggedUser = (user) => {
+export const saveLoggedUser = user => {
   return {
     type: SAVE_LOGGED_USER,
-    payload: {user: user}
+    payload: { user: user }
   };
 };
 
-export const errorToGetLoggedUser = (error) => {
+export const errorToGetLoggedUser = error => {
   return {
     type: ERROR_TO_GET_LOGGED_USER,
     error: error
-  }
+  };
 };
-
 
 export const getUserLogTimeEntries = loggedUserId => {
   return dispatch => {
-    axios.get(createRedmineApiUrl('/time_entries.json', '?user_id=' + loggedUserId + '&limit=10'))
+    axios
+      .get(
+        createRedmineApiUrl(
+          '/time_entries.json',
+          '?user_id=' + loggedUserId + '&limit=10'
+        )
+      )
       .then(res => {
-        const logTimeEntriesPromises = res.data.time_entries.map((timeEntry) => {
-          return axios.get(createRedmineApiUrl('/issues/' + timeEntry.issue.id + '.json'))
-            .then((res) => {
+        const logTimeEntriesPromises = res.data.time_entries.map(timeEntry => {
+          return axios
+            .get(createRedmineApiUrl('/issues/' + timeEntry.issue.id + '.json'))
+            .then(res => {
               return {
                 ...timeEntry,
                 issue: res.data.issue
-              }
+              };
             });
         });
 
@@ -246,7 +280,7 @@ export const getUserLogTimeEntries = loggedUserId => {
           dispatch(showUserLogTimeEntries(logTimeEntries));
         });
       })
-      .catch(function (error) {
+      .catch(function(error) {
         if (error.response) {
           dispatch(errorToGetUserLogTimeEntries(error.response));
         }
@@ -257,13 +291,13 @@ export const getUserLogTimeEntries = loggedUserId => {
 export const showUserLogTimeEntries = timeEntries => {
   return {
     type: SHOW_USER_LOG_TIME_ENTRIES,
-    payload: {logTimeEntries: timeEntries}
-  }
+    payload: { logTimeEntries: timeEntries }
+  };
 };
 
 export const errorToGetUserLogTimeEntries = error => {
   return {
     type: ERROR_TO_GET_USER_LOG_TIME_ENTRIES,
     error: error
-  }
+  };
 };
