@@ -12,10 +12,15 @@
     "build:bundle": "NODE_ENV=production webpack -p --config webpack.production.config.js --progress --profile --colors",
     "watch-app": "./node_modules/.bin/webpack -w",
     "deploy": "npm run build && rsync -avzC ./ ideato@52.29.194.12:/var/www/report.ideato.it",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "prettier":  "./node_modules/.bin/prettier --single-quote --list-different --no-semi --write \"src/**/*.{js,jsx}\" && ./node_modules/.bin/prettier --single-quote --list-different --write \"src/**/*.{css}\""
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,css}": [
+    "src/**/*.{js,jsx}": [
+      "prettier --single-quote --list-different --no-semi --write",
+      "git add"
+    ],
+    "src/**/*.css": [
       "prettier --single-quote --list-different --write",
       "git add"
     ]
