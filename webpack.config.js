@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const { resolve } = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
@@ -52,6 +53,12 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       ENDPOINT: JSON.stringify('https://project-stage.ideato.it'),
+    }),
+    new HtmlWebpackPlugin({
+      template: `${__dirname}/index.html`,
+      filename: 'index.html',
+      inject: 'body',
+      hash: true
     })
   ],
   devServer: {
