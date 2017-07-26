@@ -1,8 +1,8 @@
 {
   "name": "report-from-hell",
   "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
+  "description": "Timesheet application based on redmine api",
+  "main": "main.js",
   "scripts": {
     "test": "./node_modules/.bin/karma start karma.config.js",
     "test-watch": "./node_modules/.bin/karma start karma.config.js --single-run",
@@ -13,8 +13,17 @@
     "watch-app": "./node_modules/.bin/webpack -w",
     "deploy": "npm run build && rsync -avzC ./ ideato@52.29.194.12:/var/www/report.ideato.it",
     "precommit": "lint-staged",
-    "prettier":  "./node_modules/.bin/prettier --single-quote --list-different --no-semi --write \"src/**/*.{js,jsx}\" && ./node_modules/.bin/prettier --single-quote --list-different --write \"src/**/*.{css}\"",
-    "desktop": "electron ."
+    "prettier": "./node_modules/.bin/prettier --single-quote --list-different --no-semi --write \"src/**/*.{js,jsx}\" && ./node_modules/.bin/prettier --single-quote --list-different --write \"src/**/*.{css}\"",
+    "desktop": "webpack --config webpack.desktop.config.js --progress --profile --colors && electron .",
+    "pack": "electron-builder --dir",
+    "dist": "npm build && electron-builder -m",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "build": {
+    "appId": "ReportFromHell",
+    "mac": {
+      "category": "public.app-category.utilities"
+    }
   },
   "lint-staged": {
     "src/**/*.{js,jsx}": [
@@ -52,6 +61,8 @@
     "babel-preset-stage-2": "^6.13.0",
     "css-loader": "^0.26.0",
     "electron": "^1.6.11",
+    "electron-builder": "^19.6.3",
+    "electron-packager": "^8.7.2",
     "file-loader": "^0.9.0",
     "hapi": "^16.1.1",
     "html-webpack-plugin": "^2.28.0",

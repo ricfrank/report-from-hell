@@ -6,8 +6,7 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: resolve(__dirname, 'public'),
-    filename: 'bundle.js',
-    publicPath: '/'
+    filename: 'bundle.js'
   },
   module: {
     loaders: [
@@ -17,7 +16,7 @@ module.exports = {
         loader: 'babel',
         include: __dirname,
         query: {
-          presets: ['react', 'es2015', 'stage-2', 'react-hmre']
+          presets: ['react', 'es2015', 'stage-2']
         }
       },
       {
@@ -54,7 +53,7 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       ENDPOINT: JSON.stringify('https://project-stage.ideato.it'),
-      IS_DESKTOP: false
+      IS_DESKTOP: true
     }),
     new HtmlWebpackPlugin({
       template: `${__dirname}/index.html`,
@@ -62,11 +61,5 @@ module.exports = {
       inject: 'body',
       hash: true
     })
-  ],
-  devServer: {
-    hot: true,
-    contentBase: resolve(__dirname, 'public'),
-    publicPath: '/',
-    historyApiFallback: true
-  },
+  ]
 };

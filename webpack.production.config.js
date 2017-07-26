@@ -58,6 +58,7 @@ module.exports = {
       },
       // ENDPOINT: JSON.stringify('https://project.ideato.it'),
       ENDPOINT: JSON.stringify('https://project-stage.ideato.it'),
+      IS_DESKTOP: false
     }),
     new HtmlWebpackPlugin({
       template: `${__dirname}/index.html`,
