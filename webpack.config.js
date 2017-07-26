@@ -6,7 +6,8 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: resolve(__dirname, 'public'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: '/'
   },
   module: {
     loaders: [
@@ -65,5 +66,6 @@ module.exports = {
     hot: true,
     contentBase: resolve(__dirname, 'public'),
     publicPath: '/',
+    historyApiFallback: true
   },
 };

@@ -21,6 +21,14 @@ server.register(require('inert'), (err) => {
 
   server.route({
     method: 'GET',
+    path: '/issues/{projectId}',
+    handler: function (request, reply) {
+      reply.file(__dirname + '/public/index.html');
+    }
+  });
+
+  server.route({
+    method: 'GET',
     path: '/{param*}',
     handler: {
       directory: {

@@ -6,7 +6,8 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: resolve(__dirname, 'public'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: '/'
   },
   module: {
     loaders: [
@@ -55,7 +56,8 @@ module.exports = {
       'process.env': {
         NODE_ENV: JSON.stringify('production') //see http://dev.topheman.com/make-your-react-production-minified-version-with-webpack/
       },
-      ENDPOINT: JSON.stringify('https://project.ideato.it'),
+      // ENDPOINT: JSON.stringify('https://project.ideato.it'),
+      ENDPOINT: JSON.stringify('https://project-stage.ideato.it'),
     }),
     new HtmlWebpackPlugin({
       template: `${__dirname}/index.html`,
