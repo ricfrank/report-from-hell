@@ -7,7 +7,8 @@ import {
   logTimeEntry,
   logTimeEntryDone,
   getProjectIssues,
-  searchProjectIssues
+  searchProjectIssues,
+  getProjects
 } from '../actions'
 import {
   ISSUES_INFINITE_SCROLL_THRESHOLD,
@@ -21,6 +22,8 @@ class ProjectIssuesList extends React.Component {
 
     this.props.onLoadIssues(this.props.params['projectId'])
     window.addEventListener('scroll', this.scrollListener)
+
+    this.props.getProjects()
   }
 
   componentDidUpdate() {
@@ -141,7 +144,8 @@ const mapDispatchToProps = dispatch => {
     },
     onSearchIssue: text => {
       dispatch(searchProjectIssues(text))
-    }
+    },
+    getProjects: () => dispatch(getProjects())
   }
 }
 
