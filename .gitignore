@@ -1,5 +1,5 @@
 node_modules
 public/*
 npm-debug.log
-dist
+dist/*
 !dist/report-from-hell-*.dmg
