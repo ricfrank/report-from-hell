@@ -3,6 +3,7 @@ const { resolve } = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+  target: 'electron-renderer',
   entry: './src/index.js',
   output: {
     path: resolve(__dirname, 'public'),
@@ -46,6 +47,9 @@ module.exports = {
       {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
         loader: 'url?limit=10000&mimetype=image/svg+xml'
+      },{
+        test: /\.json/,
+        loader: 'url?limit=10000&mimetype=application/json'
       }
     ]
   },

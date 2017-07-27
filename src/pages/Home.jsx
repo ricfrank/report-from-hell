@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
+import { ExternalLink } from '../components/ExternalLink.jsx'
 import {
   getProjects,
   getLoggedUser,
@@ -56,9 +57,9 @@ class Home extends React.Component {
           <div className="col-md-3">
             <span className="rfh-white-rabbit">
               Check your time on{' '}
-              <a target="_blank" href="https://time.ideato.it/">
+              <ExternalLink href="https://time.ideato.it/">
                 white rabbit
-              </a>
+              </ExternalLink>
             </span>
           </div>
         </div>
