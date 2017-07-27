@@ -15,8 +15,9 @@
     "precommit": "lint-staged",
     "prettier": "./node_modules/.bin/prettier --single-quote --list-different --no-semi --write \"src/**/*.{js,jsx}\" && ./node_modules/.bin/prettier --single-quote --list-different --write \"src/**/*.{css}\"",
     "desktop": "webpack --config webpack.desktop.config.js --progress --profile --colors && electron .",
+    "desktop-build-bundle": "NODE_ENV=production webpack -p --config webpack.desktop.production.config.js --progress --profile --colors",
     "pack": "electron-builder --dir",
-    "dist": "npm build && electron-builder -m",
+    "dist": "npm i && npm run clean && npm run desktop-build-bundle && electron-builder -m",
     "postinstall": "electron-builder install-app-deps"
   },
   "build": {
