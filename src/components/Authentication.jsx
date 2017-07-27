@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { saveApiKey } from '../actions'
 import { Modal } from 'react-bootstrap'
+import { ExternalLink } from './ExternalLink.jsx'
 
 class Authentication extends React.Component {
   constructor(props) {
@@ -23,9 +24,12 @@ class Authentication extends React.Component {
           <Modal.Body>
             <p>
               Log into projects, go to{' '}
-              <a target="_blank" href="https://project.ideato.it/my/account">
+              <ExternalLink
+                target="_blank"
+                href="https://project.ideato.it/my/account"
+              >
                 https://project.ideato.it/my/account
-              </a>{' '}
+              </ExternalLink>{' '}
               and copy/paste <b>API access key</b>
             </p>
             <form

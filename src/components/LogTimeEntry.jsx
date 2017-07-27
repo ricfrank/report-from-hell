@@ -1,5 +1,6 @@
 import React from 'react'
 import moment from 'moment'
+import { ExternalLink } from './ExternalLink.jsx'
 
 class LogTimeEntry extends React.Component {
   constructor(props) {
@@ -71,12 +72,12 @@ class LogTimeEntry extends React.Component {
         <ul>
           <li>
             Edit issue:{' '}
-            <a
+            <ExternalLink
               target={'_blank'}
               href={`${ENDPOINT}/issues/${this.props.issueId}`}
             >
               {this.props.issueId}
-            </a>
+            </ExternalLink>
           </li>
           <li>
             Time: {this.props.hours} h
