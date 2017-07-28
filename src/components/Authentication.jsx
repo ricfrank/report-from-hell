@@ -24,11 +24,8 @@ class Authentication extends React.Component {
           <Modal.Body>
             <p>
               Log into projects, go to{' '}
-              <ExternalLink
-                target="_blank"
-                href="https://project.ideato.it/my/account"
-              >
-                https://project.ideato.it/my/account
+              <ExternalLink target="_blank" href={`${ENDPOINT}/my/account`}>
+                {`${ENDPOINT}/my/account`}
               </ExternalLink>{' '}
               and copy/paste <b>API access key</b>
             </p>
