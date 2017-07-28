@@ -1,13 +1,14 @@
 import React from 'react'
-import electron from 'electron'
 
 export const ExternalLink = ({ children, href, ...otherProps }) => {
   return (
     <a
-      href="#"
+      href={href}
       onClick={e => {
-        e.preventDefault()
-        electron.shell.openExternal(href)
+        if (IS_DESKTOP) {
+          e.preventDefault()
+          require('electron').shell.openExternal(href)
+        }
       }}
       {...otherProps}
     >

@@ -57,7 +57,7 @@ class Home extends React.Component {
           <div className="col-md-3">
             <span className="rfh-white-rabbit">
               Check your time on{' '}
-              <ExternalLink href="https://time.ideato.it/">
+              <ExternalLink target="_blank" href="https://time.ideato.it/">
                 white rabbit
               </ExternalLink>
             </span>
