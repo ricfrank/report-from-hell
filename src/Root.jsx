@@ -12,7 +12,6 @@ import ProjectIssuesList from './pages/ProjectIssuesList.jsx'
 
 const Root = React.createClass({
   render() {
-    console.log('IS_DESKTOP', IS_DESKTOP)
     return (
       <Router history={IS_DESKTOP === true ? hashHistory : browserHistory}>
         <Route path="/" component={App}>
