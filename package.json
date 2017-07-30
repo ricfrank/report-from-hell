@@ -1,5 +1,5 @@
 {
-  "name": "report-from-hell",
+  "name": "outatime",
   "version": "0.0.1",
   "description": "Timesheet application based on redmine api",
   "main": "main.js",
@@ -21,7 +21,7 @@
     "postinstall": "electron-builder install-app-deps"
   },
   "build": {
-    "appId": "ReportFromHell",
+    "appId": "Outatime",
     "mac": {
       "category": "public.app-category.utilities"
     },

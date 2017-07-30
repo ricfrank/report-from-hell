@@ -48,7 +48,7 @@ class Home extends React.Component {
         <div className="row">
           <div className="col-md-9">
             <div className="page-header">
-              <h1>Report from hell</h1>
+              <h1>Outatime</h1>
               <p className="lead">
                 Hi {this.props.user.firstname}! See your last 10 time entries
               </p>
