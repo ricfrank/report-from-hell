@@ -27,4 +27,4 @@ Build Desktop App
 ```npm run dist```
 
 
-[Download dmg](https://github.com/ricfrank/report-from-hell/tree/master/dist/report-from-hell-0.0.1.dmg)
+[Download dmg](https://github.com/ricfrank/report-from-hell/tree/master/dist/outatime-0.0.2.dmg)
