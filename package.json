@@ -24,7 +24,8 @@
     "appId": "ReportFromHell",
     "mac": {
       "category": "public.app-category.utilities"
-    }
+    },
+    "artifactName": "outatime-0.0.2.dmg"
   },
   "lint-staged": {
     "src/**/*.{js,jsx}": [
