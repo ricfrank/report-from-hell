@@ -25,7 +25,8 @@
     "mac": {
       "category": "public.app-category.utilities"
     },
-    "artifactName": "outatime-0.0.2.dmg"
+    "artifactName": "outatime-0.0.2.dmg",
+    "productName": "outatime"
   },
   "lint-staged": {
     "src/**/*.{js,jsx}": [
