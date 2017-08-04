@@ -14,6 +14,7 @@ import {
   ISSUES_INFINITE_SCROLL_THRESHOLD,
   ISSUES_INFINITE_SCROLL_LIMIT
 } from '../constants'
+import whiterabbitLogo from '../assets/wr-logo.svg'
 
 class ProjectIssuesList extends React.Component {
   constructor(props) {
@@ -58,24 +59,26 @@ class ProjectIssuesList extends React.Component {
       )
     })
     return (
-      <div className="col-md-10 rfh-no-padding">
+      <div className="col-md-10">
         <div className="row">
           <div className="col-md-9">
-            <h3 className="rfh-project-name">
-              Issues for {this.props.projectName} -{' '}
-              <span className="rfh-color-red">
-                {this.props.totalCount}
-              </span>{' '}
-              opened issues
-            </h3>
+            <div className="page-header">
+              <p className="lead">
+                Issues for {this.props.projectName} -{' '}
+                <span className="rfh-color-red">{this.props.totalCount}</span> {' '}
+                opened issues
+              </p>
+            </div>
           </div>
           <div className="col-md-3">
-            <span className="rfh-white-rabbit">
-              Check your time on{' '}
-              <a target="_blank" href="https://time.ideato.it/">
-                white rabbit
-              </a>
-            </span>
+            <a
+              className="whiterabbit-link"
+              target="_blank"
+              href="https://time.ideato.it/"
+            >
+              <span className="rfh-white-rabbit">Check your time on </span>
+              <img src={whiterabbitLogo} />
+            </a>
           </div>
         </div>
         <div className="row">

@@ -10,7 +10,8 @@ class ProjectSearchBox extends React.Component {
 
   render() {
     return (
-      <div style={{ position: 'relative' }}>
+      <div className="search-container">
+        <span className="glyphicon glyphicon-search search-icon" />
         <input
           className="form-control rfh-search--project-box"
           type="text"
