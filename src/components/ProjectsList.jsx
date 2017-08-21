@@ -5,6 +5,7 @@ import _ from 'lodash'
 import Project from './Project.jsx'
 import ProjectSearchBox from '../components/ProjectSearchBox.jsx'
 import { searchProject } from '../actions/index'
+import logo from '../assets/outatime-logo.svg'
 
 class ProjectsList extends React.Component {
   constructor(props) {
@@ -25,15 +26,15 @@ class ProjectsList extends React.Component {
       <div className="col-md-2 rfh-sidebar">
         <div className="rfh-logo">
           <Link to={'/'}>
-            <img
-              src="https://www.ideato.it/assets/themes/ideato/img/theme/ideato-logo-header.svg"
-              alt="logo ideato"
-            />
+            <img src={logo} alt="logo outatime" />
           </Link>
         </div>
+        <hr />
         <div className="rfh-projects-count">
           <h5>
-            <span className="rfh-color-red">{this.props.totalCount}</span>{' '}
+            <span className="rfh-projects-number">
+              {this.props.totalCount}
+            </span>{' '}
             active projects
           </h5>
           <ProjectSearchBox onSearchProject={this.props.onSearchProject} />

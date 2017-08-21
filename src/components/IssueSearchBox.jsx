@@ -10,7 +10,8 @@ class IssueSearchBox extends React.Component {
 
   render() {
     return (
-      <div className="col-md-12">
+      <div className="search-container search-container--issue">
+        <span className="glyphicon glyphicon-search search-icon" />
         <input
           onChange={event => {
             this.props.onSearchIssue(event.target.value)
@@ -18,7 +19,7 @@ class IssueSearchBox extends React.Component {
           }}
           className="form-control rfh-search-box"
           type="text"
-          placeholder="Search yuor issue"
+          placeholder="Search your issue"
           value={this.state.searchValue}
         />
         <span

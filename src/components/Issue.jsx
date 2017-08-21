@@ -33,7 +33,8 @@ class Issue extends React.Component {
             this.toggleTimeLogEntry()
           }}
         >
-          {this.props.id} - {this.props.subject}
+          <span className="issue-time">{this.props.id}</span>{' '}
+          <span className="issue-title">{this.props.subject}</span>
         </h4>
         <form
           style={{ display: this.state.show }}

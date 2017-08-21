@@ -64,29 +64,37 @@ class LogTimeEntry extends React.Component {
 
     return (
       <li className={'list-group-item ' + loggedTimeEntryClass}>
-        <h4 className="rfh-issue-title">
-          {this.props.logDate} #{' '}
-          <span className={'rfh-color-red'}>{this.props.projectName}</span> #{' '}
-          {this.props.subject}
-        </h4>
-        <ul>
-          <li>
-            Edit issue:{' '}
-            <ExternalLink
-              target={'_blank'}
-              href={`${ENDPOINT}/issues/${this.props.issueId}`}
-            >
-              {this.props.issueId}
-            </ExternalLink>
-          </li>
-          <li>
-            Time: {this.props.hours} h
-          </li>
-          <li>
-            Comment: {this.props.comment}
-          </li>
-        </ul>
         <div className={'row'}>
+          <div className={'col-md-10'}>
+            <h4 className="rfh-issue-title">
+              <span className="issue-date">{this.props.logDate}</span>{' '}
+              <span className="issue-divider"># </span>
+              <span className="issue-project">
+                {this.props.projectName}
+              </span>{' '}
+              <span className="issue-divider"># </span>
+              <span className="issue-title">{this.props.subject}</span>
+            </h4>
+            <ul className="issue-meta">
+              <li>
+                Edit issue:{' '}
+                <ExternalLink
+                  className="edit-issue-link"
+                  target={'_blank'}
+                  href={`${ENDPOINT}/issues/${this.props.issueId}`}
+                >
+                  {this.props.issueId}
+                </ExternalLink>
+              </li>
+              <li>
+                Time: <span className="issue-time">{this.props.hours}h</span>
+              </li>
+              <li>
+                Comment:{' '}
+                <span className="issue-comment">{this.props.comment}</span>
+              </li>
+            </ul>
+          </div>
           <div className={'col-md-2'}>
             <button
               type="button"

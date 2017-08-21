@@ -10,6 +10,7 @@ import {
   logTimeEntryDone
 } from '../actions'
 import LogTimeEntry from '../components/LogTimeEntry.jsx'
+import whiterabbitLogo from '../assets/wr-logo.svg'
 
 class Home extends React.Component {
   constructor(props) {
@@ -50,17 +51,22 @@ class Home extends React.Component {
             <div className="page-header">
               <h1>Outatime</h1>
               <p className="lead">
-                Hi {this.props.user.firstname}! See your last 10 time entries
+                Welcome back {this.props.user.firstname}!
+              </p>
+              <p className="">
+                See your last <strong>10</strong> time entries
               </p>
             </div>
           </div>
           <div className="col-md-3">
-            <span className="rfh-white-rabbit">
-              Check your time on{' '}
-              <ExternalLink target="_blank" href="https://time.ideato.it/">
-                white rabbit
-              </ExternalLink>
-            </span>
+            <ExternalLink
+              className="whiterabbit-link"
+              target="_blank"
+              href="https://time.ideato.it/"
+            >
+              <span className="rfh-white-rabbit">Check your time on </span>
+              <img src={whiterabbitLogo} />
+            </ExternalLink>
           </div>
         </div>
         <div className="row">
