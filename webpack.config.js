@@ -53,7 +53,7 @@ module.exports = {
   devtool: "inline-source-map",
   plugins: [
     new webpack.DefinePlugin({
-      ENDPOINT: JSON.stringify('https://project-stage.ideato.it'),
+      ENDPOINT: JSON.stringify('http://localhost:8080'),
       IS_DESKTOP: false
     }),
     new HtmlWebpackPlugin({

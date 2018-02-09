@@ -1,0 +1,5 @@
+FROM redmine:latest
+
+ADD ./test/redmine/redmine.db /usr/src/redmine/sqlite/redmine.db
+ADD ./test/redmine/redmine_cors /usr/src/redmine/plugins/redmine_cors
+
