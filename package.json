@@ -10,7 +10,6 @@
     "build": "npm i && npm run clean && npm run build:bundle",
     "clean": "./node_modules/.bin/rimraf public",
     "build:bundle": "NODE_ENV=production webpack -p --config webpack.production.config.js --progress --profile --colors",
-    "watch-app": "./node_modules/.bin/webpack -w",
     "deploy": "npm run build && rsync -avzC --exclude-from 'rsync-exclude.txt' ./ ideato@52.29.194.12:/var/www/report.ideato.it",
     "precommit": "lint-staged",
     "prettier": "./node_modules/.bin/prettier --single-quote --list-different --no-semi --write \"src/**/*.{js,jsx}\" && ./node_modules/.bin/prettier --single-quote --list-different --write \"src/**/*.{css}\"",
