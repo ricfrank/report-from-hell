@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const { resolve } = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path')
 
 module.exports = {
   entry: './src/index.js',
@@ -69,4 +70,12 @@ module.exports = {
     publicPath: '/',
     historyApiFallback: true
   },
+  resolve: {
+    root: [
+      path.resolve('./')
+    ],
+    alias: {
+      src: path.resolve('./src')
+    },
+  }
 };
