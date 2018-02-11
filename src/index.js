@@ -5,13 +5,10 @@ import { render } from 'react-dom'
 import Bootstrap from 'bootstrap/dist/css/bootstrap.css'
 import { createLogger } from 'redux-logger'
 import thunk from 'redux-thunk'
-import {
-  projectIssues,
-  projects,
-  authentication,
-  user,
-  userLogTimeEntries
-} from './reducers'
+import { user, userLogTimeEntries } from './reducers'
+import authentication from 'src/reducers/authentication.reducer'
+import projectIssues from 'src/reducers/projectIssues.reducer'
+import projects from 'src/reducers/projects.reducer'
 import Root from './Root.jsx'
 import styles from './assets/custom.css'
 

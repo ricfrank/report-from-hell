@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
-import { ExternalLink } from '../components/ExternalLink.jsx'
+import { ExternalLink } from 'src/components/ExternalLink.jsx'
 import {
   getProjects,
   getLoggedUser,
@@ -9,8 +9,8 @@ import {
   logTimeEntry,
   logTimeEntryDone
 } from '../actions'
-import LogTimeEntry from '../components/LogTimeEntry.jsx'
-import whiterabbitLogo from '../assets/wr-logo.svg'
+import LogTimeEntry from 'src/components/LogTimeEntry.jsx'
+import whiterabbitLogo from 'src/assets/wr-logo.svg'
 
 class Home extends React.Component {
   constructor(props) {

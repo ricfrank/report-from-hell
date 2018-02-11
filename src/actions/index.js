@@ -1,11 +1,12 @@
 import axios from 'axios'
-import createRedmineApiUrl from '../factories/RedmineApiUrl'
+import _ from 'lodash'
+import createRedmineApiUrl from 'src/factories/RedmineApiUrl'
 import {
   AUTH_LOCAL_STORAGE_KEY,
   ISSUES_INFINITE_SCROLL_LIMIT,
   ISSUES_INFINITE_SCROLL_THRESHOLD
-} from '../constants'
-import storage from '../services/LocalStorage'
+} from 'src/constants'
+import storage from 'src/services/LocalStorage'
 
 export const SHOW_PROJECT_ISSUES = 'SHOW_PROJECT_ISSUES'
 export const UPDATE_PROJECT_ISSUES = 'UPDATE_PROJECT_ISSUES'
@@ -117,11 +118,16 @@ export function getProjectIssues(
         )
       )
       .then(res => {
+        const issueTotalCount = _.get(res.data, 'total_count', 0)
+        const issues = {
+          ..._.omit(res.data, 'total_count'),
+          totalCount: issueTotalCount
+        }
         if (offset === 0) {
-          dispatch(showProjectIssues(res.data, threshold, id))
+          dispatch(showProjectIssues(issues, threshold, id))
           return
         }
-        dispatch(updateProjectIssues(res.data, threshold, id))
+        dispatch(updateProjectIssues(issues, threshold, id))
       })
       .catch(error => {
         if (error.response) {
