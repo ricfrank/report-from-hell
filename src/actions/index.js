@@ -237,7 +237,12 @@ export const getLoggedUser = () => {
     return axios
       .get(createRedmineApiUrl('/users/current.json'))
       .then(res => {
-        dispatch(saveLoggedUser(res.data.user))
+        dispatch(
+          saveLoggedUser({
+            id: res.data.user.id,
+            firstName: res.data.user.firstname
+          })
+        )
       })
       .catch(error => {
         if (error.response) {
@@ -250,7 +255,7 @@ export const getLoggedUser = () => {
 export const saveLoggedUser = user => {
   return {
     type: SAVE_LOGGED_USER,
-    payload: { user: user }
+    payload: user
   }
 }
 
