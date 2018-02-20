@@ -3,9 +3,9 @@ import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 import Project from './Project.jsx'
-import ProjectSearchBox from '../components/ProjectSearchBox.jsx'
-import { searchProject } from '../actions/index'
-import logo from '../assets/outatime-logo.svg'
+import ProjectSearchBox from 'src/components/ProjectSearchBox.jsx'
+import { searchProject } from 'src/actions/projects.action'
+import logo from 'src/assets/outatime-logo.svg'
 
 class ProjectsList extends React.Component {
   constructor(props) {

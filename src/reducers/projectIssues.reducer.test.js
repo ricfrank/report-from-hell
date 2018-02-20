@@ -1,6 +1,3 @@
-jest.mock('../services/LocalStorage')
-
-import storage from '../services/LocalStorage'
 import { ISSUES_INFINITE_SCROLL_THRESHOLD } from 'src/constants'
 import projectIssuesReducer from 'src/reducers/projectIssues.reducer'
 import {
@@ -10,7 +7,7 @@ import {
   searchProjectIssues,
   showProjectIssues,
   updateProjectIssues
-} from 'src/actions'
+} from 'src/actions/projectIssues.action'
 
 describe('project issues', () => {
   const state = {

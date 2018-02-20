@@ -7,105 +7,27 @@ import {
   ISSUES_INFINITE_SCROLL_THRESHOLD
 } from 'src/constants'
 import storage from 'src/services/LocalStorage'
-
-export const SET_ACTIVITIES = 'SET_ACTIVITIES'
-export const SHOW_PROJECT_ISSUES = 'SHOW_PROJECT_ISSUES'
-export const UPDATE_PROJECT_ISSUES = 'UPDATE_PROJECT_ISSUES'
-export const SEARCH_PROJECT_ISSUES = 'SEARCH_PROJECT_ISSUES '
-export const SHOW_PROJECTS = 'SHOW_PROJECTS'
-export const SEARCH_PROJECT = 'SEARCH_PROJECT'
-export const ERROR_TO_GET_PROJECT_ISSUES = 'ERROR_TO_GET_PROJECT_ISSUES'
-export const ERROR_TO_GET_PROJECTS = 'ERROR_TO_GET_PROJECTS'
-export const REQUIRE_AUTHENTICATION = 'REQUIRE_AUTHENTICATION'
-export const AUTHENTICATE = 'AUTHENTICATE'
-export const LOG_TIME_ENTRY_OK = 'LOG_TIME_ENTRY_OK'
-export const LOG_TIME_ENTRY_DONE = 'LOG_TIME_ENTRY_DONE'
-export const SAVE_LOGGED_USER = 'SAVE_LOGGED_USER'
-export const ERROR_TO_GET_LOGGED_USER = 'ERROR_TO_GET_LOGGED_USER'
-export const SHOW_USER_LOG_TIME_ENTRIES = 'SHOW_USER_LOG_TIME_ENTRIES'
-export const ERROR_TO_GET_USER_LOG_TIME_ENTRIES =
-  'ERROR_TO_GET_USER_LOG_TIME_ENTRIES'
+import {
+  authenticate,
+  requireAuthentication
+} from 'src/actions/authentication.action'
+import {
+  errorToGetProjectIssues,
+  logTimeEntryOk,
+  showProjectIssues,
+  updateProjectIssues
+} from 'src/actions/projectIssues.action'
+import { errorToGetProjects, showProjects } from 'src/actions/projects.action'
+import { errorToGetLoggedUser, saveLoggedUser } from 'src/actions/user.action'
+import {
+  errorToGetUserLogTimeEntries,
+  showUserLogTimeEntries
+} from 'src/actions/userLogTimeEntries.action'
 
 axios.defaults.headers.common['X-Redmine-API-Key'] = storage.getItem(
   AUTH_LOCAL_STORAGE_KEY
 )
 axios.defaults.headers.post['Content-Type'] = 'application/json'
-
-export const showProjectIssues = (
-  issues,
-  threshold = ISSUES_INFINITE_SCROLL_THRESHOLD,
-  id
-) => {
-  return {
-    type: SHOW_PROJECT_ISSUES,
-    payload: {
-      ...issues,
-      threshold: threshold,
-      projectId: id
-    }
-  }
-}
-
-export const updateProjectIssues = (
-  issues,
-  threshold = ISSUES_INFINITE_SCROLL_THRESHOLD,
-  id
-) => {
-  return {
-    type: UPDATE_PROJECT_ISSUES,
-    payload: {
-      ...issues,
-      threshold: threshold,
-      projectId: id
-    }
-  }
-}
-
-export const searchProjectIssues = text => {
-  return {
-    type: SEARCH_PROJECT_ISSUES,
-    payload: { text }
-  }
-}
-
-export const searchProject = text => {
-  return {
-    type: SEARCH_PROJECT,
-    payload: { text }
-  }
-}
-
-export const showProjects = projects => {
-  return {
-    type: SHOW_PROJECTS,
-    payload: {
-      ...projects
-    }
-  }
-}
-
-export const setActivities = activities => {
-  return {
-    type: SET_ACTIVITIES,
-    payload: {
-      activities: activities.time_entry_activities
-    }
-  }
-}
-
-export const errorToGetProjectIssues = error => {
-  return {
-    type: ERROR_TO_GET_PROJECT_ISSUES,
-    error: error
-  }
-}
-
-export const errorToGetProjects = error => {
-  return {
-    type: ERROR_TO_GET_PROJECTS,
-    error: error
-  }
-}
 
 export function getProjectIssues(
   id,
@@ -144,29 +66,6 @@ export function getProjectIssues(
           dispatch(errorToGetProjectIssues(error.response))
         }
       })
-}
-
-export function requireAuthentication() {
-  return {
-    type: REQUIRE_AUTHENTICATION
-  }
-}
-
-export function authenticate(apiKey) {
-  return {
-    type: AUTHENTICATE,
-    apiKey: apiKey
-  }
-}
-
-export function logTimeEntryOk(issueId, loggedTimeEntryId) {
-  return {
-    type: LOG_TIME_ENTRY_OK,
-    payload: {
-      loggedIssueId: issueId,
-      loggedTimeEntryId: loggedTimeEntryId
-    }
-  }
 }
 
 export function saveApiKey(apiKey) {
@@ -264,12 +163,6 @@ export function logTimeEntry(
   }
 }
 
-export function logTimeEntryDone() {
-  return {
-    type: LOG_TIME_ENTRY_DONE
-  }
-}
-
 export const getLoggedUser = () => {
   return dispatch => {
     return axios
@@ -287,20 +180,6 @@ export const getLoggedUser = () => {
           dispatch(errorToGetLoggedUser(error.response))
         }
       })
-  }
-}
-
-export const saveLoggedUser = user => {
-  return {
-    type: SAVE_LOGGED_USER,
-    payload: user
-  }
-}
-
-export const errorToGetLoggedUser = error => {
-  return {
-    type: ERROR_TO_GET_LOGGED_USER,
-    error: error
   }
 }
 
@@ -352,19 +231,5 @@ export const getUserLogTimeEntries = loggedUserId => {
           dispatch(errorToGetUserLogTimeEntries(error.response))
         }
       })
-  }
-}
-
-export const showUserLogTimeEntries = timeEntries => {
-  return {
-    type: SHOW_USER_LOG_TIME_ENTRIES,
-    payload: timeEntries
-  }
-}
-
-export const errorToGetUserLogTimeEntries = error => {
-  return {
-    type: ERROR_TO_GET_USER_LOG_TIME_ENTRIES,
-    error: error
   }
 }

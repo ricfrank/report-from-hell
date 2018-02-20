@@ -1,7 +1,8 @@
-jest.mock('../services/LocalStorage')
-
-import storage from '../services/LocalStorage'
-import { showProjects, errorToGetProjects, searchProject } from 'src/actions'
+import {
+  showProjects,
+  errorToGetProjects,
+  searchProject
+} from 'src/actions/projects.action'
 import projectReducer from 'src/reducers/projects.reducer'
 
 test('should save projects', () => {

@@ -1,8 +1,8 @@
-jest.mock('../services/LocalStorage')
-
-import storage from '../services/LocalStorage'
 import authReducer from 'src/reducers/authentication.reducer'
-import { authenticate, requireAuthentication } from 'src/actions'
+import {
+  authenticate,
+  requireAuthentication
+} from 'src/actions/authentication.action'
 
 test('should authenticate', () => {
   const apiKey = 'banana-joe'

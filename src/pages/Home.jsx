@@ -7,9 +7,9 @@ import {
   getActivities,
   getLoggedUser,
   getUserLogTimeEntries,
-  logTimeEntry,
-  logTimeEntryDone
-} from '../actions'
+  logTimeEntry
+} from 'src/actions'
+import { logTimeEntryDone } from 'src/actions/projectIssues.action'
 import LogTimeEntry from 'src/components/LogTimeEntry.jsx'
 import whiterabbitLogo from 'src/assets/wr-logo.svg'
 

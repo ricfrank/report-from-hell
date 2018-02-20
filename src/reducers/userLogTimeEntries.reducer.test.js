@@ -2,7 +2,10 @@ jest.mock('../services/LocalStorage')
 
 import storage from '../services/LocalStorage'
 import userLogTimeEntries from 'src/reducers/userLogTimeEntries.reducer'
-import { showUserLogTimeEntries, errorToGetLoggedUser } from 'src/actions'
+import {
+  showUserLogTimeEntries,
+  errorToGetUserLogTimeEntries
+} from 'src/actions/userLogTimeEntries.action'
 
 test('should save time entries log', () => {
   const timeEntries = [
@@ -37,7 +40,7 @@ test('should save time entries log', () => {
 
 test('should save error', () => {
   const error = { error: 'error' }
-  const action = errorToGetLoggedUser(error)
+  const action = errorToGetUserLogTimeEntries(error)
   const newState = userLogTimeEntries({}, action)
 
   expect(newState.error).toEqual(error)

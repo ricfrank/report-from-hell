@@ -1,4 +1,7 @@
-import { ERROR_TO_GET_LOGGED_USER, SAVE_LOGGED_USER } from 'src/actions'
+import {
+  ERROR_TO_GET_LOGGED_USER,
+  SAVE_LOGGED_USER
+} from 'src/actions/user.action'
 
 const INITIAL_STATE = {
   id: null,
