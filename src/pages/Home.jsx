@@ -36,8 +36,8 @@ class Home extends React.Component {
           subject={timeEntry.issue.subject}
           comment={timeEntry.comments}
           hours={timeEntry.hours}
-          logDate={timeEntry.spent_on}
-          projectName={timeEntry.project.name}
+          logDate={timeEntry.spentOn}
+          projectName={timeEntry.projectName}
           onLogTimeEntry={this.props.onLogTimeEntry}
           onLogTimeEntryDone={this.props.onLogTimeEntryDone}
           loggedIssueId={this.props.loggedIssueId}

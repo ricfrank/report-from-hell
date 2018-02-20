@@ -288,7 +288,23 @@ export const getUserLogTimeEntries = loggedUserId => {
         })
 
         Promise.all(logTimeEntriesPromises).then(function(logTimeEntries) {
-          dispatch(showUserLogTimeEntries(logTimeEntries))
+          dispatch(
+            showUserLogTimeEntries(
+              logTimeEntries.map(entry => {
+                return {
+                  id: entry.id,
+                  projectName: entry.project.name,
+                  issue: {
+                    id: entry.issue.id,
+                    subject: entry.issue.subject
+                  },
+                  hours: entry.hours,
+                  comments: entry.comments,
+                  spentOn: entry.spent_on
+                }
+              })
+            )
+          )
         })
       })
       .catch(function(error) {
@@ -302,7 +318,7 @@ export const getUserLogTimeEntries = loggedUserId => {
 export const showUserLogTimeEntries = timeEntries => {
   return {
     type: SHOW_USER_LOG_TIME_ENTRIES,
-    payload: { logTimeEntries: timeEntries }
+    payload: timeEntries
   }
 }
 

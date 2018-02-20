@@ -3,10 +3,12 @@ import {
   SHOW_USER_LOG_TIME_ENTRIES
 } from 'src/actions'
 
-export const userLogTimeEntries = (state = [], action) => {
+const INITIAL_STATE = []
+
+export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SHOW_USER_LOG_TIME_ENTRIES:
-      return action.payload.logTimeEntries
+      return action.payload
     case ERROR_TO_GET_LOGGED_USER:
       return {
         ...state,
