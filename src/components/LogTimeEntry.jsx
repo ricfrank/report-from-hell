@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import moment from 'moment'
 import { ExternalLink } from './ExternalLink.jsx'
 
@@ -11,7 +12,8 @@ class LogTimeEntry extends React.Component {
       timeEntryForm: {
         date: moment().format('YYYY-MM-DD'),
         hours: props.hours,
-        comment: props.comment
+        comment: props.comment,
+        activityId: props.activityId
       }
     }
   }
@@ -21,7 +23,8 @@ class LogTimeEntry extends React.Component {
       timeEntryForm: {
         date: moment().format('YYYY-MM-DD'),
         hours: nextProps.hours,
-        comment: nextProps.comment
+        comment: nextProps.comment,
+        activityId: nextProps.activityId
       }
     })
   }
@@ -52,6 +55,12 @@ class LogTimeEntry extends React.Component {
     })
   }
 
+  changeActivityId(activityId) {
+    this.setState({
+      timeEntryForm: { ...this.state.timeEntryForm, activityId }
+    })
+  }
+
   render() {
     let loggedTimeEntryClass = ''
     if (this.isLoggedTimeEntry()) {
@@ -61,6 +70,14 @@ class LogTimeEntry extends React.Component {
         this.props.onLogTimeEntryDone()
       }, 3000)
     }
+
+    const options = this.props.activities.map(a => {
+      return (
+        <option key={a.id} value={a.id}>
+          {a.name}
+        </option>
+      )
+    })
 
     return (
       <li className={'list-group-item ' + loggedTimeEntryClass}>
@@ -116,7 +133,8 @@ class LogTimeEntry extends React.Component {
               this.props.issueId,
               this.state.timeEntryForm.date,
               this.state.timeEntryForm.hours,
-              this.state.timeEntryForm.comment
+              this.state.timeEntryForm.comment,
+              this.state.timeEntryForm.activityId
             )
 
             this.toggleTimeLogEntry()
@@ -149,7 +167,7 @@ class LogTimeEntry extends React.Component {
                 required="required"
               />
             </div>
-            <div className="col-md-7 rfh-time-log-hours-comment">
+            <div className="col-md-5 rfh-time-log-hours-comment">
               <input
                 type="text"
                 className="form-control"
@@ -159,6 +177,19 @@ class LogTimeEntry extends React.Component {
                   this.changeComment(event.target.value)
                 }}
               />
+            </div>
+            <div className="col-md-2">
+              <select
+                className="form-control"
+                value={this.state.timeEntryForm.activityId}
+                onChange={event => {
+                  this.changeActivityId(event.target.value)
+                }}
+                required="required"
+              >
+                <option value="">Please select an activity</option>
+                {options}
+              </select>
             </div>
             <div className="col-md-1">
               <button
@@ -179,4 +210,11 @@ class LogTimeEntry extends React.Component {
   }
 }
 
-export default LogTimeEntry
+const mapStateToProps = state => {
+  const activities = state.activities.activities
+  return {
+    activities: activities
+  }
+}
+
+export default connect(mapStateToProps)(LogTimeEntry)

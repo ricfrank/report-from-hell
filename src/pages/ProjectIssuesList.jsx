@@ -8,7 +8,8 @@ import {
   logTimeEntryDone,
   getProjectIssues,
   searchProjectIssues,
-  getProjects
+  getProjects,
+  getActivities
 } from '../actions'
 import {
   ISSUES_INFINITE_SCROLL_THRESHOLD,
@@ -25,6 +26,7 @@ class ProjectIssuesList extends React.Component {
     window.addEventListener('scroll', this.scrollListener)
 
     this.props.getProjects()
+    this.props.getActivities()
   }
 
   componentDidUpdate() {
@@ -65,7 +67,7 @@ class ProjectIssuesList extends React.Component {
             <div className="page-header">
               <p className="lead">
                 Issues for {this.props.projectName} -{' '}
-                <span className="rfh-color-red">{this.props.totalCount}</span> {' '}
+                <span className="rfh-color-red">{this.props.totalCount}</span>{' '}
                 opened issues
               </p>
             </div>
@@ -125,8 +127,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onLogTimeEntry: (issueId, timeEntryDate, hours, comment) => {
-      dispatch(logTimeEntry(issueId, timeEntryDate, hours, comment))
+    onLogTimeEntry: (issueId, timeEntryDate, hours, comment, activityId) => {
+      dispatch(logTimeEntry(issueId, timeEntryDate, hours, comment, activityId))
     },
     onLogTimeEntryDone: () => {
       dispatch(logTimeEntryDone())
@@ -148,7 +150,8 @@ const mapDispatchToProps = dispatch => {
     onSearchIssue: text => {
       dispatch(searchProjectIssues(text))
     },
-    getProjects: () => dispatch(getProjects())
+    getProjects: () => dispatch(getProjects()),
+    getActivities: () => dispatch(getActivities())
   }
 }
 

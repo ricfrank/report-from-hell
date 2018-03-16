@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
 class Issue extends React.Component {
   constructor(props) {
@@ -14,6 +15,11 @@ class Issue extends React.Component {
     this.setState({ show: 'block' })
   }
 
+  getDefaultActivity(activities) {
+    const defaultActivity = activities.find(a => a.is_default)
+    return defaultActivity ? defaultActivity.id : ''
+  }
+
   render() {
     let loggedIssueClass = ''
     if (this.isLoggedIssue()) {
@@ -24,6 +30,16 @@ class Issue extends React.Component {
         this.props.onLogTimeEntryDone()
       }, 3000)
     }
+
+    const options = this.props.activities.map(a => {
+      return (
+        <option key={a.id} value={a.id}>
+          {a.name}
+        </option>
+      )
+    })
+
+    const defaultValue = this.getDefaultActivity(this.props.activities)
 
     return (
       <li className={'list-group-item ' + loggedIssueClass}>
@@ -45,12 +61,14 @@ class Issue extends React.Component {
               this.props.id,
               this.date.value,
               this.hours.value,
-              this.comment.value
+              this.comment.value,
+              this.activity.value
             )
 
             this.date.value = ''
             this.hours.value = ''
             this.comment.value = ''
+            this.activity.value = ''
           }}
         >
           <div className="row">
@@ -78,7 +96,7 @@ class Issue extends React.Component {
                 required="required"
               />
             </div>
-            <div className="col-md-7 rfh-time-log-hours-comment">
+            <div className="col-md-5 rfh-time-log-hours-comment">
               <input
                 type="text"
                 className="form-control"
@@ -87,6 +105,19 @@ class Issue extends React.Component {
                   this.comment = value
                 }}
               />
+            </div>
+            <div className="col-md-2">
+              <select
+                className="form-control"
+                ref={value => {
+                  this.activity = value
+                }}
+                defaultValue={defaultValue}
+                required="required"
+              >
+                <option value="">Please select an activity</option>
+                {options}
+              </select>
             </div>
             <div className="col-md-1">
               <button
@@ -107,4 +138,11 @@ class Issue extends React.Component {
   }
 }
 
-export default Issue
+const mapStateToProps = state => {
+  const activities = state.activities.activities
+  return {
+    activities: activities
+  }
+}
+
+export default connect(mapStateToProps)(Issue)
