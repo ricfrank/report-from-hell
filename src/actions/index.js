@@ -193,7 +193,12 @@ export function getProjects() {
     //
 
     return axios
-      .get(createRedmineApiUrl('/projects.json', '?limit=100'))
+      .get(
+        createRedmineApiUrl(
+          '/projects.json',
+          '?limit=100&include=time_entry_activities'
+        )
+      )
       .then(res => dispatch(showProjects(res.data)))
       .catch(error => {
         if (error.response.status == 401) {
