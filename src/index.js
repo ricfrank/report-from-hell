@@ -9,7 +9,7 @@ import userLogTimeEntries from 'src/reducers/userLogTimeEntries.reducer'
 import authentication from 'src/reducers/authentication.reducer'
 import projectIssues from 'src/reducers/projectIssues.reducer'
 import projects from 'src/reducers/projects.reducer'
-import activities from 'src/reducers/activities.reducer'
+import globalActivities from 'src/reducers/globalActivities.reducer'
 import user from 'src/reducers/user.reducer'
 import Root from './Root.jsx'
 import styles from './assets/custom.css'
@@ -17,7 +17,7 @@ import styles from './assets/custom.css'
 const reducers = combineReducers({
   projectIssues,
   projects,
-  activities,
+  globalActivities,
   authentication,
   user,
   userLogTimeEntries
