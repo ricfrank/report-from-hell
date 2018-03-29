@@ -27,6 +27,15 @@ class Home extends React.Component {
       .catch(error => {})
   }
 
+  getActivitiesFromProjectId(id) {
+    if (!this.props.projects) {
+      return []
+    }
+
+    const project = this.props.projects.projects.find(p => p.id === id)
+    return project ? project.activities : []
+  }
+
   render() {
     const userLogTimeEntries = this.props.userLogTimeEntries.map(timeEntry => {
       return (
@@ -41,6 +50,9 @@ class Home extends React.Component {
           hours={timeEntry.hours}
           logDate={timeEntry.spentOn}
           projectName={timeEntry.projectName}
+          projectActivities={this.getActivitiesFromProjectId(
+            timeEntry.projectId
+          )}
           onLogTimeEntry={this.props.onLogTimeEntry}
           onLogTimeEntryDone={this.props.onLogTimeEntryDone}
           loggedIssueId={this.props.loggedIssueId}
@@ -99,6 +111,7 @@ const mapStateToProps = state => {
 
   return {
     user: state.user,
+    projects: state.projects,
     userLogTimeEntries: state.userLogTimeEntries,
     loggedIssueId: state.projectIssues.loggedIssueId,
     loggedTimeEntryId: state.projectIssues.loggedTimeEntryId

@@ -40,6 +40,7 @@ test('should save projects', () => {
       description: '',
       status: 1,
       is_public: true,
+      activities: [],
       created_on: '2018-02-09T19:29:07Z',
       updated_on: '2018-02-09T19:29:07Z'
     },
@@ -50,6 +51,7 @@ test('should save projects', () => {
       description: '',
       status: 1,
       is_public: true,
+      activities: [],
       created_on: '2018-02-09T19:29:07Z',
       updated_on: '2018-02-09T19:29:07Z'
     }
@@ -120,6 +122,7 @@ test('should search projects', () => {
       description: '',
       status: 1,
       is_public: true,
+      activities: [],
       created_on: '2018-02-09T19:29:07Z',
       updated_on: '2018-02-09T19:29:07Z'
     }

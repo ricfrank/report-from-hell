@@ -71,7 +71,7 @@ class LogTimeEntry extends React.Component {
       }, 3000)
     }
 
-    const options = this.props.activities.map(a => {
+    const options = this.props.projectActivities.map(a => {
       return (
         <option key={a.id} value={a.id}>
           {a.name}
@@ -210,11 +210,4 @@ class LogTimeEntry extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  const activities = state.activities.activities
-  return {
-    activities: activities
-  }
-}
-
-export default connect(mapStateToProps)(LogTimeEntry)
+export default LogTimeEntry

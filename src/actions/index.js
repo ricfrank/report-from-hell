@@ -332,6 +332,7 @@ export const getUserLogTimeEntries = loggedUserId => {
                 return {
                   id: entry.id,
                   activityId: entry.activity.id,
+                  projectId: entry.project.id,
                   projectName: entry.project.name,
                   issue: {
                     id: entry.issue.id,
