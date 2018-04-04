@@ -15,11 +15,6 @@ class Issue extends React.Component {
     this.setState({ show: 'block' })
   }
 
-  getDefaultActivity(activities) {
-    const defaultActivity = activities.find(a => a.is_default)
-    return defaultActivity ? defaultActivity.id : ''
-  }
-
   render() {
     let loggedIssueClass = ''
     if (this.isLoggedIssue()) {
@@ -31,15 +26,15 @@ class Issue extends React.Component {
       }, 3000)
     }
 
-    const options = this.props.activities.map(a => {
-      return (
-        <option key={a.id} value={a.id}>
-          {a.name}
-        </option>
-      )
-    })
-
-    const defaultValue = this.getDefaultActivity(this.props.activities)
+    const options =
+      this.props.activities &&
+      this.props.activities.map(a => {
+        return (
+          <option key={a.id} value={a.id}>
+            {a.name}
+          </option>
+        )
+      })
 
     return (
       <li className={'list-group-item ' + loggedIssueClass}>
@@ -112,7 +107,7 @@ class Issue extends React.Component {
                 ref={value => {
                   this.activity = value
                 }}
-                defaultValue={defaultValue}
+                defaultValue={this.props.defaultActivityId}
                 required="required"
               >
                 <option value="">Please select an activity</option>
@@ -139,9 +134,9 @@ class Issue extends React.Component {
 }
 
 const mapStateToProps = state => {
-  const activities = state.activities.activities
+  const defaultActivityId = state.globalActivities.defaultActivityId
   return {
-    activities: activities
+    defaultActivityId
   }
 }
 

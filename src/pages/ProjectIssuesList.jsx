@@ -57,6 +57,7 @@ class ProjectIssuesList extends React.Component {
           onLogTimeEntry={this.props.onLogTimeEntry}
           onLogTimeEntryDone={this.props.onLogTimeEntryDone}
           loggedIssueId={this.props.loggedIssueId}
+          activities={this.props.projectActivities}
         />
       )
     })
@@ -114,10 +115,18 @@ const mapStateToProps = state => {
     issues = state.projectIssues.filteredIssues
   }
 
+  let project
+  if (state.projects.projects) {
+    project = state.projects.projects.find(
+      p => p.id == state.projectIssues.projectId
+    )
+  }
+
   return {
     issues: issues,
     projectName: state.projectIssues.projectName,
     projectId: state.projectIssues.projectId,
+    projectActivities: project ? project.activities : [],
     loggedIssueId: state.projectIssues.loggedIssueId,
     offset: state.projectIssues.offset,
     threshold: state.projectIssues.threshold,
