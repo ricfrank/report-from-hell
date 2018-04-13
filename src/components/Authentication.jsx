@@ -17,7 +17,7 @@ class Authentication extends React.Component {
 
     return (
       <div>
-        <Modal show={modalShow}>
+        <Modal show={modalShow} backdrop={false}>
           <Modal.Header>
             <Modal.Title>Add redmine api key</Modal.Title>
           </Modal.Header>
