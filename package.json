@@ -7,6 +7,10 @@
     "test": "jest",
     "test-watch": "jest --watch",
     "start": "./node_modules/.bin/webpack-dev-server --progress --inline --hot --port 4000",
+    "setup:android": "react-native bundle --dev false --entry-file index.js --platform android --bundle-output android/app/src/main/assets/index.android.bundle",
+    "start:mobile": "node node_modules/react-native/local-cli/cli.js start --reset-cache",
+    "run:android": "node node_modules/react-native/local-cli/cli.js run-android",
+    "run:ios": "node node_modules/react-native/local-cli/cli.js run-ios",
     "build": "npm i && npm run clean && npm run build:bundle",
     "clean": "./node_modules/.bin/rimraf public",
     "build:bundle": "NODE_ENV=production webpack -p --config webpack.production.config.js --progress --profile --colors",
@@ -63,6 +67,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-react-hmre": "^1.1.1",
+    "babel-preset-react-native": "^4.0.0",
     "babel-preset-stage-2": "^6.24.1",
     "css-loader": "^0.28.11",
     "electron": "^1.8.4",
@@ -76,6 +81,7 @@
     "jest": "^22.4.3",
     "lint-staged": "^7.0.4",
     "prettier": "^1.12.0",
+    "react-test-renderer": "^16.3.1",
     "rimraf": "^2.6.2",
     "style-loader": "^0.20.3",
     "url-loader": "^1.0.1",
@@ -87,6 +93,7 @@
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
       "src(.*)$": "<rootDir>/src/$1"
-    }
+    },
+    "preset": "react-native"
   }
 }
