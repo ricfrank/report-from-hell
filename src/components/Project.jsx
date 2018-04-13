@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-const Project = React.createClass({
-  render: function() {
+class Project extends React.Component {
+  render() {
     return (
       <Link
         to={'/issues/' + this.props.id}
@@ -16,6 +16,6 @@ const Project = React.createClass({
       </Link>
     )
   }
-})
+}
 
 export default Project
