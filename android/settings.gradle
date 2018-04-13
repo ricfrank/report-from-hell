@@ -1,0 +1,3 @@
+rootProject.name = 'outatime'
+
+include ':app'
