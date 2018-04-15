@@ -8,7 +8,8 @@ import {
   logTimeEntryDone,
   getProjectIssues,
   searchProjectIssues,
-  getProjects
+  getProjects,
+  getActivities
 } from '../actions'
 import {
   ISSUES_INFINITE_SCROLL_THRESHOLD,
@@ -25,6 +26,7 @@ class ProjectIssuesList extends React.Component {
     window.addEventListener('scroll', this.scrollListener)
 
     this.props.getProjects()
+    this.props.getActivities()
   }
 
   componentDidUpdate() {
@@ -55,6 +57,7 @@ class ProjectIssuesList extends React.Component {
           onLogTimeEntry={this.props.onLogTimeEntry}
           onLogTimeEntryDone={this.props.onLogTimeEntryDone}
           loggedIssueId={this.props.loggedIssueId}
+          activities={this.props.projectActivities}
         />
       )
     })
@@ -65,7 +68,7 @@ class ProjectIssuesList extends React.Component {
             <div className="page-header">
               <p className="lead">
                 Issues for {this.props.projectName} -{' '}
-                <span className="rfh-color-red">{this.props.totalCount}</span> {' '}
+                <span className="rfh-color-red">{this.props.totalCount}</span>{' '}
                 opened issues
               </p>
             </div>
@@ -112,10 +115,18 @@ const mapStateToProps = state => {
     issues = state.projectIssues.filteredIssues
   }
 
+  let project
+  if (state.projects.projects) {
+    project = state.projects.projects.find(
+      p => p.id == state.projectIssues.projectId
+    )
+  }
+
   return {
     issues: issues,
     projectName: state.projectIssues.projectName,
     projectId: state.projectIssues.projectId,
+    projectActivities: project ? project.activities : [],
     loggedIssueId: state.projectIssues.loggedIssueId,
     offset: state.projectIssues.offset,
     threshold: state.projectIssues.threshold,
@@ -125,8 +136,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onLogTimeEntry: (issueId, timeEntryDate, hours, comment) => {
-      dispatch(logTimeEntry(issueId, timeEntryDate, hours, comment))
+    onLogTimeEntry: (issueId, timeEntryDate, hours, comment, activityId) => {
+      dispatch(logTimeEntry(issueId, timeEntryDate, hours, comment, activityId))
     },
     onLogTimeEntryDone: () => {
       dispatch(logTimeEntryDone())
@@ -148,7 +159,8 @@ const mapDispatchToProps = dispatch => {
     onSearchIssue: text => {
       dispatch(searchProjectIssues(text))
     },
-    getProjects: () => dispatch(getProjects())
+    getProjects: () => dispatch(getProjects()),
+    getActivities: () => dispatch(getActivities())
   }
 }
 

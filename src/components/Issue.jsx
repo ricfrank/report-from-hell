@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
 class Issue extends React.Component {
   constructor(props) {
@@ -25,6 +26,16 @@ class Issue extends React.Component {
       }, 3000)
     }
 
+    const options =
+      this.props.activities &&
+      this.props.activities.map(a => {
+        return (
+          <option key={a.id} value={a.id}>
+            {a.name}
+          </option>
+        )
+      })
+
     return (
       <li className={'list-group-item ' + loggedIssueClass}>
         <h4
@@ -45,12 +56,14 @@ class Issue extends React.Component {
               this.props.id,
               this.date.value,
               this.hours.value,
-              this.comment.value
+              this.comment.value,
+              this.activity.value
             )
 
             this.date.value = ''
             this.hours.value = ''
             this.comment.value = ''
+            this.activity.value = ''
           }}
         >
           <div className="row">
@@ -78,7 +91,7 @@ class Issue extends React.Component {
                 required="required"
               />
             </div>
-            <div className="col-md-7 rfh-time-log-hours-comment">
+            <div className="col-md-5 rfh-time-log-hours-comment">
               <input
                 type="text"
                 className="form-control"
@@ -87,6 +100,19 @@ class Issue extends React.Component {
                   this.comment = value
                 }}
               />
+            </div>
+            <div className="col-md-2">
+              <select
+                className="form-control"
+                ref={value => {
+                  this.activity = value
+                }}
+                defaultValue={this.props.defaultActivityId}
+                required="required"
+              >
+                <option value="">Please select an activity</option>
+                {options}
+              </select>
             </div>
             <div className="col-md-1">
               <button
@@ -107,4 +133,11 @@ class Issue extends React.Component {
   }
 }
 
-export default Issue
+const mapStateToProps = state => {
+  const defaultActivityId = state.globalActivities.defaultActivityId
+  return {
+    defaultActivityId
+  }
+}
+
+export default connect(mapStateToProps)(Issue)

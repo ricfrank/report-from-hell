@@ -11,13 +11,26 @@ const PROJECT_INITIAL_STATE = {
   totalCount: 0
 }
 
+const getProjects = projects => {
+  const CLOSED_PROJECT_STATUS_ID = 5
+  return projects
+    .filter(p => {
+      return p.status !== CLOSED_PROJECT_STATUS_ID
+    })
+    .map(p => {
+      const toReturn = {
+        ...p,
+        activities: p.time_entry_activities || []
+      }
+      delete toReturn.time_entry_activities
+      return toReturn
+    })
+}
+
 export default (state = PROJECT_INITIAL_STATE, action) => {
   switch (action.type) {
     case SHOW_PROJECTS:
-      const CLOSED_PROJECT_STATUS_ID = 5
-      const projects = action.payload.projects.filter(project => {
-        return project.status !== CLOSED_PROJECT_STATUS_ID
-      })
+      const projects = getProjects(action.payload.projects)
       return {
         ...state,
         projects: _.sortBy(projects, 'identifier'),

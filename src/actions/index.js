@@ -8,6 +8,7 @@ import {
 } from 'src/constants'
 import storage from 'src/services/LocalStorage'
 
+export const SET_ACTIVITIES = 'SET_ACTIVITIES'
 export const SHOW_PROJECT_ISSUES = 'SHOW_PROJECT_ISSUES'
 export const UPDATE_PROJECT_ISSUES = 'UPDATE_PROJECT_ISSUES'
 export const SEARCH_PROJECT_ISSUES = 'SEARCH_PROJECT_ISSUES '
@@ -79,6 +80,15 @@ export const showProjects = projects => {
     type: SHOW_PROJECTS,
     payload: {
       ...projects
+    }
+  }
+}
+
+export const setActivities = activities => {
+  return {
+    type: SET_ACTIVITIES,
+    payload: {
+      activities: activities.time_entry_activities
     }
   }
 }
@@ -183,7 +193,12 @@ export function getProjects() {
     //
 
     return axios
-      .get(createRedmineApiUrl('/projects.json', '?limit=100'))
+      .get(
+        createRedmineApiUrl(
+          '/projects.json',
+          '?limit=100&include=time_entry_activities'
+        )
+      )
       .then(res => dispatch(showProjects(res.data)))
       .catch(error => {
         if (error.response.status == 401) {
@@ -200,7 +215,29 @@ export function getProjects() {
   }
 }
 
-export function logTimeEntry(issueId, timeEntryDate, hours, comment) {
+export function getActivities() {
+  return dispatch => {
+    axios
+      .get(createRedmineApiUrl('/enumerations/time_entry_activities.json'))
+      .then(res => dispatch(setActivities(res.data)))
+      .catch(function(error) {
+        if (error.response.status == 401) {
+          dispatch(requireAuthentication())
+          return
+        }
+
+        console.error(error.response)
+      })
+  }
+}
+
+export function logTimeEntry(
+  issueId,
+  timeEntryDate,
+  hours,
+  comment,
+  activityId
+) {
   return (dispatch, getState) => {
     axios
       .post(createRedmineApiUrl('/time_entries.json'), {
@@ -208,7 +245,8 @@ export function logTimeEntry(issueId, timeEntryDate, hours, comment) {
           issue_id: issueId,
           spent_on: timeEntryDate,
           hours: hours,
-          comments: comment
+          comments: comment,
+          activity_id: activityId
         }
       })
       .then(function(response) {
@@ -293,6 +331,8 @@ export const getUserLogTimeEntries = loggedUserId => {
               logTimeEntries.map(entry => {
                 return {
                   id: entry.id,
+                  activityId: entry.activity.id,
+                  projectId: entry.project.id,
                   projectName: entry.project.name,
                   issue: {
                     id: entry.issue.id,

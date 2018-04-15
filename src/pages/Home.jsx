@@ -4,6 +4,7 @@ import _ from 'lodash'
 import { ExternalLink } from 'src/components/ExternalLink.jsx'
 import {
   getProjects,
+  getActivities,
   getLoggedUser,
   getUserLogTimeEntries,
   logTimeEntry,
@@ -18,11 +19,21 @@ class Home extends React.Component {
     this.props
       .getProjects()
       .then(() => {
+        this.props.getActivities()
         this.props.getLoggedUser().then(() => {
           this.props.getUserLogTimeEntries(this.props.user.id)
         })
       })
       .catch(error => {})
+  }
+
+  getActivitiesFromProjectId(id) {
+    if (!this.props.projects) {
+      return []
+    }
+
+    const project = this.props.projects.projects.find(p => p.id === id)
+    return project ? project.activities : []
   }
 
   render() {
@@ -33,11 +44,15 @@ class Home extends React.Component {
           loggedTimeEntryId={this.props.loggedTimeEntryId}
           id={timeEntry.id}
           issueId={timeEntry.issue.id}
+          activityId={timeEntry.activityId}
           subject={timeEntry.issue.subject}
           comment={timeEntry.comments}
           hours={timeEntry.hours}
           logDate={timeEntry.spentOn}
           projectName={timeEntry.projectName}
+          projectActivities={this.getActivitiesFromProjectId(
+            timeEntry.projectId
+          )}
           onLogTimeEntry={this.props.onLogTimeEntry}
           onLogTimeEntryDone={this.props.onLogTimeEntryDone}
           loggedIssueId={this.props.loggedIssueId}
@@ -50,9 +65,7 @@ class Home extends React.Component {
           <div className="col-md-9">
             <div className="page-header">
               <h1>Outatime</h1>
-              <p className="lead">
-                Welcome back {this.props.user.firstname}!
-              </p>
+              <p className="lead">Welcome back {this.props.user.firstname}!</p>
               <p className="">
                 See your last <strong>10</strong> time entries
               </p>
@@ -98,6 +111,7 @@ const mapStateToProps = state => {
 
   return {
     user: state.user,
+    projects: state.projects,
     userLogTimeEntries: state.userLogTimeEntries,
     loggedIssueId: state.projectIssues.loggedIssueId,
     loggedTimeEntryId: state.projectIssues.loggedTimeEntryId
@@ -106,10 +120,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onLogTimeEntry: (issueId, timeEntryDate, hours, comment) => {
-      dispatch(logTimeEntry(issueId, timeEntryDate, hours, comment))
+    onLogTimeEntry: (issueId, timeEntryDate, hours, comment, activityId) => {
+      dispatch(logTimeEntry(issueId, timeEntryDate, hours, comment, activityId))
     },
     getProjects: () => dispatch(getProjects()),
+    getActivities: () => dispatch(getActivities()),
     getLoggedUser: () => dispatch(getLoggedUser()),
     getUserLogTimeEntries: userId => {
       dispatch(getUserLogTimeEntries(userId))
