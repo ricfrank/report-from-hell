@@ -7,7 +7,6 @@
     "test": "jest",
     "test-watch": "jest --watch",
     "start": "./node_modules/.bin/webpack-dev-server --progress --inline --hot --port 4000",
-    "start:mobile": "node node_modules/react-native/local-cli/cli.js start --reset-cache",
     "run:android": "node node_modules/react-native/local-cli/cli.js run-android",
     "run:ios": "node node_modules/react-native/local-cli/cli.js run-ios",
     "build": "npm i && npm run clean && npm run build:bundle",
