@@ -1,19 +1,21 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
-import Issue from 'src/components/Issue.jsx'
-import IssueSearchBox from 'src/components/IssueSearchBox.jsx'
-import { logTimeEntry, getProjectIssues, getProjects } from 'src/actions'
+import Issue from 'web/components/Issue.jsx'
+import IssueSearchBox from 'web/components/IssueSearchBox.jsx'
+import {
+  logTimeEntry,
+  logTimeEntryDone,
+  getProjectIssues,
+  searchProjectIssues,
+  getProjects,
+  getActivities
+} from 'core/actions'
 import {
   ISSUES_INFINITE_SCROLL_THRESHOLD,
   ISSUES_INFINITE_SCROLL_LIMIT
 } from 'src/constants'
-import whiterabbitLogo from 'src/assets/wr-logo.svg'
-import {
-  logTimeEntryDone,
-  searchProjectIssues
-} from 'src/actions/projectIssues.action'
-import { getActivities } from 'src/actions'
+import whiterabbitLogo from 'web/assets/wr-logo.svg'
 
 class ProjectIssuesList extends React.Component {
   constructor(props) {

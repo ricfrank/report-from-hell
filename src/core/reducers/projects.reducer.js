@@ -2,7 +2,7 @@ import {
   SEARCH_PROJECT,
   SHOW_PROJECTS,
   ERROR_TO_GET_PROJECTS
-} from 'src/actions/projects.action'
+} from 'core/actions'
 import _ from 'lodash'
 
 const PROJECT_INITIAL_STATE = {

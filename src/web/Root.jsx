@@ -6,9 +6,9 @@ import {
   hashHistory,
   IndexRoute
 } from 'react-router'
-import App from './App.jsx'
-import Home from './pages/Home.jsx'
-import ProjectIssuesList from './pages/ProjectIssuesList.jsx'
+import App from 'web/App.jsx'
+import Home from 'web/pages/Home.jsx'
+import ProjectIssuesList from 'web/pages/ProjectIssuesList.jsx'
 class Root extends React.Component {
   render() {
     return (

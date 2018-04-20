@@ -1,17 +1,17 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
-import { ExternalLink } from 'src/components/ExternalLink.jsx'
+import { ExternalLink } from 'web/components/ExternalLink.jsx'
 import {
   getProjects,
   getActivities,
   getLoggedUser,
   getUserLogTimeEntries,
-  logTimeEntry
-} from 'src/actions'
-import { logTimeEntryDone } from 'src/actions/projectIssues.action'
-import LogTimeEntry from 'src/components/LogTimeEntry.jsx'
-import whiterabbitLogo from 'src/assets/wr-logo.svg'
+  logTimeEntry,
+  logTimeEntryDone
+} from 'core/actions'
+import LogTimeEntry from 'web/components/LogTimeEntry.jsx'
+import whiterabbitLogo from 'web/assets/wr-logo.svg'
 
 class Home extends React.Component {
   constructor(props) {

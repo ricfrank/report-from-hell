@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { saveApiKey } from 'src/actions'
+import { saveApiKey } from 'core/actions'
 import { Modal } from 'react-bootstrap'
 import { ExternalLink } from './ExternalLink.jsx'
 

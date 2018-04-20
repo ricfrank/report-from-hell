@@ -1,5 +1,8 @@
-import userReducer from 'src/reducers/user.reducer'
-import { saveLoggedUser, errorToGetLoggedUser } from 'src/actions/user.action'
+jest.mock('src/services/LocalStorage')
+
+import storage from 'src/services/LocalStorage'
+import userReducer from 'core/reducers/user.reducer'
+import { saveLoggedUser, errorToGetLoggedUser } from 'core/actions'
 
 test('should save user data after login', () => {
   const expectedUser = {

@@ -5,7 +5,7 @@ import {
   SEARCH_PROJECT_ISSUES,
   SHOW_PROJECT_ISSUES,
   UPDATE_PROJECT_ISSUES
-} from 'src/actions/projectIssues.action'
+} from 'core/actions'
 import { ISSUES_INFINITE_SCROLL_THRESHOLD } from 'src/constants'
 import _ from 'lodash'
 

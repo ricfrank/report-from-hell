@@ -1,20 +1,15 @@
 import {
   ERROR_TO_GET_LOGGED_USER,
-  SAVE_LOGGED_USER
-} from 'src/actions/user.action'
+  SHOW_USER_LOG_TIME_ENTRIES
+} from 'core/actions'
 
-const INITIAL_STATE = {
-  id: null,
-  firstName: null
-}
+const INITIAL_STATE = []
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case SAVE_LOGGED_USER:
-      return {
-        ...action.payload
-      }
-    case ERROR_TO_GET_LOGGED_USER:
+    case SHOW_USER_LOG_TIME_ENTRIES:
+      return action.payload
+    case ERROR_TO_GET_USER_LOG_TIME_ENTRIES:
       return {
         ...state,
         error: action.error

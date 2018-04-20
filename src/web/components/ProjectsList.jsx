@@ -2,10 +2,10 @@ import React from 'react'
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import _ from 'lodash'
+import ProjectSearchBox from 'web/components/ProjectSearchBox.jsx'
+import { searchProject } from 'core/actions/index'
 import Project from './Project.jsx'
-import ProjectSearchBox from 'src/components/ProjectSearchBox.jsx'
-import { searchProject } from 'src/actions/projects.action'
-import logo from 'src/assets/outatime-logo.svg'
+import logo from 'web/assets/outatime-logo.svg'
 
 class ProjectsList extends React.Component {
   constructor(props) {
@@ -32,16 +32,12 @@ class ProjectsList extends React.Component {
         <hr />
         <div className="rfh-projects-count">
           <h5>
-            <span className="rfh-projects-number">
-              {this.props.totalCount}
-            </span>{' '}
+            <span className="rfh-projects-number">{this.props.totalCount}</span>{' '}
             active projects
           </h5>
           <ProjectSearchBox onSearchProject={this.props.onSearchProject} />
         </div>
-        <div className="list-group">
-          {projects}
-        </div>
+        <div className="list-group">{projects}</div>
       </div>
     )
   }

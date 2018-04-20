@@ -1,7 +1,8 @@
 import React from 'react'
-import ProjectsList from './components/ProjectsList.jsx'
-import Authentication from './components/Authentication.jsx'
 import { connect } from 'react-redux'
+import ProjectsList from 'web/components/ProjectsList.jsx'
+import Authentication from 'web/components/Authentication.jsx'
+import { getProjects } from 'core/actions'
 
 class App extends React.Component {
   constructor(props) {

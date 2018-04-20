@@ -1,5 +1,8 @@
+jest.mock('../services/LocalStorage')
+
+import storage from 'src/services/LocalStorage'
 import { ISSUES_INFINITE_SCROLL_THRESHOLD } from 'src/constants'
-import projectIssuesReducer from 'src/reducers/projectIssues.reducer'
+import projectIssuesReducer from 'core/reducers/projectIssues.reducer'
 import {
   errorToGetProjectIssues,
   logTimeEntryDone,
