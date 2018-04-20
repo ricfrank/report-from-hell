@@ -53,6 +53,7 @@
     "react-dom": "^16.3.1",
     "react-native": "^0.55.2",
     "react-native-calendars": "^1.18.2",
+    "react-native-modal": "^5.4.0",
     "react-redux": "^5.0.7",
     "react-router": "^3.0.0",
     "redux": "^3.7.2",
