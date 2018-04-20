@@ -65,3 +65,7 @@ If you get an error on your device like this: `"Unable to load script from asset
 ```
 $ adb reverse tcp:8081 tcp:8081
 ```
+### Debugging
+Shake your phone or navigate to the development menu and click on the `Debug JS remotely`. After this navigate to `http://localhost:8081/debugger-ui/` on your browser and open the dev tools. 
+
+Happy debugging!
