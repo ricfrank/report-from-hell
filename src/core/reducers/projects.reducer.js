@@ -1,9 +1,9 @@
+import _ from 'lodash'
 import {
   SEARCH_PROJECT,
   SHOW_PROJECTS,
   ERROR_TO_GET_PROJECTS
-} from 'core/actions'
-import _ from 'lodash'
+} from '../actions'
 
 const PROJECT_INITIAL_STATE = {
   projects: [],

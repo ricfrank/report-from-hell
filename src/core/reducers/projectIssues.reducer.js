@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import {
   ERROR_TO_GET_PROJECT_ISSUES,
   LOG_TIME_ENTRY_DONE,
@@ -5,9 +6,8 @@ import {
   SEARCH_PROJECT_ISSUES,
   SHOW_PROJECT_ISSUES,
   UPDATE_PROJECT_ISSUES
-} from 'core/actions'
-import { ISSUES_INFINITE_SCROLL_THRESHOLD } from 'src/constants'
-import _ from 'lodash'
+} from '../actions'
+import { ISSUES_INFINITE_SCROLL_THRESHOLD } from '../../constants'
 
 const PROJECT_ISSUES_INITIAL_STATE = {
   issues: [],

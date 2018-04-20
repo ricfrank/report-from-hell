@@ -1,34 +1,37 @@
 import axios from 'axios'
 import _ from 'lodash'
-import createRedmineApiUrl from 'src/factories/RedmineApiUrl'
+import createRedmineApiUrl from '../../factories/RedmineApiUrl'
 import {
   AUTH_LOCAL_STORAGE_KEY,
   ISSUES_INFINITE_SCROLL_LIMIT,
   ISSUES_INFINITE_SCROLL_THRESHOLD
-} from 'src/constants'
-import storage from 'src/services/LocalStorage'
-import {
-  authenticate,
-  requireAuthentication
-} from 'src/actions/authentication.action'
-import {
-  errorToGetProjectIssues,
-  logTimeEntryOk,
-  showProjectIssues,
-  updateProjectIssues,
-  setActivities
-} from 'src/actions/projectIssues.action'
-import { errorToGetProjects, showProjects } from 'src/actions/projects.action'
-import { errorToGetLoggedUser, saveLoggedUser } from 'src/actions/user.action'
-import {
-  errorToGetUserLogTimeEntries,
-  showUserLogTimeEntries
-} from 'src/actions/userLogTimeEntries.action'
+} from '../../constants'
+import storage from '../../services/LocalStorage'
 
-axios.defaults.headers.common['X-Redmine-API-Key'] = storage.getItem(
-  AUTH_LOCAL_STORAGE_KEY
-)
-axios.defaults.headers.post['Content-Type'] = 'application/json'
+export const SET_ACTIVITIES = 'SET_ACTIVITIES'
+export const SHOW_PROJECT_ISSUES = 'SHOW_PROJECT_ISSUES'
+export const UPDATE_PROJECT_ISSUES = 'UPDATE_PROJECT_ISSUES'
+export const SEARCH_PROJECT_ISSUES = 'SEARCH_PROJECT_ISSUES '
+export const SHOW_PROJECTS = 'SHOW_PROJECTS'
+export const SEARCH_PROJECT = 'SEARCH_PROJECT'
+export const ERROR_TO_GET_PROJECT_ISSUES = 'ERROR_TO_GET_PROJECT_ISSUES'
+export const ERROR_TO_GET_PROJECTS = 'ERROR_TO_GET_PROJECTS'
+export const REQUIRE_AUTHENTICATION = 'REQUIRE_AUTHENTICATION'
+export const AUTHENTICATE = 'AUTHENTICATE'
+export const LOG_TIME_ENTRY_OK = 'LOG_TIME_ENTRY_OK'
+export const LOG_TIME_ENTRY_DONE = 'LOG_TIME_ENTRY_DONE'
+export const SAVE_LOGGED_USER = 'SAVE_LOGGED_USER'
+export const ERROR_TO_GET_LOGGED_USER = 'ERROR_TO_GET_LOGGED_USER'
+export const SHOW_USER_LOG_TIME_ENTRIES = 'SHOW_USER_LOG_TIME_ENTRIES'
+export const ERROR_TO_GET_USER_LOG_TIME_ENTRIES =
+  'ERROR_TO_GET_USER_LOG_TIME_ENTRIES'
+
+if (typeof window !== 'undefined') {
+  axios.defaults.headers.common['X-Redmine-API-Key'] = storage.getItem(
+    AUTH_LOCAL_STORAGE_KEY
+  )
+  axios.defaults.headers.post['Content-Type'] = 'application/json'
+}
 
 export function getProjectIssues(
   id,
@@ -71,10 +74,12 @@ export function getProjectIssues(
 
 export function saveApiKey(apiKey) {
   return (dispatch, getState) => {
-    storage.setItem(AUTH_LOCAL_STORAGE_KEY, apiKey)
-    axios.defaults.headers.common['X-Redmine-API-Key'] = storage.getItem(
-      AUTH_LOCAL_STORAGE_KEY
-    )
+    if (typeof window !== 'undefined') {
+      storage.setItem(AUTH_LOCAL_STORAGE_KEY, apiKey)
+      axios.defaults.headers.common['X-Redmine-API-Key'] = storage.getItem(
+        AUTH_LOCAL_STORAGE_KEY
+      )
+    }
 
     dispatch(authenticate(apiKey))
     dispatch(getProjects())
@@ -87,8 +92,10 @@ export function saveApiKey(apiKey) {
 export function getProjects() {
   return dispatch => {
     //why ?
-    if (storage.getItem(AUTH_LOCAL_STORAGE_KEY)) {
-      dispatch(authenticate(storage.getItem(AUTH_LOCAL_STORAGE_KEY)))
+    if (typeof window !== 'undefined') {
+      if (storage.getItem(AUTH_LOCAL_STORAGE_KEY)) {
+        dispatch(authenticate(storage.getItem(AUTH_LOCAL_STORAGE_KEY)))
+      }
     }
     //
 

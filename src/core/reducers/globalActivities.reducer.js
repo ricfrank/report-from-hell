@@ -1,4 +1,4 @@
-import { SET_ACTIVITIES } from 'core/actions'
+import { SET_ACTIVITIES } from '../actions'
 
 const ACTIVITIES_INITIAL_STATE = {
   activities: [],

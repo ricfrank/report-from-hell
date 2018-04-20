@@ -1,10 +1,14 @@
 const LocalStorage = () => {
   return {
     getItem(key) {
-      return localStorage.getItem(key)
+      if (typeof localStorage !== 'undefined') {
+        return localStorage.getItem(key)
+      }
     },
     setItem(key, value) {
-      localStorage.setItem(key, value)
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem(key, value)
+      }
     }
   }
 }

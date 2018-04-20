@@ -1,7 +1,7 @@
 import {
   ERROR_TO_GET_LOGGED_USER,
   SHOW_USER_LOG_TIME_ENTRIES
-} from 'core/actions'
+} from '../actions'
 
 const INITIAL_STATE = []
 
