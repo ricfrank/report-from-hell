@@ -11,13 +11,15 @@ class Authentication extends React.Component {
 
   render() {
     let modalShow = true
+    let backdrop = true
     if (this.props.apiKey) {
       modalShow = false
+      backdrop = false
     }
 
     return (
       <div>
-        <Modal show={modalShow}>
+        <Modal show={modalShow} backdrop={backdrop}>
           <Modal.Header>
             <Modal.Title>Add redmine api key</Modal.Title>
           </Modal.Header>

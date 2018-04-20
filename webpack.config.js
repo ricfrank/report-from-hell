@@ -3,6 +3,7 @@ const { resolve } = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+  mode: 'development',
   entry: './src/index.js',
   output: {
     path: resolve(__dirname, 'public'),
@@ -10,14 +11,14 @@ module.exports = {
     publicPath: '/'
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /(\.js|\.jsx)$/,
         exclude: /(node_modules)/,
-        loader: 'babel',
+        loader: 'babel-loader',
         include: __dirname,
         query: {
-          presets: ['react', 'es2015', 'stage-2', 'react-hmre']
+          presets: ['react', 'env', 'stage-2', 'react-hmre']
         }
       },
       {
@@ -34,19 +35,19 @@ module.exports = {
       },
       {
         test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url?limit=10000&mimetype=application/font-woff'
+        loader: 'url-loader?limit=10000&mimetype=application/font-woff'
       },
       {
         test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url?limit=10000&mimetype=application/octet-stream'
+        loader: 'url-loader?limit=10000&mimetype=application/octet-stream'
       },
       {
         test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'file'
+        loader: 'file-loader'
       },
       {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url?limit=10000&mimetype=image/svg+xml'
+        loader: 'url-loader?limit=10000&mimetype=image/svg+xml'
       }
     ]
   },
@@ -70,7 +71,6 @@ module.exports = {
     historyApiFallback: true
   },
   resolve: {
-    root: resolve(__dirname),
     alias: {
       src: resolve(__dirname, 'src')
     },
