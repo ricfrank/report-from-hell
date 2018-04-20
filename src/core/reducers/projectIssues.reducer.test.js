@@ -1,8 +1,8 @@
-jest.mock('../services/LocalStorage')
+jest.mock('../../services/LocalStorage')
 
-import storage from 'src/services/LocalStorage'
-import { ISSUES_INFINITE_SCROLL_THRESHOLD } from 'src/constants'
-import projectIssuesReducer from 'core/reducers/projectIssues.reducer'
+import storage from '../../services/LocalStorage'
+import { ISSUES_INFINITE_SCROLL_THRESHOLD } from '../../constants'
+import projectIssuesReducer from './projectIssues.reducer'
 import {
   errorToGetProjectIssues,
   logTimeEntryDone,
@@ -10,7 +10,7 @@ import {
   searchProjectIssues,
   showProjectIssues,
   updateProjectIssues
-} from 'src/actions/projectIssues.action'
+} from 'core/actions'
 
 describe('project issues', () => {
   const state = {

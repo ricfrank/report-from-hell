@@ -1,8 +1,8 @@
-jest.mock('../services/LocalStorage')
+jest.mock('../../services/LocalStorage')
 
-import storage from 'src/services/LocalStorage'
-import globalActivitiesReducer from 'core/reducers/globalActivities.reducer'
-import { setActivities } from 'core/actions'
+import storage from '../../services/LocalStorage'
+import globalActivitiesReducer from './globalActivities.reducer'
+import { setActivities } from '../actions'
 
 const MOCK_ACTIVITIES_WITH_DEFAULT = [
   { id: 8, name: 'Design' },

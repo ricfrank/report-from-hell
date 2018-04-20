@@ -1,8 +1,8 @@
-jest.mock('src/services/LocalStorage')
+jest.mock('../../services/LocalStorage')
 
-import storage from 'src/services/LocalStorage'
-import userLogTimeEntries from 'core/reducers/userLogTimeEntries.reducer'
-import { showUserLogTimeEntries, errorToGetLoggedUser } from 'core/actions'
+import storage from '../../services/LocalStorage'
+import userLogTimeEntries from './userLogTimeEntries.reducer'
+import { showUserLogTimeEntries, errorToGetLoggedUser } from '../actions'
 
 test('should save time entries log', () => {
   const timeEntries = [
