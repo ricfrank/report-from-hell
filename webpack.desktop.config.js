@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   mode: 'development',
   target: 'electron-renderer',
-  entry: './src/web/index.jss',
+  entry: './src/web/index.js',
   output: {
     path: resolve(__dirname, 'public'),
     filename: 'bundle.js'
@@ -66,5 +66,12 @@ module.exports = {
       inject: 'body',
       hash: true
     })
-  ]
+  ],
+  resolve: {
+    alias: {
+      src: resolve(__dirname, 'src'),
+      core: resolve(__dirname, 'src/core'),
+      web: resolve(__dirname, 'src/web')
+    },
+  }
 };

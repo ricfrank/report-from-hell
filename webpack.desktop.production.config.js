@@ -66,5 +66,12 @@ module.exports = {
       inject: 'body',
       hash: true
     })
-  ]
+  ],
+  resolve: {
+    alias: {
+      src: resolve(__dirname, 'src'),
+      core: resolve(__dirname, 'src/core'),
+      web: resolve(__dirname, 'src/web')
+    },
+  }
 };
