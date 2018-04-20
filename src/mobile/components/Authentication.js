@@ -7,23 +7,35 @@ import { saveApiKey } from '../../core/actions'
 class Authentication extends Component {
   constructor(props) {
     super(props)
+
+    this.state = {
+      text: ''
+    }
   }
 
   render() {
     let modalShow = true
-    let backdrop = true
     if (this.props.apiKey) {
       modalShow = false
-      backdrop = false
     }
 
     return (
       <View>
         <Modal isVisible={modalShow}>
           <View>
+            <TextInput
+              style={{
+                height: 40,
+                color: 'white',
+                borderColor: 'gray',
+                borderWidth: 1
+              }}
+              onChangeText={text => this.setState({ text })}
+              value={this.state.text}
+            />
             <Button
               title="Send"
-              onPress={() => this.props.onApiKeySend(this.apiKeyValue.value)}
+              onPress={() => this.props.onApiKeySend(this.state.text)}
             />
           </View>
         </Modal>
