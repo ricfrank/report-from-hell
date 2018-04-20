@@ -47,3 +47,21 @@ Build Desktop App
 
 
 [Download dmg](https://github.com/ricfrank/report-from-hell/tree/master/dist/outatime-0.0.2.dmg)
+
+Build Mobile app
+=================
+
+For android:
+
+```npm run:android```
+
+For iOS:
+
+```npm run:ios```
+
+### Troubleshooting
+If you get an error on your device like this: `"Unable to load script from assets index.android.bundle"` try the following:
+
+```
+$ adb reverse tcp:8081 tcp:8081
+```
