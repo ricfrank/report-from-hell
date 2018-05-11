@@ -15,7 +15,8 @@ import {
   errorToGetProjectIssues,
   logTimeEntryOk,
   showProjectIssues,
-  updateProjectIssues
+  updateProjectIssues,
+  setActivities
 } from 'src/actions/projectIssues.action'
 import { errorToGetProjects, showProjects } from 'src/actions/projects.action'
 import { errorToGetLoggedUser, saveLoggedUser } from 'src/actions/user.action'
@@ -42,7 +43,7 @@ export function getProjectIssues(
           '/issues.json',
           '?project_id=' +
             id +
-            '&status_id=open&limit=' +
+            '&subproject_id=!*&status_id=open&limit=' +
             limit +
             '&offset=' +
             offset +

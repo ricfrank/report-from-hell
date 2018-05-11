@@ -6,6 +6,7 @@ export const LOG_TIME_ENTRY_OK = 'LOG_TIME_ENTRY_OK'
 export const SHOW_PROJECT_ISSUES = 'SHOW_PROJECT_ISSUES'
 export const UPDATE_PROJECT_ISSUES = 'UPDATE_PROJECT_ISSUES'
 export const SEARCH_PROJECT_ISSUES = 'SEARCH_PROJECT_ISSUES '
+export const SET_ACTIVITIES = 'SET_ACTIVITIES'
 
 export const errorToGetProjectIssues = error => {
   return {
@@ -63,6 +64,15 @@ export const updateProjectIssues = (
       ...issues,
       threshold: threshold,
       projectId: id
+    }
+  }
+}
+
+export const setActivities = activities => {
+  return {
+    type: SET_ACTIVITIES,
+    payload: {
+      activities: activities.time_entry_activities
     }
   }
 }

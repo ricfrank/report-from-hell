@@ -13,6 +13,7 @@ import {
   logTimeEntryDone,
   searchProjectIssues
 } from 'src/actions/projectIssues.action'
+import { getActivities } from 'src/actions'
 
 class ProjectIssuesList extends React.Component {
   constructor(props) {

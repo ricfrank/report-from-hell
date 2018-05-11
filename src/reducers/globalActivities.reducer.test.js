@@ -2,7 +2,7 @@ jest.mock('../services/LocalStorage')
 
 import storage from '../services/LocalStorage'
 import globalActivitiesReducer from 'src/reducers/globalActivities.reducer'
-import { setActivities } from 'src/actions'
+import { setActivities } from 'src/actions/projectIssues.action'
 
 const MOCK_ACTIVITIES_WITH_DEFAULT = [
   { id: 8, name: 'Design' },
