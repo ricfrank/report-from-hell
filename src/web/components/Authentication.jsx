@@ -34,7 +34,6 @@ class Authentication extends React.Component {
             <form
               onSubmit={e => {
                 e.preventDefault()
-
                 this.props.onApiKeySend(this.apiKeyValue.value)
               }}
             >
