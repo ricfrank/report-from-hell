@@ -3,7 +3,7 @@ import {
   SEARCH_PROJECT,
   SHOW_PROJECTS,
   ERROR_TO_GET_PROJECTS
-} from '../actions'
+} from '../actions/projects.action'
 
 const PROJECT_INITIAL_STATE = {
   projects: [],

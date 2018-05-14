@@ -6,7 +6,7 @@ import {
   SEARCH_PROJECT_ISSUES,
   SHOW_PROJECT_ISSUES,
   UPDATE_PROJECT_ISSUES
-} from '../actions'
+} from '../actions/projectIssues.action'
 import { ISSUES_INFINITE_SCROLL_THRESHOLD } from '../../constants'
 
 const PROJECT_ISSUES_INITIAL_STATE = {

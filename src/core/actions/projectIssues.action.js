@@ -1,4 +1,4 @@
-import { ISSUES_INFINITE_SCROLL_THRESHOLD } from 'src/constants'
+import { ISSUES_INFINITE_SCROLL_THRESHOLD } from '../../constants'
 
 export const ERROR_TO_GET_PROJECT_ISSUES = 'ERROR_TO_GET_PROJECT_ISSUES'
 export const LOG_TIME_ENTRY_DONE = 'LOG_TIME_ENTRY_DONE'

@@ -1,4 +1,4 @@
-import { SET_ACTIVITIES } from '../actions'
+import { SET_ACTIVITIES } from '../actions/projectIssues.action'
 
 const ACTIVITIES_INITIAL_STATE = {
   activities: [],

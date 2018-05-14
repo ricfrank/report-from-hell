@@ -7,24 +7,20 @@ import {
   ISSUES_INFINITE_SCROLL_THRESHOLD
 } from '../../constants'
 import storage from '../../services/LocalStorage'
-
-export const SET_ACTIVITIES = 'SET_ACTIVITIES'
-export const SHOW_PROJECT_ISSUES = 'SHOW_PROJECT_ISSUES'
-export const UPDATE_PROJECT_ISSUES = 'UPDATE_PROJECT_ISSUES'
-export const SEARCH_PROJECT_ISSUES = 'SEARCH_PROJECT_ISSUES '
-export const SHOW_PROJECTS = 'SHOW_PROJECTS'
-export const SEARCH_PROJECT = 'SEARCH_PROJECT'
-export const ERROR_TO_GET_PROJECT_ISSUES = 'ERROR_TO_GET_PROJECT_ISSUES'
-export const ERROR_TO_GET_PROJECTS = 'ERROR_TO_GET_PROJECTS'
-export const REQUIRE_AUTHENTICATION = 'REQUIRE_AUTHENTICATION'
-export const AUTHENTICATE = 'AUTHENTICATE'
-export const LOG_TIME_ENTRY_OK = 'LOG_TIME_ENTRY_OK'
-export const LOG_TIME_ENTRY_DONE = 'LOG_TIME_ENTRY_DONE'
-export const SAVE_LOGGED_USER = 'SAVE_LOGGED_USER'
-export const ERROR_TO_GET_LOGGED_USER = 'ERROR_TO_GET_LOGGED_USER'
-export const SHOW_USER_LOG_TIME_ENTRIES = 'SHOW_USER_LOG_TIME_ENTRIES'
-export const ERROR_TO_GET_USER_LOG_TIME_ENTRIES =
-  'ERROR_TO_GET_USER_LOG_TIME_ENTRIES'
+import { authenticate, requireAuthentication } from './authentication.action'
+import {
+  errorToGetProjectIssues,
+  logTimeEntryOk,
+  showProjectIssues,
+  updateProjectIssues,
+  setActivities
+} from './projectIssues.action'
+import { errorToGetProjects, showProjects } from './projects.action'
+import { errorToGetLoggedUser, saveLoggedUser } from './user.action'
+import {
+  errorToGetUserLogTimeEntries,
+  showUserLogTimeEntries
+} from './userLogTimeEntries.action'
 
 if (typeof window !== 'undefined') {
   axios.defaults.headers.common['X-Redmine-API-Key'] = storage.getItem(

@@ -1,4 +1,7 @@
-import { AUTHENTICATE, REQUIRE_AUTHENTICATION } from '../actions'
+import {
+  AUTHENTICATE,
+  REQUIRE_AUTHENTICATION
+} from '../actions/authentication.action'
 
 const INITIAL_STATE = {
   apiKey: null

@@ -2,7 +2,7 @@ jest.mock('../../services/LocalStorage')
 
 import storage from '../../services/LocalStorage'
 import userReducer from './user.reducer'
-import { saveLoggedUser, errorToGetLoggedUser } from '../actions'
+import { saveLoggedUser, errorToGetLoggedUser } from '../actions/user.action'
 
 test('should save user data after login', () => {
   const expectedUser = {

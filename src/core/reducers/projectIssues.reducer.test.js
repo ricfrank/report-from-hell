@@ -10,7 +10,7 @@ import {
   searchProjectIssues,
   showProjectIssues,
   updateProjectIssues
-} from 'core/actions'
+} from '../actions/projectIssues.action'
 
 describe('project issues', () => {
   const state = {

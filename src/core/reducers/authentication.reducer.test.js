@@ -2,7 +2,10 @@ jest.mock('../../services/LocalStorage')
 
 import storage from '../../services/LocalStorage'
 import authReducer from './authentication.reducer'
-import { authenticate, requireAuthentication } from '../actions'
+import {
+  authenticate,
+  requireAuthentication
+} from '../actions/authentication.action'
 
 test('should authenticate', () => {
   const apiKey = 'banana-joe'

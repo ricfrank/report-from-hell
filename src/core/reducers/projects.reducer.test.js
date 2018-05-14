@@ -1,7 +1,11 @@
 jest.mock('../../services/LocalStorage')
 
 import storage from '../../services/LocalStorage'
-import { showProjects, errorToGetProjects, searchProject } from '../actions'
+import {
+  showProjects,
+  errorToGetProjects,
+  searchProject
+} from '../actions/projects.action'
 import projectReducer from './projects.reducer'
 
 test('should save projects', () => {
