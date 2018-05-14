@@ -3,21 +3,22 @@ const { resolve } = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  mode: 'production',
+  entry: './src/web/index.js',
   output: {
     path: resolve(__dirname, 'public'),
     filename: 'bundle.js',
     publicPath: '/'
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /(\.js|\.jsx)$/,
         exclude: /(node_modules)/,
-        loader: 'babel',
+        loader: 'babel-loader',
         include: __dirname,
         query: {
-          presets: ['react', 'es2015', 'stage-2']
+          presets: ['react', 'env', 'stage-2']
         }
       },
       {
@@ -34,19 +35,19 @@ module.exports = {
       },
       {
         test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url?limit=10000&mimetype=application/font-woff'
+        loader: 'url-loader?limit=10000&mimetype=application/font-woff'
       },
       {
         test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url?limit=10000&mimetype=application/octet-stream'
+        loader: 'url-loader?limit=10000&mimetype=application/octet-stream'
       },
       {
         test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'file'
+        loader: 'file-loader'
       },
       {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url?limit=10000&mimetype=image/svg+xml'
+        loader: 'url-loader?limit=10000&mimetype=image/svg+xml'
       }
     ]
   },
@@ -67,9 +68,10 @@ module.exports = {
     })
   ],
   resolve: {
-    root: resolve(__dirname),
     alias: {
-      src: resolve(__dirname, 'src')
+      src: resolve(__dirname, 'src'),
+      core: resolve(__dirname, 'src/core'),
+      web: resolve(__dirname, 'src/web')
     },
   }
 };
