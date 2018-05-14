@@ -21,8 +21,9 @@ import {
   errorToGetUserLogTimeEntries,
   showUserLogTimeEntries
 } from './userLogTimeEntries.action'
+import { isWeb } from '../helpers'
 
-if (typeof window !== 'undefined') {
+if (isWeb()) {
   axios.defaults.headers.common['X-Redmine-API-Key'] = storage.getItem(
     AUTH_LOCAL_STORAGE_KEY
   )
@@ -70,7 +71,7 @@ export function getProjectIssues(
 
 export function saveApiKey(apiKey) {
   return (dispatch, getState) => {
-    if (typeof window !== 'undefined') {
+    if (isWeb()) {
       storage.setItem(AUTH_LOCAL_STORAGE_KEY, apiKey)
       axios.defaults.headers.common['X-Redmine-API-Key'] = storage.getItem(
         AUTH_LOCAL_STORAGE_KEY
@@ -88,7 +89,7 @@ export function saveApiKey(apiKey) {
 export function getProjects() {
   return dispatch => {
     //why ?
-    if (typeof window !== 'undefined') {
+    if (isWeb()) {
       if (storage.getItem(AUTH_LOCAL_STORAGE_KEY)) {
         dispatch(authenticate(storage.getItem(AUTH_LOCAL_STORAGE_KEY)))
       }
