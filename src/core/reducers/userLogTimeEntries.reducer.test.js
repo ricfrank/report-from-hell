@@ -4,7 +4,7 @@ import storage from '../../services/LocalStorage'
 import userLogTimeEntries from './userLogTimeEntries.reducer'
 import {
   showUserLogTimeEntries,
-  errorToGetLoggedUser
+  errorToGetUserLogTimeEntries
 } from '../actions/userLogTimeEntries.action'
 
 test('should save time entries log', () => {
