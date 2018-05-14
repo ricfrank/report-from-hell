@@ -95,6 +95,13 @@ export function getProjects() {
     }
     //
 
+    console.log(
+      createRedmineApiUrl(
+        '/projects.json',
+        '?limit=100&include=time_entry_activities'
+      )
+    )
+
     return axios
       .get(
         createRedmineApiUrl(
@@ -104,6 +111,7 @@ export function getProjects() {
       )
       .then(res => dispatch(showProjects(res.data)))
       .catch(error => {
+        console.log(error)
         if (error.response.status == 401) {
           dispatch(requireAuthentication())
           return new Promise((resolve, reject) => {
