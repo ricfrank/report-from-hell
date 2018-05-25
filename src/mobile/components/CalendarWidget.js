@@ -28,7 +28,7 @@ const themes = {
     textDisabledColor: '#d9e1e8',
     dotColor: '#ffffff',
     selectedDotColor: '#ffffff',
-    monthTextColor: 'blue',
+    monthTextColor: '#ffffff',
     textDayFontFamily: 'monospace',
     textMonthFontFamily: 'monospace',
     textDayHeaderFontFamily: 'monospace',
@@ -43,9 +43,12 @@ const themes = {
         borderStyle: 'solid',
         borderColor: '#F13153',
         borderRadius: 16,
-        padding: 3,
         backgroundColor: '#FFFFFF',
-        textAlign: 'center'
+        textAlign: 'center',
+        paddingTop: 3,
+        paddingBottom: 3,
+        paddingLeft: 3,
+        paddingRight: 3
       }
     }
   }
