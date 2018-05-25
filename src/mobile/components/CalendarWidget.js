@@ -1,12 +1,17 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
 import { Calendar } from 'react-native-calendars'
+import Arrow from './Arrow'
 
-export default class CalendarWidget extends Component<Props> {
+export default class CalendarWidget extends Component {
   render() {
     return (
       <View>
-        <Calendar theme={themes.overrides} />
+        <Calendar
+          theme={themes.overrides}
+          firstDay={1}
+          renderArrow={direction => <Arrow direction={direction} />}
+        />
       </View>
     )
   }
@@ -31,7 +36,7 @@ const themes = {
     textDayHeaderFontFamily: 'monospace',
     textMonthFontWeight: 'bold',
     textDayFontSize: 16,
-    textMonthFontSize: 24,
+    textMonthFontSize: 20,
     textDayHeaderFontSize: 16
   }
 }
