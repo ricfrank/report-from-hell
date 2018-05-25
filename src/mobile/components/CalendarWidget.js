@@ -24,12 +24,10 @@ const themes = {
     textSectionTitleColor: '#b6c1cd',
     selectedDayBackgroundColor: '#ffffff',
     selectedDayTextColor: '#ffffff',
-    todayTextColor: '#ffffff',
-    dayTextColor: '#ffffff',
+    dayTextColor: '#FAFAFA',
     textDisabledColor: '#d9e1e8',
     dotColor: '#ffffff',
     selectedDotColor: '#ffffff',
-    arrowColor: 'orange',
     monthTextColor: 'blue',
     textDayFontFamily: 'monospace',
     textMonthFontFamily: 'monospace',
@@ -37,6 +35,18 @@ const themes = {
     textMonthFontWeight: 'bold',
     textDayFontSize: 14,
     textMonthFontSize: 20,
-    textDayHeaderFontSize: 9
+    textDayHeaderFontSize: 9,
+    'stylesheet.day.basic': {
+      todayText: {
+        color: '#F13153',
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: '#F13153',
+        borderRadius: 16,
+        padding: 3,
+        backgroundColor: '#FFFFFF',
+        textAlign: 'center'
+      }
+    }
   }
 }
