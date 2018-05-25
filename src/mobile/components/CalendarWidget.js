@@ -35,8 +35,8 @@ const themes = {
     textMonthFontFamily: 'monospace',
     textDayHeaderFontFamily: 'monospace',
     textMonthFontWeight: 'bold',
-    textDayFontSize: 16,
+    textDayFontSize: 14,
     textMonthFontSize: 20,
-    textDayHeaderFontSize: 16
+    textDayHeaderFontSize: 9
   }
 }

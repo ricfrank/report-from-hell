@@ -1,16 +1,27 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import { prevMonth, nextMonth } from '../utils'
 
 const Arrow = props =>
   props.direction === 'left' ? (
     <View>
-      <Text>{prevMonth()}</Text>
+      <Text style={styles.arrow}>{prevMonth()}</Text>
     </View>
   ) : (
     <View>
-      <Text>{nextMonth()}</Text>
+      <Text style={styles.arrow}>{nextMonth()}</Text>
     </View>
   )
+
+const styles = StyleSheet.create({
+  arrow: {
+    opacity: 0.6,
+    color: '#FFFFFF',
+    fontSize: 14,
+    fontWeight: 'bold',
+    lineHeight: 40,
+    textAlign: 'center'
+  }
+})
 
 export default Arrow
