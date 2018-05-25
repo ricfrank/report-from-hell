@@ -1,22 +1,6 @@
 import React from 'react'
 import { View, Text } from 'react-native'
-
-const monthNames = [
-  'JAN',
-  'FEB',
-  'MAR',
-  'APR',
-  'MAY',
-  'JUN',
-  'JUL',
-  'AUG',
-  'SEP',
-  'OCT',
-  'NOV',
-  'DEC'
-]
-const prevMonth = () => monthNames[new Date().getMonth() % 12 - 1]
-const nextMonth = () => monthNames[new Date().getMonth() % 12 + 1]
+import { prevMonth, nextMonth } from '../utils'
 
 const Arrow = props =>
   props.direction === 'left' ? (
