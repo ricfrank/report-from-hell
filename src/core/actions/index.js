@@ -98,7 +98,7 @@ export function saveApiKey(apiKey) {
 }
 
 export function getProjects() {
-  return (dispatch, getState) => {
+  return dispatch => {
     if (isBrowser()) {
       if (storage.getItem(AUTH_LOCAL_STORAGE_KEY)) {
         const apiKey = storage.getItem(AUTH_LOCAL_STORAGE_KEY)
