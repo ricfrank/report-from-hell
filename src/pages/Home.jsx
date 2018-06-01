@@ -67,7 +67,7 @@ class Home extends React.Component {
               <h1>Outatime</h1>
               <p className="lead">Welcome back {this.props.user.firstname}!</p>
               <p className="">
-                See your last <strong>10</strong> time entries
+                See your last <strong>20</strong> time entries
               </p>
             </div>
           </div>
