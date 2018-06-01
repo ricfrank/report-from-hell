@@ -1,5 +1,7 @@
 import axios from 'axios'
 import _ from 'lodash'
+import localStorage from 'react-native-sync-localstorage'
+import { isBrowser, isReactNative } from '../utils'
 import createRedmineApiUrl from '../../factories/RedmineApiUrl'
 import {
   AUTH_LOCAL_STORAGE_KEY,
@@ -22,12 +24,17 @@ import {
   showUserLogTimeEntries
 } from './userLogTimeEntries.action'
 
-if (typeof window !== 'undefined') {
+if (isBrowser()) {
   axios.defaults.headers.common['X-Redmine-API-Key'] = storage.getItem(
     AUTH_LOCAL_STORAGE_KEY
   )
-  axios.defaults.headers.post['Content-Type'] = 'application/json'
+} else if (isReactNative()) {
+  axios.defaults.headers.common['X-Redmine-API-Key'] = localStorage.getItem(
+    AUTH_LOCAL_STORAGE_KEY
+  )
 }
+
+axios.defaults.headers.post['Content-Type'] = 'application/json'
 
 export function getProjectIssues(
   id,
@@ -70,9 +77,14 @@ export function getProjectIssues(
 
 export function saveApiKey(apiKey) {
   return (dispatch, getState) => {
-    if (typeof window !== 'undefined') {
+    if (isBrowser()) {
       storage.setItem(AUTH_LOCAL_STORAGE_KEY, apiKey)
       axios.defaults.headers.common['X-Redmine-API-Key'] = storage.getItem(
+        AUTH_LOCAL_STORAGE_KEY
+      )
+    } else if (isReactNative()) {
+      localStorage.setItem(AUTH_LOCAL_STORAGE_KEY, apiKey)
+      axios.defaults.headers.common['X-Redmine-API-Key'] = localStorage.getItem(
         AUTH_LOCAL_STORAGE_KEY
       )
     }
@@ -87,13 +99,17 @@ export function saveApiKey(apiKey) {
 
 export function getProjects() {
   return dispatch => {
-    //why ?
-    if (typeof window !== 'undefined') {
+    if (isBrowser()) {
       if (storage.getItem(AUTH_LOCAL_STORAGE_KEY)) {
-        dispatch(authenticate(storage.getItem(AUTH_LOCAL_STORAGE_KEY)))
+        const apiKey = storage.getItem(AUTH_LOCAL_STORAGE_KEY)
+        dispatch(authenticate(apiKey))
+      }
+    } else if (isReactNative()) {
+      if (localStorage.getItem(AUTH_LOCAL_STORAGE_KEY)) {
+        const apiKey = localStorage.getItem(AUTH_LOCAL_STORAGE_KEY)
+        dispatch(authenticate(apiKey))
       }
     }
-    //
 
     return axios
       .get(
@@ -128,7 +144,6 @@ export function getActivities() {
           dispatch(requireAuthentication())
           return
         }
-
         console.error(error.response)
       })
   }
@@ -161,7 +176,6 @@ export function logTimeEntry(
           dispatch(requireAuthentication())
           return
         }
-
         console.error(error.response)
       })
   }
