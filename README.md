@@ -68,4 +68,8 @@ $ adb reverse tcp:8081 tcp:8081
 ### Debugging
 Shake your phone or navigate to the development menu and click on the `Debug JS remotely`. After this navigate to `http://localhost:8081/debugger-ui/` on your browser and open the dev tools. 
 
+There is a great tool that combines React DevTools, Redux DevTools and the usual dev tools like console, network etc. which you can find here:
+
+[React Native Debugger](https://github.com/jhen0409/react-native-debugger)
+
 Happy debugging!
