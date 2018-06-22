@@ -53,11 +53,11 @@ Build Mobile app
 
 For android:
 
-```npm run:android```
+```npm run run-android```
 
 For iOS:
 
-```npm run:ios```
+```npm run run-ios```
 
 ### Troubleshooting
 If you get an error on your device like this: `"Unable to load script from assets index.android.bundle"` try the following:
