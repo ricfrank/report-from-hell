@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "test": "jest",
-    "test-watch": "jest --watch",
+    "test-watch": "jest --watchAll",
     "start": "./node_modules/.bin/webpack-dev-server --progress --inline --hot --port 4000",
     "run-android": "node node_modules/react-native/local-cli/cli.js run-android",
     "run-ios": "node node_modules/react-native/local-cli/cli.js run-ios",
@@ -75,6 +75,8 @@
     "electron": "^1.8.4",
     "electron-builder": "^20.15.3",
     "electron-packager": "^12.1.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "file-loader": "^1.1.11",
     "hapi": "^16.1.1",
     "html-webpack-plugin": "^3.2.0",
@@ -98,6 +100,7 @@
       "^core(.*)$": "<rootDir>/src/core$1",
       "^web(.*)$": "<rootDir>/src/web$1"
     },
-    "preset": "react-native"
+    "preset": "react-native",
+    "setupTestFrameworkScriptFile": "./src/setupTests.js"
   }
 }
