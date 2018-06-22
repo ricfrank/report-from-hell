@@ -8,7 +8,7 @@ const UserName = props => {
       <Text style={styles.userIcon}>
         <Icon name="user" size={20} color="#ffffff" />
       </Text>
-      <Text style={styles.userNameText}>{props.userName}</Text>
+      <Text style={styles.userNameText}>{props.name}</Text>
     </View>
   )
 }

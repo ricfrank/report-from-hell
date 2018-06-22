@@ -23,7 +23,7 @@ class CalendarWidget extends Component {
   render() {
     return (
       <View>
-        <UserName userName={this.props.user.firstName} />
+        <UserName name={this.props.user.firstName} />
         <Calendar
           theme={themes.overrides}
           firstDay={1}
