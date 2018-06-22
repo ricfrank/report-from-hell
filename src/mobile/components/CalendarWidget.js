@@ -3,6 +3,7 @@ import { View } from 'react-native'
 import { Calendar } from 'react-native-calendars'
 import { connect } from 'react-redux'
 import { isEmpty } from 'lodash'
+import UserName from './UserName'
 import Arrow from './Arrow'
 
 class CalendarWidget extends Component {
@@ -22,6 +23,7 @@ class CalendarWidget extends Component {
   render() {
     return (
       <View>
+        <UserName userName={this.props.user.firstName} />
         <Calendar
           theme={themes.overrides}
           firstDay={1}
