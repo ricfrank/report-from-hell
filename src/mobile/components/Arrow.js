@@ -5,11 +5,11 @@ import { prevMonth, nextMonth } from '../utils'
 const Arrow = props =>
   props.direction === 'left' ? (
     <View>
-      <Text style={styles.arrow}>{prevMonth()}</Text>
+      <Text style={styles.arrow}>{prevMonth(props.currentMonth)}</Text>
     </View>
   ) : (
     <View>
-      <Text style={styles.arrow}>{nextMonth()}</Text>
+      <Text style={styles.arrow}>{nextMonth(props.currentMonth)}</Text>
     </View>
   )
 

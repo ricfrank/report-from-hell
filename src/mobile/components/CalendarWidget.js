@@ -2,11 +2,15 @@ import React, { Component } from 'react'
 import { View } from 'react-native'
 import { Calendar } from 'react-native-calendars'
 import { connect } from 'react-redux'
-import _ from 'lodash'
-import moment from 'moment'
+import { isEmpty } from 'lodash'
+import UserName from './UserName'
 import Arrow from './Arrow'
 
 class CalendarWidget extends Component {
+  state = {
+    currentMonth: new Date().getMonth() % 12 + 1
+  }
+
   getUserLogTimeEntries() {
     const logEntries = {}
     for (let log of this.props.userLogTimeEntries) {
@@ -19,10 +23,34 @@ class CalendarWidget extends Component {
   render() {
     return (
       <View>
+        <UserName name={this.props.user.firstName} />
         <Calendar
           theme={themes.overrides}
           firstDay={1}
-          renderArrow={direction => <Arrow direction={direction} />}
+          renderArrow={direction => (
+            <Arrow
+              direction={direction}
+              currentMonth={this.state.currentMonth}
+            />
+          )}
+          onPressArrowLeft={substractMonth => {
+            substractMonth()
+            this.setState({
+              currentMonth:
+                this.state.currentMonth === 1
+                  ? this.state.currentMonth + 11
+                  : this.state.currentMonth - 1
+            })
+          }}
+          onPressArrowRight={addMonth => {
+            addMonth()
+            this.setState({
+              currentMonth:
+                this.state.currentMonth === 12
+                  ? this.state.currentMonth - 11
+                  : this.state.currentMonth + 1
+            })
+          }}
           markedDates={this.getUserLogTimeEntries()}
         />
       </View>
@@ -68,11 +96,11 @@ const themes = {
 }
 
 const mapStateToProps = state => {
-  if (!_.isEmpty(state.user.error)) {
+  if (!isEmpty(state.user.error)) {
     alert(state.user.error.data + '\n' + state.user.error.status + '\n')
     return
   }
-  if (!_.isEmpty(state.userLogTimeEntries.error)) {
+  if (!isEmpty(state.userLogTimeEntries.error)) {
     alert(
       state.user.userLogTimeEntries.data +
         '\n' +
