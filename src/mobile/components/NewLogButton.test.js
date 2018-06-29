@@ -14,7 +14,13 @@ describe('NewLogButton', () => {
     expect(wrapper.find('LinearGradient')).toHaveLength(1)
   })
 
-  test('should change icon when pressed', () => {
+  test('should contain the correct Icon', () => {
+    const wrapper = shallow(<NewLogButton onPress={onPress} />)
+
+    expect(wrapper.find('Icon').props().name).toBe('ios-add')
+  })
+
+  test('should change call a function when pressed', () => {
     const wrapper = shallow(<NewLogButton onPress={onPress} />)
 
     wrapper.find('TouchableOpacity').simulate('press')

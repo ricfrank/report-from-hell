@@ -4,6 +4,7 @@ import { Calendar } from 'react-native-calendars'
 import { connect } from 'react-redux'
 import { isEmpty } from 'lodash'
 import UserName from './UserName'
+import PieChart from './PieChart'
 import NewLogButton from './NewLogButton'
 import Arrow from './Arrow'
 
@@ -25,6 +26,7 @@ class CalendarWidget extends Component {
     return (
       <View>
         <UserName name={this.props.user.firstName} />
+        <PieChart />
         <Calendar
           theme={themes.overrides}
           firstDay={1}
