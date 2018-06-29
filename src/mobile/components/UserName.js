@@ -1,12 +1,12 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome'
+import Icon from 'react-native-vector-icons/SimpleLineIcons'
 
 const UserName = props => {
   return (
     <View style={styles.wrapper}>
       <Text style={styles.userIcon}>
-        <Icon name="user" size={20} color="#ffffff" />
+        <Icon name="people" size={20} color="#ffffff" />
       </Text>
       <Text style={styles.userNameText}>{props.name}</Text>
     </View>
