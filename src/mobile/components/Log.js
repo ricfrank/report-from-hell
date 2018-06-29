@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, Button, StyleSheet } from 'react-native'
 
 const Log = props => {
   const { hours, projectName, issue, comments } = props.log
@@ -12,6 +12,14 @@ const Log = props => {
         <Text style={styles.projectName}>{projectName}</Text>
         <Text style={styles.issueSubject}>{issue.subject}</Text>
         <Text style={styles.comments}>{comments}</Text>
+      </View>
+      <View>
+        <Button
+          onPress={() => {}}
+          title="LOG AGAIN"
+          color="#403A60"
+          accessibilityLabel="Learn more about this purple button"
+        />
       </View>
     </View>
   )
@@ -36,7 +44,8 @@ const styles = StyleSheet.create({
     fontSize: 12,
     lineHeight: 14,
     opacity: 0.6,
-    color: '#403A60'
+    color: '#403A60',
+    marginBottom: 4
   },
   comments: {
     fontSize: 10,
