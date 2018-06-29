@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { View, ScrollView } from 'react-native'
 import { Calendar } from 'react-native-calendars'
 import { connect } from 'react-redux'
 import { isEmpty } from 'lodash'
 import Header from './Header'
 import NewLogButton from './NewLogButton'
+import LatestLogs from './LatestLogs'
 import Arrow from './Arrow'
 
 export class CalendarWidget extends Component {
@@ -24,7 +25,7 @@ export class CalendarWidget extends Component {
 
   render() {
     return (
-      <View>
+      <ScrollView>
         <Header name={this.props.user.firstName} />
         <Calendar
           theme={themes.overrides}
@@ -63,7 +64,12 @@ export class CalendarWidget extends Component {
           }}
           pressed={this.state.newLogPressed}
         />
-      </View>
+        <View>
+          <LatestLogs
+            logs={this.state.newLogPressed ? this.props.userLogTimeEntries : []}
+          />
+        </View>
+      </ScrollView>
     )
   }
 }
