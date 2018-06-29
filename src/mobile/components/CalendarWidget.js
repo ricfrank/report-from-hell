@@ -4,6 +4,7 @@ import { Calendar } from 'react-native-calendars'
 import { connect } from 'react-redux'
 import { isEmpty } from 'lodash'
 import UserName from './UserName'
+import NewLogButton from './NewLogButton'
 import Arrow from './Arrow'
 
 class CalendarWidget extends Component {
@@ -53,6 +54,7 @@ class CalendarWidget extends Component {
           }}
           markedDates={this.getUserLogTimeEntries()}
         />
+        <NewLogButton onPress={() => {}} />
       </View>
     )
   }

@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
   },
   userNameText: {
     color: '#ffffff',
-    fontFamily: 'Simple-Line-Icons',
     fontSize: 12,
     padding: 8
   }
