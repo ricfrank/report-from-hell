@@ -3,28 +3,35 @@ import { shallow } from 'enzyme'
 import NewLogButton from './NewLogButton'
 
 describe('NewLogButton', () => {
-  const onPress = jest.fn()
+  const mockCallback = jest.fn()
+
   test('should render without crashing', () => {
-    shallow(<NewLogButton onPress={onPress} />)
+    shallow(<NewLogButton onPress={mockCallback} pressed={false} />)
   })
 
   test('should contain an LinearGradient', () => {
-    const wrapper = shallow(<NewLogButton onPress={onPress} />)
+    const wrapper = shallow(
+      <NewLogButton onPress={mockCallback} pressed={false} />
+    )
 
     expect(wrapper.find('LinearGradient')).toHaveLength(1)
   })
 
   test('should contain the correct Icon', () => {
-    const wrapper = shallow(<NewLogButton onPress={onPress} />)
+    const wrapper = shallow(
+      <NewLogButton onPress={mockCallback} pressed={false} />
+    )
 
     expect(wrapper.find('Icon').props().name).toBe('ios-add')
   })
 
-  test('should change call a function when pressed', () => {
-    const wrapper = shallow(<NewLogButton onPress={onPress} />)
+  test('should call the callback passed down when pressed', () => {
+    const wrapper = shallow(
+      <NewLogButton onPress={mockCallback} pressed={false} />
+    )
 
     wrapper.find('TouchableOpacity').simulate('press')
 
-    expect(onPress).toHaveBeenCalled()
+    expect(mockCallback).toHaveBeenCalled()
   })
 })

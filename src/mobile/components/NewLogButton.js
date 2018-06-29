@@ -8,7 +8,11 @@ const NewLogButton = props => {
     <View style={styles.wrapper}>
       <LinearGradient colors={['#1FF9B4', '#43D6D6']} style={styles.button}>
         <TouchableOpacity onPress={props.onPress}>
-          <Icon name="ios-add" size={50} color="#ffffff" />
+          {!props.pressed ? (
+            <Icon name="ios-add" size={50} color="#ffffff" />
+          ) : (
+            <Icon name="ios-close" size={50} color="#ffffff" />
+          )}
         </TouchableOpacity>
       </LinearGradient>
     </View>

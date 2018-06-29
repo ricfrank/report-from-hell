@@ -7,9 +7,10 @@ import Header from './Header'
 import NewLogButton from './NewLogButton'
 import Arrow from './Arrow'
 
-class CalendarWidget extends Component {
+export class CalendarWidget extends Component {
   state = {
-    currentMonth: new Date().getMonth() % 12 + 1
+    currentMonth: new Date().getMonth() % 12 + 1,
+    newLogPressed: false
   }
 
   getUserLogTimeEntries() {
@@ -54,7 +55,14 @@ class CalendarWidget extends Component {
           }}
           markedDates={this.getUserLogTimeEntries()}
         />
-        <NewLogButton onPress={() => {}} />
+        <NewLogButton
+          onPress={() => {
+            this.setState({
+              newLogPressed: !this.state.newLogPressed
+            })
+          }}
+          pressed={this.state.newLogPressed}
+        />
       </View>
     )
   }
