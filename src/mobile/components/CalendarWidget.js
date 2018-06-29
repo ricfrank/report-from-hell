@@ -64,11 +64,11 @@ export class CalendarWidget extends Component {
           }}
           pressed={this.state.newLogPressed}
         />
-        <View>
-          <LatestLogs
-            logs={this.state.newLogPressed ? this.props.userLogTimeEntries : []}
-          />
-        </View>
+        {this.state.newLogPressed && (
+          <View style={{ padding: 32 }}>
+            <LatestLogs logs={this.props.userLogTimeEntries} />
+          </View>
+        )}
       </ScrollView>
     )
   }
