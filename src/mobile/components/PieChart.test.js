@@ -2,8 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import PieChart from './PieChart'
 
-describe('NewLogButton', () => {
-  const onPress = jest.fn()
+describe('PieChart', () => {
   test('should render without crashing', () => {
     shallow(<PieChart />)
   })

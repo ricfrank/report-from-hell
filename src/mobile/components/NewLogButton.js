@@ -3,7 +3,7 @@ import { View, TouchableOpacity, StyleSheet } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import LinearGradient from 'react-native-linear-gradient'
 
-const UserName = props => {
+const NewLogButton = props => {
   return (
     <View style={styles.wrapper}>
       <LinearGradient colors={['#1FF9B4', '#43D6D6']} style={styles.button}>
@@ -28,4 +28,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default UserName
+export default NewLogButton
