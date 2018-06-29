@@ -12,6 +12,7 @@ const PieChart = () => {
 
 const styles = StyleSheet.create({
   wrapper: {
+    flex: 1,
     backgroundColor: '#38324e'
   }
 })

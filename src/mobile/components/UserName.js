@@ -15,7 +15,10 @@ const UserName = props => {
 
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: '#38324e'
+    flex: 6,
+    backgroundColor: '#38324e',
+    display: 'flex',
+    flexDirection: 'row'
   },
   userIcon: {
     color: '#ffffff',
