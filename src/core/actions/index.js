@@ -28,13 +28,19 @@ if (isBrowser()) {
   axios.defaults.headers.common['X-Redmine-API-Key'] = storage.getItem(
     AUTH_LOCAL_STORAGE_KEY
   )
+  axios.defaults.headers.post['Content-Type'] = 'application/json'
 } else if (isReactNative()) {
-  axios.defaults.headers.common['X-Redmine-API-Key'] = localStorage.getItem(
-    AUTH_LOCAL_STORAGE_KEY
-  )
+  localStorage
+    .getAllFromLocalStorage()
+    .then(storage => {
+      axios.defaults.headers.common['X-Redmine-API-Key'] =
+        storage[AUTH_LOCAL_STORAGE_KEY]
+      axios.defaults.headers.post['Content-Type'] = 'application/json'
+    })
+    .catch(err => {
+      console.warn(err)
+    })
 }
-
-axios.defaults.headers.post['Content-Type'] = 'application/json'
 
 export function getProjectIssues(
   id,
