@@ -26,7 +26,7 @@ export class CalendarWidget extends Component {
   render() {
     return (
       <ScrollView>
-        <Header name={this.props.user.firstName} />
+        <Header name={this.props.user.fullName} />
         <Calendar
           theme={themes.overrides}
           firstDay={1}

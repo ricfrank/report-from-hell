@@ -195,7 +195,8 @@ export const getLoggedUser = () => {
         dispatch(
           saveLoggedUser({
             id: res.data.user.id,
-            firstName: res.data.user.firstname
+            firstName: res.data.user.firstname,
+            fullName: `${res.data.user.firstname} ${res.data.user.lastname}`
           })
         )
       })
