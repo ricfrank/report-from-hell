@@ -4,10 +4,21 @@ import Authentication from './components/Authentication'
 import CalendarWidget from './components/CalendarWidget'
 
 export default class Root extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      text: ''
+    }
+  }
+
   render() {
     return (
       <View>
-        <Authentication />
+        <Authentication
+          onChangeText={text => this.setState({ text })}
+          text={this.state.text}
+        />
         <CalendarWidget />
       </View>
     )

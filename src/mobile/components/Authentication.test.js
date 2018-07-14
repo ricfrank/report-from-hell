@@ -15,4 +15,16 @@ describe('Authentication', () => {
 
     expect(mockSend).toHaveBeenCalled()
   })
+
+  test('should update the input text properly', () => {
+    const mockChangeText = jest.fn()
+    const wrapper = shallow(<Authentication onChangeText={mockChangeText} />)
+
+    wrapper
+      .find('TextInput')
+      .props()
+      .onChangeText('text')
+
+    expect(mockChangeText).toHaveBeenCalled()
+  })
 })
