@@ -21,7 +21,7 @@ export const Authentication = props => {
               borderColor: 'gray',
               borderWidth: 1
             }}
-            onChangeText={text => props.onChangeText(text)}
+            onChangeText={props.onChangeText}
             value={props.text}
           />
           <Button title="Send" onPress={() => props.onApiKeySend(props.text)} />
