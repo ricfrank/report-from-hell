@@ -11,7 +11,8 @@ import Arrow from './Arrow'
 export class CalendarWidget extends Component {
   state = {
     currentMonth: new Date().getMonth() % 12 + 1,
-    newLogPressed: false
+    newLogPressed: false,
+    markedDates: null
   }
 
   getUserLogTimeEntries() {
@@ -23,6 +24,19 @@ export class CalendarWidget extends Component {
     return logEntries
   }
 
+  highlightSelectedDay(day) {
+    const logEntries = this.getUserLogTimeEntries()
+    logEntries[day.dateString] = {
+      ...logEntries[day.dateString],
+      selected: true,
+      selectedColor: 'blue'
+    }
+
+    this.setState({
+      markedDates: logEntries
+    })
+  }
+
   render() {
     return (
       <ScrollView>
@@ -30,6 +44,9 @@ export class CalendarWidget extends Component {
         <Calendar
           theme={themes.overrides}
           firstDay={1}
+          onDayPress={day => {
+            this.highlightSelectedDay(day)
+          }}
           renderArrow={direction => (
             <Arrow
               direction={direction}
@@ -54,7 +71,11 @@ export class CalendarWidget extends Component {
                   : this.state.currentMonth + 1
             })
           }}
-          markedDates={this.getUserLogTimeEntries()}
+          markedDates={
+            !this.state.markedDates
+              ? this.getUserLogTimeEntries()
+              : this.state.markedDates
+          }
         />
         <NewLogButton
           onPress={() => {
