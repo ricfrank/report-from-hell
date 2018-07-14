@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Text, Button, TextInput } from 'react-native'
+import { View, Button, TextInput } from 'react-native'
 import { connect } from 'react-redux'
 import Modal from 'react-native-modal'
 import { saveApiKey } from '../../core/actions'
 
-class Authentication extends Component {
+export class Authentication extends Component {
   constructor(props) {
     super(props)
 
@@ -55,4 +55,7 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Authentication)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Authentication)
