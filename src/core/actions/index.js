@@ -208,15 +208,30 @@ export const getLoggedUser = () => {
   }
 }
 
-export const getUserLogTimeEntries = loggedUserId => {
+export const getUserLogTimeEntries = (
+  loggedUserId,
+  { start, finish } = { start: '2018-05-25', finish: '2018-07-06' }
+) => {
+  let timeEntriesUrl
+  if (isBrowser()) {
+    timeEntriesUrl = createRedmineApiUrl(
+      '/time_entries.json',
+      '?user_id=' + loggedUserId + '&limit=10'
+    )
+  } else if (isReactNative()) {
+    timeEntriesUrl = createRedmineApiUrl(
+      '/time_entries.json',
+      '?user_id=' +
+        loggedUserId +
+        '&limit=100&spent_on=><' +
+        start +
+        '|' +
+        finish
+    )
+  }
   return dispatch => {
     axios
-      .get(
-        createRedmineApiUrl(
-          '/time_entries.json',
-          '?user_id=' + loggedUserId + '&limit=10'
-        )
-      )
+      .get(timeEntriesUrl)
       .then(res => {
         const logTimeEntriesPromises = res.data.time_entries.map(timeEntry => {
           return axios
