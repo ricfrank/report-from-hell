@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, ScrollView } from 'react-native'
+import { View, ScrollView, Platform } from 'react-native'
 import { Calendar } from 'react-native-calendars'
 import { connect } from 'react-redux'
 import { isEmpty } from 'lodash'
@@ -10,7 +10,7 @@ import Arrow from './Arrow'
 
 export class CalendarWidget extends Component {
   state = {
-    currentMonth: new Date().getMonth() % 12 + 1,
+    currentMonth: (new Date().getMonth() % 12) + 1,
     newLogPressed: false,
     markedDates: null
   }
@@ -18,7 +18,11 @@ export class CalendarWidget extends Component {
   getUserLogTimeEntries() {
     const logEntries = {}
     for (let log of this.props.userLogTimeEntries) {
-      logEntries[log.spentOn] = { marked: true }
+      logEntries[log.spentOn] = {
+        selected: true,
+        color: 'green',
+        selectedColor: 'green'
+      }
     }
 
     return logEntries
@@ -104,7 +108,7 @@ const themes = {
     selectedDayTextColor: '#ffffff',
     dayTextColor: '#FAFAFA',
     textDisabledColor: '#d9e1e8',
-    dotColor: '#ffffff',
+    dotColor: 'transparent',
     selectedDotColor: '#ffffff',
     monthTextColor: '#ffffff',
     textDayFontFamily: 'monospace',
@@ -115,18 +119,27 @@ const themes = {
     textMonthFontSize: 20,
     textDayHeaderFontSize: 9,
     'stylesheet.day.basic': {
-      todayText: {
-        color: '#F13153',
+      base: {
+        width: 32,
+        height: 32,
+        alignItems: 'center'
+      },
+      text: {
+        marginTop: Platform.OS === 'android' ? 6 : 8,
+        color: '#FAFAFA',
+        borderRadius: 16
+      },
+      alignedText: {},
+      today: {
+        backgroundColor: '#FFFFFF',
         borderWidth: 1,
         borderStyle: 'solid',
         borderColor: '#F13153',
-        borderRadius: 16,
-        backgroundColor: '#FFFFFF',
-        textAlign: 'center',
-        paddingTop: 3,
-        paddingBottom: 3,
-        paddingLeft: 3,
-        paddingRight: 3
+        borderRadius: 16
+      },
+      todayText: {
+        marginTop: Platform.OS === 'android' ? 5 : 7,
+        color: '#F13153'
       }
     }
   }
@@ -156,4 +169,7 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, null)(CalendarWidget)
+export default connect(
+  mapStateToProps,
+  null
+)(CalendarWidget)
