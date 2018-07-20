@@ -40,4 +40,21 @@ describe('CalendarWidget', () => {
 
     expect(bgColorBefore).not.toBe(bgColorAfter)
   })
+
+  test('should keep track of the start and end of the current visible dates', () => {
+    const wrapper = mount(<CalendarWidget user={{}} userLogTimeEntries={[]} />)
+
+    expect(wrapper.state().startOfVisibleDates).toBe(
+      wrapper
+        .find('Day')
+        .first()
+        .props().date.dateString
+    )
+    expect(wrapper.state().endOfVisibleDates).toBe(
+      wrapper
+        .find('Day')
+        .last()
+        .props().date.dateString
+    )
+  })
 })

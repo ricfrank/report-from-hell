@@ -11,6 +11,8 @@ import Arrow from './Arrow'
 export class CalendarWidget extends Component {
   state = {
     currentMonth: (new Date().getMonth() % 12) + 1,
+    startOfVisibleDates: '2018-06-25',
+    endOfVisibleDates: '2018-08-05',
     newLogPressed: false,
     markedDates: null
   }
