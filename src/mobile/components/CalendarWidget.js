@@ -10,17 +10,11 @@ import Arrow from './Arrow'
 
 export class CalendarWidget extends Component {
   state = {
-    currentMonth: null,
+    currentMonth: (new Date().getMonth() % 12) + 1,
     startOfVisibleDates: '2018-06-25',
     endOfVisibleDates: '2018-08-05',
     newLogPressed: false,
     markedDates: null
-  }
-
-  componentDidMount() {
-    this.setState({
-      currentMonth: (this.props.currentTime.getMonth() % 12) + 1
-    })
   }
 
   getUserLogTimeEntries() {
@@ -175,7 +169,7 @@ const mapStateToProps = state => {
     userLogTimeEntries: state.userLogTimeEntries,
     loggedIssueId: state.projectIssues.loggedIssueId,
     loggedTimeEntryId: state.projectIssues.loggedTimeEntryId,
-    currentTime: new Date(Date.now())
+    currentTime: '' // workaround due to lib bug: check issues for current
   }
 }
 
