@@ -10,11 +10,17 @@ import Arrow from './Arrow'
 
 export class CalendarWidget extends Component {
   state = {
-    currentMonth: (new Date().getMonth() % 12) + 1,
+    currentMonth: null,
     startOfVisibleDates: '2018-06-25',
     endOfVisibleDates: '2018-08-05',
     newLogPressed: false,
     markedDates: null
+  }
+
+  componentDidMount() {
+    this.setState({
+      currentMonth: (this.props.currentTime.getMonth() % 12) + 1
+    })
   }
 
   getUserLogTimeEntries() {
@@ -48,6 +54,7 @@ export class CalendarWidget extends Component {
       <ScrollView>
         <Header name={this.props.user.fullName} />
         <Calendar
+          current={this.props.currentTime}
           theme={themes.overrides}
           firstDay={1}
           onDayPress={day => {
@@ -167,7 +174,8 @@ const mapStateToProps = state => {
     projects: state.projects,
     userLogTimeEntries: state.userLogTimeEntries,
     loggedIssueId: state.projectIssues.loggedIssueId,
-    loggedTimeEntryId: state.projectIssues.loggedTimeEntryId
+    loggedTimeEntryId: state.projectIssues.loggedTimeEntryId,
+    currentTime: new Date(Date.now())
   }
 }
 
