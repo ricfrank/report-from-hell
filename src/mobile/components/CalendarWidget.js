@@ -51,6 +51,10 @@ export class CalendarWidget extends Component {
           current={this.props.currentTime}
           theme={themes.overrides}
           firstDay={1}
+          onMonthChange={month => {
+            console.log('month changed', month)
+          }}
+          disableMonthChange={true}
           onDayPress={day => {
             this.highlightSelectedDay(day)
           }}
