@@ -28,13 +28,19 @@ if (isBrowser()) {
   axios.defaults.headers.common['X-Redmine-API-Key'] = storage.getItem(
     AUTH_LOCAL_STORAGE_KEY
   )
+  axios.defaults.headers.post['Content-Type'] = 'application/json'
 } else if (isReactNative()) {
-  axios.defaults.headers.common['X-Redmine-API-Key'] = localStorage.getItem(
-    AUTH_LOCAL_STORAGE_KEY
-  )
+  localStorage
+    .getAllFromLocalStorage()
+    .then(storage => {
+      axios.defaults.headers.common['X-Redmine-API-Key'] =
+        storage[AUTH_LOCAL_STORAGE_KEY]
+      axios.defaults.headers.post['Content-Type'] = 'application/json'
+    })
+    .catch(err => {
+      console.warn(err)
+    })
 }
-
-axios.defaults.headers.post['Content-Type'] = 'application/json'
 
 export function getProjectIssues(
   id,
@@ -189,7 +195,8 @@ export const getLoggedUser = () => {
         dispatch(
           saveLoggedUser({
             id: res.data.user.id,
-            firstName: res.data.user.firstname
+            firstName: res.data.user.firstname,
+            fullName: `${res.data.user.firstname} ${res.data.user.lastname}`
           })
         )
       })
@@ -201,15 +208,30 @@ export const getLoggedUser = () => {
   }
 }
 
-export const getUserLogTimeEntries = loggedUserId => {
+export const getUserLogTimeEntries = (
+  loggedUserId,
+  { start, finish } = { start: '2018-05-25', finish: '2018-07-06' }
+) => {
+  let timeEntriesUrl
+  if (isBrowser()) {
+    timeEntriesUrl = createRedmineApiUrl(
+      '/time_entries.json',
+      '?user_id=' + loggedUserId + '&limit=10'
+    )
+  } else if (isReactNative()) {
+    timeEntriesUrl = createRedmineApiUrl(
+      '/time_entries.json',
+      '?user_id=' +
+        loggedUserId +
+        '&limit=100&spent_on=><' +
+        start +
+        '|' +
+        finish
+    )
+  }
   return dispatch => {
     axios
-      .get(
-        createRedmineApiUrl(
-          '/time_entries.json',
-          '?user_id=' + loggedUserId + '&limit=10'
-        )
-      )
+      .get(timeEntriesUrl)
       .then(res => {
         const logTimeEntriesPromises = res.data.time_entries.map(timeEntry => {
           return axios

@@ -1,32 +1,63 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { View, ScrollView, Platform } from 'react-native'
 import { Calendar } from 'react-native-calendars'
 import { connect } from 'react-redux'
 import { isEmpty } from 'lodash'
-import UserName from './UserName'
+import Header from './Header'
+import NewLogButton from './NewLogButton'
+import LatestLogs from './LatestLogs'
 import Arrow from './Arrow'
 
-class CalendarWidget extends Component {
+export class CalendarWidget extends Component {
   state = {
-    currentMonth: new Date().getMonth() % 12 + 1
+    currentMonth: (new Date().getMonth() % 12) + 1,
+    startOfVisibleDates: '2018-06-25',
+    endOfVisibleDates: '2018-08-05',
+    newLogPressed: false,
+    markedDates: null
   }
 
   getUserLogTimeEntries() {
     const logEntries = {}
     for (let log of this.props.userLogTimeEntries) {
-      logEntries[log.spentOn] = { marked: true }
+      logEntries[log.spentOn] = {
+        selected: true,
+        color: 'green',
+        selectedColor: 'green'
+      }
     }
 
     return logEntries
   }
 
+  highlightSelectedDay(day) {
+    const logEntries = this.getUserLogTimeEntries()
+    logEntries[day.dateString] = {
+      ...logEntries[day.dateString],
+      selected: true,
+      selectedColor: 'blue'
+    }
+
+    this.setState({
+      markedDates: logEntries
+    })
+  }
+
   render() {
     return (
-      <View>
-        <UserName name={this.props.user.firstName} />
+      <ScrollView>
+        <Header name={this.props.user.fullName} />
         <Calendar
+          current={this.props.currentTime}
           theme={themes.overrides}
           firstDay={1}
+          onMonthChange={month => {
+            console.log('month changed', month)
+          }}
+          disableMonthChange={true}
+          onDayPress={day => {
+            this.highlightSelectedDay(day)
+          }}
           renderArrow={direction => (
             <Arrow
               direction={direction}
@@ -51,9 +82,26 @@ class CalendarWidget extends Component {
                   : this.state.currentMonth + 1
             })
           }}
-          markedDates={this.getUserLogTimeEntries()}
+          markedDates={
+            !this.state.markedDates
+              ? this.getUserLogTimeEntries()
+              : this.state.markedDates
+          }
         />
-      </View>
+        <NewLogButton
+          onPress={() => {
+            this.setState({
+              newLogPressed: !this.state.newLogPressed
+            })
+          }}
+          pressed={this.state.newLogPressed}
+        />
+        {this.state.newLogPressed && (
+          <View style={{ padding: 32 }}>
+            <LatestLogs logs={this.props.userLogTimeEntries} />
+          </View>
+        )}
+      </ScrollView>
     )
   }
 }
@@ -67,7 +115,7 @@ const themes = {
     selectedDayTextColor: '#ffffff',
     dayTextColor: '#FAFAFA',
     textDisabledColor: '#d9e1e8',
-    dotColor: '#ffffff',
+    dotColor: 'transparent',
     selectedDotColor: '#ffffff',
     monthTextColor: '#ffffff',
     textDayFontFamily: 'monospace',
@@ -78,18 +126,27 @@ const themes = {
     textMonthFontSize: 20,
     textDayHeaderFontSize: 9,
     'stylesheet.day.basic': {
-      todayText: {
-        color: '#F13153',
+      base: {
+        width: 32,
+        height: 32,
+        alignItems: 'center'
+      },
+      text: {
+        marginTop: Platform.OS === 'android' ? 6 : 8,
+        color: '#FAFAFA',
+        borderRadius: 16
+      },
+      alignedText: {},
+      today: {
+        backgroundColor: '#FFFFFF',
         borderWidth: 1,
         borderStyle: 'solid',
         borderColor: '#F13153',
-        borderRadius: 16,
-        backgroundColor: '#FFFFFF',
-        textAlign: 'center',
-        paddingTop: 3,
-        paddingBottom: 3,
-        paddingLeft: 3,
-        paddingRight: 3
+        borderRadius: 16
+      },
+      todayText: {
+        marginTop: Platform.OS === 'android' ? 5 : 7,
+        color: '#F13153'
       }
     }
   }
@@ -115,8 +172,12 @@ const mapStateToProps = state => {
     projects: state.projects,
     userLogTimeEntries: state.userLogTimeEntries,
     loggedIssueId: state.projectIssues.loggedIssueId,
-    loggedTimeEntryId: state.projectIssues.loggedTimeEntryId
+    loggedTimeEntryId: state.projectIssues.loggedTimeEntryId,
+    currentTime: '' // workaround due to lib bug: check issues for current
   }
 }
 
-export default connect(mapStateToProps, null)(CalendarWidget)
+export default connect(
+  mapStateToProps,
+  null
+)(CalendarWidget)

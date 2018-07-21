@@ -1,6 +1,6 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 
-export const ExternalLink = ({ children, href, ...otherProps }) => {
+export const ExternalLink = ({ children }) => {
   return <View>{children}</View>
 }
