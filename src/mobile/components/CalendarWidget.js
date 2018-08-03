@@ -7,12 +7,18 @@ import Header from './Header'
 import NewLogButton from './NewLogButton'
 import LatestLogs from './LatestLogs'
 import Arrow from './Arrow'
+import {
+  calculateFirstDayOfVisibleDates,
+  calculateLastDayOfVisibleDates
+} from '../utils'
 
 export class CalendarWidget extends Component {
   state = {
     currentMonth: (new Date().getMonth() % 12) + 1,
-    startOfVisibleDates: '2018-06-25',
-    endOfVisibleDates: '2018-08-05',
+    startOfVisibleDates: calculateFirstDayOfVisibleDates(
+      this.props.currentTime
+    ),
+    endOfVisibleDates: calculateLastDayOfVisibleDates(this.props.currentTime),
     newLogPressed: false,
     markedDates: null
   }
@@ -52,7 +58,14 @@ export class CalendarWidget extends Component {
           theme={themes.overrides}
           firstDay={1}
           onMonthChange={month => {
-            console.log('month changed', month)
+            this.setState({
+              startOfVisibleDates: calculateFirstDayOfVisibleDates(
+                month.dateString
+              ),
+              endOfVisibleDates: calculateLastDayOfVisibleDates(
+                month.dateString
+              )
+            })
           }}
           disableMonthChange={true}
           onDayPress={day => {
@@ -155,7 +168,7 @@ const themes = {
 const mapStateToProps = state => {
   if (!isEmpty(state.user.error)) {
     alert(state.user.error.data + '\n' + state.user.error.status + '\n')
-    return
+    return null
   }
   if (!isEmpty(state.userLogTimeEntries.error)) {
     alert(
@@ -164,7 +177,7 @@ const mapStateToProps = state => {
         state.user.userLogTimeEntries.status +
         '\n'
     )
-    return
+    return null
   }
 
   return {

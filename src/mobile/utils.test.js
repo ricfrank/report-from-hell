@@ -1,4 +1,9 @@
-import { prevMonth, nextMonth } from './utils'
+import {
+  prevMonth,
+  nextMonth,
+  calculateFirstDayOfVisibleDates,
+  calculateLastDayOfVisibleDates
+} from './utils'
 
 describe('utils', () => {
   describe('prevMonth', () => {
@@ -16,6 +21,7 @@ describe('utils', () => {
       expect(prevMonth(currentMonthIndex3)).toBe('JAN')
     })
   })
+
   describe('nextMonth', () => {
     test('should calculate correctly next month', () => {
       const currentMonthIndex = 12
@@ -29,6 +35,32 @@ describe('utils', () => {
       const currentMonthIndex3 = 2
 
       expect(nextMonth(currentMonthIndex3)).toBe('MAR')
+    })
+  })
+
+  describe('calculateFirstDayOfVisibleDates', () => {
+    test('should calculate the first day of the visible calendar', () => {
+      const currentDate = '2018-07-20'
+
+      expect(calculateFirstDayOfVisibleDates(currentDate)).toBe('2018-06-25')
+
+      const currentDateNextMonth = '2018-08-20'
+
+      expect(calculateFirstDayOfVisibleDates(currentDateNextMonth)).toBe(
+        '2018-07-30'
+      )
+    })
+
+    test('should calculate the last day of the visible calendar', () => {
+      const currentDate = '2018-07-20'
+
+      expect(calculateLastDayOfVisibleDates(currentDate)).toBe('2018-08-05')
+
+      const currentDateNextMonth = '2018-08-20'
+
+      expect(calculateLastDayOfVisibleDates(currentDateNextMonth)).toBe(
+        '2018-09-02'
+      )
     })
   })
 })
