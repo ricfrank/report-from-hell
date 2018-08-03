@@ -3,11 +3,13 @@ import { ScrollView, Platform } from 'react-native'
 import { Calendar } from 'react-native-calendars'
 import { connect } from 'react-redux'
 import { isEmpty } from 'lodash'
+import moment from 'moment'
 import { getUserLogTimeEntries } from '../../core/actions'
 import Header from './Header'
 import NewLogButton from './NewLogButton'
 import Padding from './Padding'
 import LatestLogs from './LatestLogs'
+import DayInfo from './DayInfo'
 import Arrow from './Arrow'
 import {
   calculateFirstDayOfVisibleDates,
@@ -16,11 +18,12 @@ import {
 
 export class CalendarWidget extends Component {
   state = {
-    currentMonth: (new Date().getMonth() % 12) + 1,
+    currentMonth: new Date().getMonth() % 12 + 1,
     startOfVisibleDates: calculateFirstDayOfVisibleDates(
       this.props.currentTime
     ),
     endOfVisibleDates: calculateLastDayOfVisibleDates(this.props.currentTime),
+    selectedDay: {},
     newLogPressed: false,
     markedDates: null
   }
@@ -47,7 +50,14 @@ export class CalendarWidget extends Component {
     }
 
     this.setState({
-      markedDates: logEntries
+      markedDates: logEntries,
+      selectedDay: {
+        name: moment(day.dateString).format('dddd'),
+        date: day.day,
+        logs: this.props.userLogTimeEntries.filter(
+          log => log.spentOn === day.dateString
+        )
+      }
     })
   }
 
@@ -124,6 +134,12 @@ export class CalendarWidget extends Component {
             <LatestLogs logs={this.props.userLogTimeEntries} />
           </Padding>
         )}
+        {!isEmpty(this.state.selectedDay) &&
+          !this.state.newLogPressed && (
+            <Padding>
+              <DayInfo day={this.state.selectedDay} />
+            </Padding>
+          )}
       </ScrollView>
     )
   }
@@ -200,7 +216,6 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  { getUserLogTimeEntries }
-)(CalendarWidget)
+export default connect(mapStateToProps, { getUserLogTimeEntries })(
+  CalendarWidget
+)

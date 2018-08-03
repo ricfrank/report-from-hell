@@ -57,6 +57,30 @@ describe('CalendarWidget', () => {
     expect(bgColorBefore).not.toBe(bgColorAfter)
   })
 
+  test('should display visual info about log entries for any day that is clicked', () => {
+    const datestring = '2018-06-25'
+    const wrapper = mount(
+      <CalendarWidget
+        currentTime={'2018-07-10'}
+        user={{}}
+        userLogTimeEntries={[]}
+      />
+    )
+
+    expect(wrapper.find('DayInfo').length).toBe(0)
+
+    wrapper
+      .find('Calendar')
+      .find('Day')
+      .at(0)
+      .props()
+      .onPress(datestring)
+
+    wrapper.update()
+
+    expect(wrapper.find('DayInfo').length).toBe(1)
+  })
+
   test('should keep track of the start and end of the current visible dates', () => {
     const wrapper = mount(
       <CalendarWidget
