@@ -1,5 +1,5 @@
 import axios from 'axios'
-import _ from 'lodash'
+import { get, omit } from 'lodash'
 import localStorage from 'react-native-sync-localstorage'
 import { isBrowser, isReactNative } from '../utils'
 import createRedmineApiUrl from '../../factories/RedmineApiUrl'
@@ -23,6 +23,10 @@ import {
   errorToGetUserLogTimeEntries,
   showUserLogTimeEntries
 } from './userLogTimeEntries.action'
+import {
+  calculateFirstDayOfVisibleDates,
+  calculateLastDayOfVisibleDates
+} from '../utils'
 
 if (isBrowser()) {
   axios.defaults.headers.common['X-Redmine-API-Key'] = storage.getItem(
@@ -63,9 +67,9 @@ export function getProjectIssues(
         )
       )
       .then(res => {
-        const issueTotalCount = _.get(res.data, 'total_count', 0)
+        const issueTotalCount = get(res.data, 'total_count', 0)
         const issues = {
-          ..._.omit(res.data, 'total_count'),
+          ...omit(res.data, 'total_count'),
           totalCount: issueTotalCount
         }
         if (offset === 0) {
@@ -210,7 +214,10 @@ export const getLoggedUser = () => {
 
 export const getUserLogTimeEntries = (
   loggedUserId,
-  { start, finish } = { start: '2018-05-25', finish: '2018-07-06' }
+  { start, finish } = {
+    start: calculateFirstDayOfVisibleDates(new Date()),
+    finish: calculateLastDayOfVisibleDates(new Date())
+  }
 ) => {
   let timeEntriesUrl
   if (isBrowser()) {

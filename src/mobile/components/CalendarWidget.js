@@ -3,6 +3,7 @@ import { View, ScrollView, Platform } from 'react-native'
 import { Calendar } from 'react-native-calendars'
 import { connect } from 'react-redux'
 import { isEmpty } from 'lodash'
+import { getUserLogTimeEntries } from '../../core/actions'
 import Header from './Header'
 import NewLogButton from './NewLogButton'
 import LatestLogs from './LatestLogs'
@@ -10,7 +11,7 @@ import Arrow from './Arrow'
 import {
   calculateFirstDayOfVisibleDates,
   calculateLastDayOfVisibleDates
-} from '../utils'
+} from '../../core/utils'
 
 export class CalendarWidget extends Component {
   state = {
@@ -58,14 +59,22 @@ export class CalendarWidget extends Component {
           theme={themes.overrides}
           firstDay={1}
           onMonthChange={month => {
-            this.setState({
-              startOfVisibleDates: calculateFirstDayOfVisibleDates(
-                month.dateString
-              ),
-              endOfVisibleDates: calculateLastDayOfVisibleDates(
-                month.dateString
-              )
-            })
+            this.setState(
+              {
+                startOfVisibleDates: calculateFirstDayOfVisibleDates(
+                  month.dateString
+                ),
+                endOfVisibleDates: calculateLastDayOfVisibleDates(
+                  month.dateString
+                )
+              },
+              () => {
+                this.props.getUserLogTimeEntries(this.props.user.id, {
+                  start: this.state.startOfVisibleDates,
+                  finish: this.state.endOfVisibleDates
+                })
+              }
+            )
           }}
           disableMonthChange={true}
           onDayPress={day => {
@@ -192,5 +201,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  null
+  { getUserLogTimeEntries }
 )(CalendarWidget)
