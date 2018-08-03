@@ -5,12 +5,12 @@ import { connect } from 'react-redux'
 import { isEmpty } from 'lodash'
 import moment from 'moment'
 import { getUserLogTimeEntries } from '../../core/actions'
-import Header from './Header'
-import NewLogButton from './NewLogButton'
-import Padding from './Padding'
-import LatestLogs from './LatestLogs'
-import DayInfo from './DayInfo'
-import Arrow from './Arrow'
+import Header from '../components/Header'
+import NewLogButton from '../components/NewLogButton'
+import Padding from '../components/Padding'
+import LatestLogs from '../components/LatestLogs'
+import DayInfo from '../components/DayInfo'
+import Arrow from '../components/Arrow'
 import {
   calculateFirstDayOfVisibleDates,
   calculateLastDayOfVisibleDates
