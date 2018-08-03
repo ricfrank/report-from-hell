@@ -1,7 +1,12 @@
 import axios from 'axios'
 import { get, omit } from 'lodash'
 import localStorage from 'react-native-sync-localstorage'
-import { isBrowser, isReactNative } from '../utils'
+import {
+  isBrowser,
+  isReactNative,
+  calculateFirstDayOfVisibleDates,
+  calculateLastDayOfVisibleDates
+} from '../utils'
 import createRedmineApiUrl from '../../factories/RedmineApiUrl'
 import {
   AUTH_LOCAL_STORAGE_KEY,
@@ -23,10 +28,6 @@ import {
   errorToGetUserLogTimeEntries,
   showUserLogTimeEntries
 } from './userLogTimeEntries.action'
-import {
-  calculateFirstDayOfVisibleDates,
-  calculateLastDayOfVisibleDates
-} from '../utils'
 
 if (isBrowser()) {
   axios.defaults.headers.common['X-Redmine-API-Key'] = storage.getItem(
