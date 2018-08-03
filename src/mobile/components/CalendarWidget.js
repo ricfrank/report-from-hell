@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import { View, ScrollView, Platform } from 'react-native'
+import { ScrollView, Platform } from 'react-native'
 import { Calendar } from 'react-native-calendars'
 import { connect } from 'react-redux'
 import { isEmpty } from 'lodash'
 import { getUserLogTimeEntries } from '../../core/actions'
 import Header from './Header'
 import NewLogButton from './NewLogButton'
+import Padding from './Padding'
 import LatestLogs from './LatestLogs'
 import Arrow from './Arrow'
 import {
@@ -119,9 +120,9 @@ export class CalendarWidget extends Component {
           pressed={this.state.newLogPressed}
         />
         {this.state.newLogPressed && (
-          <View style={{ padding: 32 }}>
+          <Padding>
             <LatestLogs logs={this.props.userLogTimeEntries} />
-          </View>
+          </Padding>
         )}
       </ScrollView>
     )
