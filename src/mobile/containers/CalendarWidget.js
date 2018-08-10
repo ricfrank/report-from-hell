@@ -45,8 +45,14 @@ export class CalendarWidget extends Component {
     const logEntries = this.getUserLogTimeEntries()
     logEntries[day.dateString] = {
       ...logEntries[day.dateString],
-      selected: true,
-      selectedColor: 'blue'
+      customStyles: {
+        container: {
+          backgroundColor: 'blue'
+        },
+        text: {
+          color: 'white'
+        }
+      }
     }
 
     this.setState({
@@ -115,6 +121,7 @@ export class CalendarWidget extends Component {
                   : this.state.currentMonth + 1
             })
           }}
+          markingType={'custom'}
           markedDates={
             !this.state.markedDates
               ? this.getUserLogTimeEntries()
