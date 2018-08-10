@@ -37,7 +37,10 @@ class Home extends React.Component {
   }
 
   render() {
-    const userLogTimeEntries = this.props.userLogTimeEntries.map(timeEntry => {
+    const userLogTimeEntries = _.uniqBy(
+      this.props.userLogTimeEntries,
+      'issue.id'
+    ).map(timeEntry => {
       return (
         <LogTimeEntry
           key={'logTimeEntry-' + timeEntry.id}
@@ -66,9 +69,7 @@ class Home extends React.Component {
             <div className="page-header">
               <h1>Outatime</h1>
               <p className="lead">Welcome back {this.props.user.firstname}!</p>
-              <p className="">
-                See your last <strong>20</strong> time entries
-              </p>
+              <p className="">See your last time entries</p>
             </div>
           </div>
           <div className="col-md-3">
