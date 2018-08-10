@@ -1,5 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { ExternalLink } from './ExternalLink.jsx'
+import moment from 'moment'
 
 class Issue extends React.Component {
   constructor(props) {
@@ -72,6 +74,7 @@ class Issue extends React.Component {
                 type="date"
                 className="form-control"
                 placeholder="Date"
+                value={moment().format('YYYY-MM-DD')}
                 ref={value => {
                   this.date = value
                 }}
@@ -124,6 +127,22 @@ class Issue extends React.Component {
             </div>
           </div>
         </form>
+        <ul className="issue-meta">
+          <li>
+            Edit issue:{' '}
+            <ExternalLink
+              className="edit-issue-link"
+              target={'_blank'}
+              href={`${ENDPOINT}/issues/${this.props.id}`}
+            >
+              {this.props.id}
+            </ExternalLink>
+          </li>
+          <li>
+            Description:{' '}
+            <span className="issue-comment">{this.props.description}</span>
+          </li>
+        </ul>
       </li>
     )
   }

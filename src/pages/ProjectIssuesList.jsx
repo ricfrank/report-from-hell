@@ -52,6 +52,7 @@ class ProjectIssuesList extends React.Component {
           key={'projectIssues-' + issue.id}
           id={issue.id}
           subject={issue.subject}
+          description={issue.description}
           onLogTimeEntry={this.props.onLogTimeEntry}
           onLogTimeEntryDone={this.props.onLogTimeEntryDone}
           loggedIssueId={this.props.loggedIssueId}
