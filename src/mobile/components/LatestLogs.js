@@ -1,12 +1,23 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, Button, StyleSheet } from 'react-native'
 import Log from './Log'
 
-const LatestLogs = props => {
+const LatestLogs = ({ logs }) => {
   return (
     <View>
       <Text style={styles.title}>LATEST</Text>
-      {props.logs.map(log => <Log key={log.id} log={log} />)}
+      {logs &&
+        logs.map(log => (
+          <View key={log.id}>
+            <Log log={log} />
+            <Button
+              onPress={() => {}}
+              title="LOG AGAIN"
+              color="#403A60"
+              accessibilityLabel="Learn more about this purple button"
+            />
+          </View>
+        ))}
     </View>
   )
 }

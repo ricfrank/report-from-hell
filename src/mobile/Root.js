@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
 import Authentication from './components/Authentication'
-import CalendarWidget from './components/CalendarWidget'
+import CalendarWidget from './containers/CalendarWidget'
 
 export default class Root extends Component {
   constructor(props) {

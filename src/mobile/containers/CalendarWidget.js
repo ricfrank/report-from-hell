@@ -1,18 +1,29 @@
 import React, { Component } from 'react'
-import { View, ScrollView, Platform } from 'react-native'
+import { ScrollView, Platform } from 'react-native'
 import { Calendar } from 'react-native-calendars'
 import { connect } from 'react-redux'
 import { isEmpty } from 'lodash'
-import Header from './Header'
-import NewLogButton from './NewLogButton'
-import LatestLogs from './LatestLogs'
-import Arrow from './Arrow'
+import moment from 'moment'
+import { getUserLogTimeEntries } from '../../core/actions'
+import Header from '../components/Header'
+import NewLogButton from '../components/NewLogButton'
+import Padding from '../components/Padding'
+import LatestLogs from '../components/LatestLogs'
+import DayInfo from '../components/DayInfo'
+import Arrow from '../components/Arrow'
+import {
+  calculateFirstDayOfVisibleDates,
+  calculateLastDayOfVisibleDates
+} from '../../core/utils'
 
 export class CalendarWidget extends Component {
   state = {
-    currentMonth: (new Date().getMonth() % 12) + 1,
-    startOfVisibleDates: '2018-06-25',
-    endOfVisibleDates: '2018-08-05',
+    currentMonth: new Date().getMonth() % 12 + 1,
+    startOfVisibleDates: calculateFirstDayOfVisibleDates(
+      this.props.currentTime
+    ),
+    endOfVisibleDates: calculateLastDayOfVisibleDates(this.props.currentTime),
+    selectedDay: {},
     newLogPressed: false,
     markedDates: null
   }
@@ -39,7 +50,14 @@ export class CalendarWidget extends Component {
     }
 
     this.setState({
-      markedDates: logEntries
+      markedDates: logEntries,
+      selectedDay: {
+        name: moment(day.dateString).format('dddd'),
+        date: day.day,
+        logs: this.props.userLogTimeEntries.filter(
+          log => log.spentOn === day.dateString
+        )
+      }
     })
   }
 
@@ -52,7 +70,22 @@ export class CalendarWidget extends Component {
           theme={themes.overrides}
           firstDay={1}
           onMonthChange={month => {
-            console.log('month changed', month)
+            this.setState(
+              {
+                startOfVisibleDates: calculateFirstDayOfVisibleDates(
+                  month.dateString
+                ),
+                endOfVisibleDates: calculateLastDayOfVisibleDates(
+                  month.dateString
+                )
+              },
+              () => {
+                this.props.getUserLogTimeEntries(this.props.user.id, {
+                  start: this.state.startOfVisibleDates,
+                  finish: this.state.endOfVisibleDates
+                })
+              }
+            )
           }}
           disableMonthChange={true}
           onDayPress={day => {
@@ -97,10 +130,16 @@ export class CalendarWidget extends Component {
           pressed={this.state.newLogPressed}
         />
         {this.state.newLogPressed && (
-          <View style={{ padding: 32 }}>
+          <Padding>
             <LatestLogs logs={this.props.userLogTimeEntries} />
-          </View>
+          </Padding>
         )}
+        {!isEmpty(this.state.selectedDay) &&
+          !this.state.newLogPressed && (
+            <Padding>
+              <DayInfo day={this.state.selectedDay} />
+            </Padding>
+          )}
       </ScrollView>
     )
   }
@@ -155,7 +194,7 @@ const themes = {
 const mapStateToProps = state => {
   if (!isEmpty(state.user.error)) {
     alert(state.user.error.data + '\n' + state.user.error.status + '\n')
-    return
+    return null
   }
   if (!isEmpty(state.userLogTimeEntries.error)) {
     alert(
@@ -164,7 +203,7 @@ const mapStateToProps = state => {
         state.user.userLogTimeEntries.status +
         '\n'
     )
-    return
+    return null
   }
 
   return {
@@ -177,7 +216,6 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  null
-)(CalendarWidget)
+export default connect(mapStateToProps, { getUserLogTimeEntries })(
+  CalendarWidget
+)

@@ -24,7 +24,11 @@ export const Authentication = props => {
             onChangeText={props.onChangeText}
             value={props.text}
           />
-          <Button title="Send" onPress={() => props.onApiKeySend(props.text)} />
+          <Button
+            title="Send"
+            onPress={() => props.onApiKeySend(props.text)}
+            disabled={!props.text}
+          />
         </View>
       </Modal>
     </View>
@@ -43,7 +47,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Authentication)
+export default connect(mapStateToProps, mapDispatchToProps)(Authentication)

@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-import { prevMonth, nextMonth } from '../utils'
+import { prevMonth, nextMonth } from '../../core/utils'
 
 const Arrow = props =>
   props.direction === 'left' ? (

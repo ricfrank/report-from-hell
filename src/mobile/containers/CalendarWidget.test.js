@@ -12,7 +12,7 @@ describe('CalendarWidget', () => {
   test('should render without crashing', () => {
     shallow(
       <CalendarWidget
-        currentTime={new Date(Date.now())}
+        currentTime={new Date()}
         user={{}}
         userLogTimeEntries={[]}
       />
@@ -22,7 +22,7 @@ describe('CalendarWidget', () => {
   test('should change NewLogButton icon when NewLogButton is pressed', () => {
     const wrapper = shallow(
       <CalendarWidget
-        currentTime={new Date(Date.now())}
+        currentTime={new Date()}
         user={{}}
         userLogTimeEntries={[]}
       />
@@ -36,7 +36,7 @@ describe('CalendarWidget', () => {
   test('should highlight any day that is clicked', () => {
     const wrapper = mount(
       <CalendarWidget
-        currentTime={new Date(Date.now())}
+        currentTime={new Date()}
         user={{}}
         userLogTimeEntries={[]}
       />
@@ -57,10 +57,34 @@ describe('CalendarWidget', () => {
     expect(bgColorBefore).not.toBe(bgColorAfter)
   })
 
+  test('should display visual info about log entries for any day that is clicked', () => {
+    const datestring = '2018-06-25'
+    const wrapper = mount(
+      <CalendarWidget
+        currentTime={'2018-07-10'}
+        user={{}}
+        userLogTimeEntries={[]}
+      />
+    )
+
+    expect(wrapper.find('DayInfo').length).toBe(0)
+
+    wrapper
+      .find('Calendar')
+      .find('Day')
+      .at(0)
+      .props()
+      .onPress(datestring)
+
+    wrapper.update()
+
+    expect(wrapper.find('DayInfo').length).toBe(1)
+  })
+
   test('should keep track of the start and end of the current visible dates', () => {
     const wrapper = mount(
       <CalendarWidget
-        currentTime={new Date(Date.now())}
+        currentTime={new Date()}
         user={{}}
         userLogTimeEntries={[]}
       />
@@ -79,21 +103,22 @@ describe('CalendarWidget', () => {
         .props().date.dateString
     )
 
-    const currentTime = wrapper.prop('currentTime')
-    const nextMonth = new Date(currentTime.setMonth(currentTime.getMonth() + 1))
+    const wrapperNextMonth = mount(
+      <CalendarWidget
+        currentTime={new Date(new Date().setMonth(new Date().getMonth() + 1))}
+        user={{}}
+        userLogTimeEntries={[]}
+      />
+    )
 
-    wrapper.setProps({
-      currentTime: nextMonth
-    })
-
-    expect(wrapper.state().startOfVisibleDates).toBe(
-      wrapper
+    expect(wrapperNextMonth.state().startOfVisibleDates).toBe(
+      wrapperNextMonth
         .find('Day')
         .first()
         .props().date.dateString
     )
-    expect(wrapper.state().endOfVisibleDates).toBe(
-      wrapper
+    expect(wrapperNextMonth.state().endOfVisibleDates).toBe(
+      wrapperNextMonth
         .find('Day')
         .last()
         .props().date.dateString
