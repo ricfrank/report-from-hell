@@ -4,17 +4,21 @@ import { Calendar } from 'react-native-calendars'
 import { connect } from 'react-redux'
 import { isEmpty } from 'lodash'
 import moment from 'moment'
-import { getUserLogTimeEntries } from '../../core/actions'
-import Header from '../components/Header'
-import NewLogButton from '../components/NewLogButton'
-import Padding from '../components/Padding'
-import LatestLogs from '../components/LatestLogs'
-import DayInfo from '../components/DayInfo'
-import Arrow from '../components/Arrow'
+import { getUserLogTimeEntries } from '../../../core/actions'
+import Header from '../../components/Header'
+import NewLogButton from '../../components/NewLogButton'
+import Padding from '../../components/Padding'
+import LatestLogs from '../../components/LatestLogs'
+import DayInfo from '../../components/DayInfo'
+import Arrow from '../../components/Arrow'
 import {
   calculateFirstDayOfVisibleDates,
   calculateLastDayOfVisibleDates
-} from '../../core/utils'
+} from '../../../core/utils'
+import {
+  transformToMultipleDailyLogEntries,
+  transformToMarkedDatesWithAppropriateColors
+} from './helpers'
 
 export class CalendarWidget extends Component {
   state = {
@@ -29,24 +33,22 @@ export class CalendarWidget extends Component {
   }
 
   getUserLogTimeEntries() {
-    const logEntries = {}
-    for (let log of this.props.userLogTimeEntries) {
-      logEntries[log.spentOn] = {
-        selected: true,
-        color: 'green',
-        selectedColor: 'green'
-      }
-    }
-
-    return logEntries
+    return transformToMarkedDatesWithAppropriateColors(
+      transformToMultipleDailyLogEntries(this.props.userLogTimeEntries)
+    )
   }
 
   highlightSelectedDay(day) {
     const logEntries = this.getUserLogTimeEntries()
     logEntries[day.dateString] = {
-      ...logEntries[day.dateString],
-      selected: true,
-      selectedColor: 'blue'
+      customStyles: {
+        container: {
+          backgroundColor: 'blue'
+        },
+        text: {
+          color: 'white'
+        }
+      }
     }
 
     this.setState({
@@ -115,6 +117,7 @@ export class CalendarWidget extends Component {
                   : this.state.currentMonth + 1
             })
           }}
+          markingType={'custom'}
           markedDates={
             !this.state.markedDates
               ? this.getUserLogTimeEntries()

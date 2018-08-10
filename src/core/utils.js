@@ -1,4 +1,9 @@
 import moment from 'moment'
+import {
+  NOT_BILLABLE_PROJECT_IDS,
+  HOLIDAY_ISSUE_IDS,
+  mandatoryDailyWorkHours
+} from './constants'
 
 export const isBrowser = () => typeof document !== 'undefined'
 export const isReactNative = () =>
@@ -110,5 +115,75 @@ export const calculateLastDayOfVisibleDates = date => {
       return lastDay.add(2, 'days').format('YYYY-MM-DD')
     case 'Saturday':
       return lastDay.add(1, 'days').format('YYYY-MM-DD')
+  }
+}
+
+const isHolidayEntry = issueId => {
+  return HOLIDAY_ISSUE_IDS.includes(issueId)
+}
+
+const isBillableEntry = projectId => {
+  return !NOT_BILLABLE_PROJECT_IDS.includes(projectId)
+}
+
+const hasMissingHours = (total, base) => {
+  return total < base
+}
+
+const getBillableAndTotalHours = entries => {
+  let billable = 0
+  let total = 0
+  for (let entry of entries) {
+    if (isBillableEntry(entry.projectId)) {
+      billable += entry.hours
+    }
+    total += entry.hours
+  }
+
+  return {
+    billable,
+    total
+  }
+}
+
+const calculateHourPercentage = (billable, base) => {
+  return billable / base
+}
+
+const isGood = percentage => {
+  return percentage >= 0.8
+}
+
+const isWarning = percentage => {
+  return percentage >= 0.6 && percentage < 0.8
+}
+
+const isBad = percentage => {
+  return percentage < 0.6
+}
+
+export const colorize = dayEntries => {
+  if (isHolidayEntry(dayEntries[0].issue.id)) {
+    return 'purple'
+  }
+
+  const { billable, total } = getBillableAndTotalHours(dayEntries)
+
+  if (hasMissingHours(total, mandatoryDailyWorkHours)) {
+    return 'red'
+  }
+
+  const percentage = calculateHourPercentage(billable, mandatoryDailyWorkHours)
+
+  if (isGood(percentage)) {
+    return 'green'
+  }
+
+  if (isWarning(percentage)) {
+    return 'yellow'
+  }
+
+  if (isBad(percentage)) {
+    return 'orange'
   }
 }

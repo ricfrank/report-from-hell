@@ -81,6 +81,71 @@ describe('CalendarWidget', () => {
     expect(wrapper.find('DayInfo').length).toBe(1)
   })
 
+  test('should display different colors according to how many hours someone worked daily', () => {
+    const wrapper = mount(
+      <CalendarWidget
+        currentTime={'2018-07-10'}
+        user={{}}
+        userLogTimeEntries={[
+          {
+            id: 40807,
+            activityId: 9,
+            projectId: 4,
+            projectName: 'ideato office',
+            issue: {
+              id: 11297,
+              subject: 'Academy - formazione interna'
+            },
+            hours: 8,
+            comments: 'Outatime app',
+            spentOn: '2018-08-10'
+          },
+          {
+            id: 40811,
+            activityId: 9,
+            projectId: 208,
+            projectName: 'Wally',
+            issue: {
+              id: 12863,
+              subject: 'Attività progetto eidoo'
+            },
+            hours: 4,
+            comments: '',
+            spentOn: '2018-08-09'
+          },
+          {
+            id: 40810,
+            activityId: 9,
+            projectId: 208,
+            projectName: 'Wally',
+            issue: {
+              id: 12863,
+              subject: 'Attività progetto eidoo'
+            },
+            hours: 4,
+            comments: '',
+            spentOn: '2018-08-08'
+          },
+          {
+            id: 40809,
+            activityId: 9,
+            projectId: 4,
+            projectName: 'Wally',
+            issue: {
+              id: 11297,
+              subject: 'Academy - formazione interna'
+            },
+            hours: 4,
+            comments: 'Outatime app',
+            spentOn: '2018-08-08'
+          }
+        ]}
+      />
+    )
+
+    // console.log(wrapper.props())
+  })
+
   test('should keep track of the start and end of the current visible dates', () => {
     const wrapper = mount(
       <CalendarWidget
