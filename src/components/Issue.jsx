@@ -1,12 +1,18 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { ExternalLink } from './ExternalLink.jsx'
-import moment from 'moment'
+import moment from 'moment/moment'
 
 class Issue extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { show: 'none' }
+    this.state = {
+      show: 'none',
+      timeEntryForm: {
+        date: moment().format('YYYY-MM-DD'),
+        hours: 8
+      }
+    }
   }
 
   toggleTimeLogEntry() {
@@ -15,6 +21,18 @@ class Issue extends React.Component {
       return
     }
     this.setState({ show: 'block' })
+  }
+
+  changeDate(date) {
+    this.setState({
+      timeEntryForm: { ...this.state.timeEntryForm, date }
+    })
+  }
+
+  changeHours(hours) {
+    this.setState({
+      timeEntryForm: { ...this.state.timeEntryForm, hours }
+    })
   }
 
   render() {
@@ -46,7 +64,6 @@ class Issue extends React.Component {
             this.toggleTimeLogEntry()
           }}
         >
-          <span className="issue-time">{this.props.id}</span>{' '}
           <span className="issue-title">{this.props.subject}</span>
         </h4>
         <form
@@ -56,14 +73,15 @@ class Issue extends React.Component {
 
             this.props.onLogTimeEntry(
               this.props.id,
-              this.date.value,
-              this.hours.value,
+              this.state.timeEntryForm.date,
+              this.state.timeEntryForm.hours,
               this.comment.value,
               this.activity.value
             )
 
-            this.date.value = ''
-            this.hours.value = ''
+            this.setState({
+              timeEntryForm: { date: moment().format('YYYY-MM-DD'), hours: 8 }
+            })
             this.comment.value = ''
             this.activity.value = ''
           }}
@@ -74,9 +92,9 @@ class Issue extends React.Component {
                 type="date"
                 className="form-control"
                 placeholder="Date"
-                value={moment().format('YYYY-MM-DD')}
-                ref={value => {
-                  this.date = value
+                value={this.state.timeEntryForm.date}
+                onChange={event => {
+                  this.changeDate(event.target.value)
                 }}
                 required="required"
               />
@@ -88,8 +106,9 @@ class Issue extends React.Component {
                 placeholder="Time"
                 step="0.5"
                 pattern="[0-8]?(\.[0,5])?"
-                ref={value => {
-                  this.hours = value
+                value={this.state.timeEntryForm.hours}
+                onChange={event => {
+                  this.changeHours(event.target.value)
                 }}
                 required="required"
               />
