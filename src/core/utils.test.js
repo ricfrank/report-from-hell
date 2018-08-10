@@ -2,7 +2,8 @@ import {
   prevMonth,
   nextMonth,
   calculateFirstDayOfVisibleDates,
-  calculateLastDayOfVisibleDates
+  calculateLastDayOfVisibleDates,
+  colorize
 } from './utils'
 
 describe('utils', () => {
@@ -61,6 +62,144 @@ describe('utils', () => {
       expect(calculateLastDayOfVisibleDates(currentDateNextMonth)).toBe(
         '2018-09-02'
       )
+    })
+  })
+
+  describe('colorize', () => {
+    test('should give us green if billable hours are more than 80% of daily hours', () => {
+      const entries = [
+        {
+          id: 40810,
+          activityId: 9,
+          projectId: 208,
+          projectName: 'Wally',
+          issue: {
+            id: 12863,
+            subject: 'Attività progetto eidoo'
+          },
+          hours: 8,
+          comments: '',
+          spentOn: '2018-08-08'
+        }
+      ]
+
+      expect(colorize(entries)).toBe('green')
+    })
+
+    test('should give us yellow if billable hours are more than 60% and less than 80% of daily hours', () => {
+      const entries = [
+        {
+          id: 40807,
+          activityId: 9,
+          projectId: 4,
+          projectName: 'ideato office',
+          issue: {
+            id: 11297,
+            subject: 'Academy - formazione interna'
+          },
+          hours: 2,
+          comments: 'Outatime app'
+        },
+        {
+          id: 40810,
+          activityId: 9,
+          projectId: 208,
+          projectName: 'Wally',
+          issue: {
+            id: 12863,
+            subject: 'Attività progetto eidoo'
+          },
+          hours: 6,
+          comments: '',
+          spentOn: '2018-08-08'
+        }
+      ]
+
+      expect(colorize(entries)).toBe('yellow')
+    })
+
+    test('should give us orange if daily work hours are more than 60% of daily hours', () => {
+      const entries = [
+        {
+          id: 40807,
+          activityId: 9,
+          projectId: 4,
+          projectName: 'ideato office',
+          issue: {
+            id: 11297,
+            subject: 'Academy - formazione interna'
+          },
+          hours: 6,
+          comments: 'Outatime app'
+        },
+        {
+          id: 40810,
+          activityId: 9,
+          projectId: 208,
+          projectName: 'Wally',
+          issue: {
+            id: 12863,
+            subject: 'Attività progetto eidoo'
+          },
+          hours: 2,
+          comments: '',
+          spentOn: '2018-08-08'
+        }
+      ]
+
+      expect(colorize(entries)).toBe('orange')
+    })
+
+    test('should give us red if daily work hours are less than 8', () => {
+      const entries = [
+        {
+          id: 40807,
+          activityId: 9,
+          projectId: 4,
+          projectName: 'ideato office',
+          issue: {
+            id: 11297,
+            subject: 'Academy - formazione interna'
+          },
+          hours: 2,
+          comments: 'Outatime app'
+        },
+        {
+          id: 40810,
+          activityId: 9,
+          projectId: 208,
+          projectName: 'Wally',
+          issue: {
+            id: 12863,
+            subject: 'Attività progetto eidoo'
+          },
+          hours: 3,
+          comments: '',
+          spentOn: '2018-08-08'
+        }
+      ]
+
+      expect(colorize(entries)).toBe('red')
+    })
+
+    test('should give us purple for vacation', () => {
+      const entries = [
+        {
+          id: 40884,
+          activityId: 9,
+          projectId: 4,
+          projectName: 'ideato office',
+          issue: {
+            id: 12362,
+            subject: 'Permessi e ferie'
+          },
+          hours: 8,
+          comments: 'Ferie',
+          spentOn: '2018-08-17'
+        }
+      ]
+
+      expect(colorize(entries)).toBe('purple')
     })
   })
 })
