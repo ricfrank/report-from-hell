@@ -15,6 +15,10 @@ import {
   calculateFirstDayOfVisibleDates,
   calculateLastDayOfVisibleDates
 } from '../../../core/utils'
+import {
+  transformToMultipleDailyLogEntries,
+  transformToMarkedDatesWithAppropriateColors
+} from './helpers'
 
 export class CalendarWidget extends Component {
   state = {
@@ -29,21 +33,9 @@ export class CalendarWidget extends Component {
   }
 
   getUserLogTimeEntries() {
-    const logEntries = {}
-    for (let log of this.props.userLogTimeEntries) {
-      logEntries[log.spentOn] = {
-        customStyles: {
-          container: {
-            backgroundColor: 'red'
-          },
-          text: {
-            color: 'white'
-          }
-        }
-      }
-    }
-
-    return logEntries
+    return transformToMarkedDatesWithAppropriateColors(
+      transformToMultipleDailyLogEntries(this.props.userLogTimeEntries)
+    )
   }
 
   highlightSelectedDay(day) {

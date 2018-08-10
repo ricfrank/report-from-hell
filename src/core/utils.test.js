@@ -98,7 +98,8 @@ describe('utils', () => {
             subject: 'Academy - formazione interna'
           },
           hours: 2,
-          comments: 'Outatime app'
+          comments: 'Outatime app',
+          spentOn: '2018-08-08'
         },
         {
           id: 40810,
@@ -130,7 +131,8 @@ describe('utils', () => {
             subject: 'Academy - formazione interna'
           },
           hours: 6,
-          comments: 'Outatime app'
+          comments: 'Outatime app',
+          spentOn: '2018-08-08'
         },
         {
           id: 40810,
@@ -162,7 +164,8 @@ describe('utils', () => {
             subject: 'Academy - formazione interna'
           },
           hours: 2,
-          comments: 'Outatime app'
+          comments: 'Outatime app',
+          spentOn: '2018-08-08'
         },
         {
           id: 40810,
