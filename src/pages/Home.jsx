@@ -26,7 +26,7 @@ class Home extends React.Component {
       })
       .catch(error => {})
     this.state = {
-      test: false
+      showMessage: false
     }
     this.showMessage = this.showMessage.bind(this)
     this.hideMessage = this.hideMessage.bind(this)
@@ -43,14 +43,14 @@ class Home extends React.Component {
 
   showMessage() {
     this.setState({
-      test: true,
+      showMessage: true,
       className: 'rfh-logged-issue-msg'
     })
   }
 
   hideMessage() {
     this.setState({
-      test: false
+      showMessage: false
     })
   }
 
@@ -112,7 +112,7 @@ class Home extends React.Component {
         </div>
         <div
           id="messages"
-          className={this.state.test ? this.state.className : ''}
+          className={this.state.showMessage ? this.state.className : ''}
         >
           New entry just recorded!
         </div>
