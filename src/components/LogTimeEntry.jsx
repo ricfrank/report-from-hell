@@ -29,6 +29,21 @@ class LogTimeEntry extends React.Component {
     })
   }
 
+  componentDidMount() {
+    if (this.isLoggedTimeEntry()) {
+      this.props.show()
+
+      setTimeout(() => {
+        this.props.onLogTimeEntryDone()
+        this.props.hide()
+      }, 3000)
+    }
+  }
+
+  isLoggedTimeEntry() {
+    return this.props.loggedTimeEntryId === this.props.id
+  }
+
   toggleTimeLogEntry() {
     if (this.state.show === 'block') {
       this.setState({ show: 'none' })
@@ -62,15 +77,6 @@ class LogTimeEntry extends React.Component {
   }
 
   render() {
-    let loggedTimeEntryClass = ''
-    if (this.isLoggedTimeEntry()) {
-      loggedTimeEntryClass = 'rfh-logged-issue-msg'
-
-      setTimeout(() => {
-        this.props.onLogTimeEntryDone()
-      }, 3000)
-    }
-
     const options = this.props.projectActivities.map(a => {
       return (
         <option key={a.id} value={a.id}>
@@ -80,7 +86,7 @@ class LogTimeEntry extends React.Component {
     })
 
     return (
-      <li className={'list-group-item ' + loggedTimeEntryClass}>
+      <li className={'list-group-item'}>
         <div className={'row'}>
           <div className={'col-md-10'}>
             <h4 className="rfh-issue-title">
@@ -203,10 +209,6 @@ class LogTimeEntry extends React.Component {
         </form>
       </li>
     )
-  }
-
-  isLoggedTimeEntry() {
-    return this.props.loggedTimeEntryId === this.props.id
   }
 }
 
