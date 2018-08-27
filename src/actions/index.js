@@ -190,7 +190,7 @@ export const getUserLogTimeEntries = loggedUserId => {
       .get(
         createRedmineApiUrl(
           '/time_entries.json',
-          '?user_id=' + loggedUserId + '&limit=60'
+          '?user_id=' + loggedUserId + '&limit=30'
         )
       )
       .then(res => {

@@ -31,12 +31,12 @@ class LogTimeEntry extends React.Component {
 
   componentDidMount() {
     if (this.isLoggedTimeEntry()) {
-      this.props.show()
+      this.props.show(this.props.subject, this.props.issueId)
 
       setTimeout(() => {
         this.props.onLogTimeEntryDone()
         this.props.hide()
-      }, 3000)
+      }, 5000)
     }
   }
 
@@ -91,7 +91,7 @@ class LogTimeEntry extends React.Component {
           <div className={'col-md-10'}>
             <h4 className="rfh-issue-title">
               <span className="issue-date">{this.props.logDate}</span>{' '}
-              <span className="issue-divider"># </span>
+              {this.props.logDate && <span className="issue-divider"># </span>}
               <span className="issue-project">
                 {this.props.projectName}
               </span>{' '}
@@ -109,13 +109,17 @@ class LogTimeEntry extends React.Component {
                   {this.props.issueId}
                 </ExternalLink>
               </li>
-              <li>
-                Time: <span className="issue-time">{this.props.hours}h</span>
-              </li>
-              <li>
-                Comment:{' '}
-                <span className="issue-comment">{this.props.comment}</span>
-              </li>
+              {this.props.hours && (
+                <li>
+                  Time: <span className="issue-time">{this.props.hours}h</span>
+                </li>
+              )}
+              {this.props.comment && (
+                <li>
+                  Comment:{' '}
+                  <span className="issue-comment">{this.props.comment}</span>
+                </li>
+              )}
             </ul>
           </div>
           <div className={'col-md-2'}>

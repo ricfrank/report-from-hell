@@ -26,10 +26,16 @@ class Home extends React.Component {
       })
       .catch(error => {})
     this.state = {
-      showMessage: false
+      showMessage: false,
+      showUnique: false,
+      selectedIssue: {
+        subject: '',
+        id: ''
+      }
     }
     this.showMessage = this.showMessage.bind(this)
     this.hideMessage = this.hideMessage.bind(this)
+    this.toggleEntries = this.toggleEntries.bind(this)
   }
 
   getActivitiesFromProjectId(id) {
@@ -41,10 +47,14 @@ class Home extends React.Component {
     return project ? project.activities : []
   }
 
-  showMessage() {
+  showMessage(subject, id) {
     this.setState({
       showMessage: true,
-      className: 'rfh-logged-issue-msg'
+      className: 'rfh-logged-issue-msg',
+      selectedIssue: {
+        subject,
+        id
+      }
     })
   }
 
@@ -54,8 +64,72 @@ class Home extends React.Component {
     })
   }
 
+  toggleEntries() {
+    if (!this.state.showUnique) {
+      this.setState({
+        showUnique: true
+      })
+
+      return
+    }
+
+    this.setState({
+      showUnique: false
+    })
+  }
+
+  showEntriesFilterButton() {
+    return (
+      <ul className="nav nav-tabs">
+        <li
+          role="presentation"
+          className={!this.state.showUnique ? 'active' : ''}
+        >
+          <a href="#" onClick={this.toggleEntries}>
+            See last 30 entries
+          </a>
+        </li>
+        <li
+          role="presentation"
+          className={this.state.showUnique ? 'active' : ''}
+        >
+          <a href="#" onClick={this.toggleEntries}>
+            Last used issues
+          </a>
+        </li>
+      </ul>
+    )
+  }
+
   render() {
-    const userLogTimeEntries = _.uniqBy(
+    const userLogTimeEntries = this.props.userLogTimeEntries.map(timeEntry => {
+      return (
+        <div>
+          <LogTimeEntry
+            key={'logTimeEntry-' + timeEntry.id}
+            loggedTimeEntryId={this.props.loggedTimeEntryId}
+            id={timeEntry.id}
+            issueId={timeEntry.issue.id}
+            activityId={timeEntry.activityId}
+            subject={timeEntry.issue.subject}
+            comment={timeEntry.comments}
+            hours={timeEntry.hours}
+            logDate={timeEntry.spentOn}
+            projectName={timeEntry.projectName}
+            projectActivities={this.getActivitiesFromProjectId(
+              timeEntry.projectId
+            )}
+            onLogTimeEntry={this.props.onLogTimeEntry}
+            onLogTimeEntryDone={this.props.onLogTimeEntryDone}
+            loggedIssueId={this.props.loggedIssueId}
+            show={this.showMessage}
+            hide={this.hideMessage}
+          />
+        </div>
+      )
+    })
+
+    const userLogTimeUniqueEntries = _.uniqBy(
       this.props.userLogTimeEntries,
       'issue.id'
     ).map(timeEntry => {
@@ -67,9 +141,6 @@ class Home extends React.Component {
           issueId={timeEntry.issue.id}
           activityId={timeEntry.activityId}
           subject={timeEntry.issue.subject}
-          comment={timeEntry.comments}
-          hours={timeEntry.hours}
-          logDate={timeEntry.spentOn}
           projectName={timeEntry.projectName}
           projectActivities={this.getActivitiesFromProjectId(
             timeEntry.projectId
@@ -86,11 +157,7 @@ class Home extends React.Component {
       <div className="col-md-10">
         <div className="row">
           <div className="col-md-9">
-            <div className="page-header">
-              <h1>Outatime</h1>
-              <p className="lead">Welcome back {this.props.user.firstname}!</p>
-              <p className="">See your last time entries</p>
-            </div>
+            <div className="page-header">{this.showEntriesFilterButton()}</div>
           </div>
           <div className="col-md-3">
             <ExternalLink
@@ -104,9 +171,20 @@ class Home extends React.Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-md-12">
+          <div
+            className="col-md-12"
+            style={{ display: this.state.showUnique ? 'none' : 'block' }}
+          >
             <ul className="list-group rfh-issues-list" ref="issuesList">
               {userLogTimeEntries}
+            </ul>
+          </div>
+          <div
+            className="col-md-12"
+            style={{ display: this.state.showUnique ? 'block' : 'none' }}
+          >
+            <ul className="list-group rfh-issues-list" ref="issuesList">
+              {userLogTimeUniqueEntries}
             </ul>
           </div>
         </div>
@@ -114,7 +192,10 @@ class Home extends React.Component {
           id="messages"
           className={this.state.showMessage ? this.state.className : ''}
         >
-          New entry just recorded!
+          New entry just recorded! <br />
+          <b>Id: {this.state.selectedIssue.id}</b>
+          <br />
+          <b>Title: {this.state.selectedIssue.subject}</b>
         </div>
       </div>
     )
@@ -162,7 +243,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Home)
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
