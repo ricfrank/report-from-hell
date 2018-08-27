@@ -25,6 +25,11 @@ class Home extends React.Component {
         })
       })
       .catch(error => {})
+    this.state = {
+      showMessage: false
+    }
+    this.showMessage = this.showMessage.bind(this)
+    this.hideMessage = this.hideMessage.bind(this)
   }
 
   getActivitiesFromProjectId(id) {
@@ -34,6 +39,19 @@ class Home extends React.Component {
 
     const project = this.props.projects.projects.find(p => p.id === id)
     return project ? project.activities : []
+  }
+
+  showMessage() {
+    this.setState({
+      showMessage: true,
+      className: 'rfh-logged-issue-msg'
+    })
+  }
+
+  hideMessage() {
+    this.setState({
+      showMessage: false
+    })
   }
 
   render() {
@@ -59,6 +77,8 @@ class Home extends React.Component {
           onLogTimeEntry={this.props.onLogTimeEntry}
           onLogTimeEntryDone={this.props.onLogTimeEntryDone}
           loggedIssueId={this.props.loggedIssueId}
+          show={this.showMessage}
+          hide={this.hideMessage}
         />
       )
     })
@@ -89,6 +109,12 @@ class Home extends React.Component {
               {userLogTimeEntries}
             </ul>
           </div>
+        </div>
+        <div
+          id="messages"
+          className={this.state.showMessage ? this.state.className : ''}
+        >
+          New entry just recorded!
         </div>
       </div>
     )
@@ -136,4 +162,7 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home)
