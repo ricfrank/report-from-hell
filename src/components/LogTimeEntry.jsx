@@ -31,12 +31,12 @@ class LogTimeEntry extends React.Component {
 
   componentDidMount() {
     if (this.isLoggedTimeEntry()) {
-      this.props.show(this.props.subject, this.props.issueId)
+      this.props.show(this.props.subject, this.props.projectName)
 
       setTimeout(() => {
         this.props.onLogTimeEntryDone()
         this.props.hide()
-      }, 5000)
+      }, 10000)
     }
   }
 

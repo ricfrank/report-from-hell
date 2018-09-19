@@ -30,7 +30,7 @@ class Home extends React.Component {
       showUnique: false,
       selectedIssue: {
         subject: '',
-        id: ''
+        projectName: ''
       }
     }
     this.showMessage = this.showMessage.bind(this)
@@ -47,13 +47,13 @@ class Home extends React.Component {
     return project ? project.activities : []
   }
 
-  showMessage(subject, id) {
+  showMessage(subject, projectName) {
     this.setState({
       showMessage: true,
       className: 'rfh-logged-issue-msg',
       selectedIssue: {
         subject,
-        id
+        projectName
       }
     })
   }
@@ -192,10 +192,11 @@ class Home extends React.Component {
           id="messages"
           className={this.state.showMessage ? this.state.className : ''}
         >
-          New entry just recorded! <br />
-          <b>Id: {this.state.selectedIssue.id}</b>
-          <br />
-          <b>Title: {this.state.selectedIssue.subject}</b>
+          <h4>New entry just recorded!</h4>
+          <h5>
+            {this.state.selectedIssue.projectName} #{' '}
+            {this.state.selectedIssue.subject}
+          </h5>
         </div>
       </div>
     )
